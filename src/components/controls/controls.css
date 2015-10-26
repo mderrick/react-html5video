@@ -1,0 +1,13 @@
+.video-controls {
+    height: 34px;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+}
+
+.video__control {
+    position: relative;
+    padding: 10px;
+    height: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
+}

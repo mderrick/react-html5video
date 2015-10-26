@@ -1,0 +1,7 @@
+.video-play {
+    cursor: pointer;
+}
+
+.video-play:hover{
+    background-color: #1a1a1a;
+}

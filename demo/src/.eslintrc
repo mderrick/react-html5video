@@ -1,0 +1,6 @@
+{
+    "extends": "./../../node_modules/coding-standards/.eslintrc-react",
+    "env": {
+        "node": false
+    }
+}

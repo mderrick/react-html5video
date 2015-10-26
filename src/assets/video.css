@@ -1,0 +1,7 @@
+@import './../components/video/video.css';
+@import './../components/icon/icon.css';
+@import './../components/controls/controls.css';
+@import './../components/controls/seek/seek.css';
+@import './../components/controls/play/play.css';
+@import './../components/controls/mute/mute.css';
+@import './../components/controls/fullscreen/fullscreen.css';

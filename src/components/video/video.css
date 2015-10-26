@@ -1,0 +1,46 @@
+.video {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    font-family: Helvetica;
+    background-color: #000;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.video__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+.video:hover .video__controls {
+    opacity: 1;
+}
+
+.video__overlay-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.video__overlay-play .video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -41px;
+    margin-top: -35px;
+    font-size: 30px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.7);
+}
