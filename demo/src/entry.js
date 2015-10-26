@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Video, { Controls } from './../../src/components/video/video';
+import Style from './../../src/assets/video.css';
 
 var Content = React.createClass({
 

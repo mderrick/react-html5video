@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-fontello-react');
+    grunt.loadNpmTasks('grunt-gh-pages');
+
     grunt.initConfig({
         'fontello-react': {
             options: {
@@ -12,6 +14,12 @@ module.exports = function(grunt) {
                 jsOutputPath: './src/components/icon/Icon.js',
                 cssOutputPath: './src/components/icon/icon.css'
             }
+        },
+        'gh-pages': {
+            options: {
+                base: 'demo'
+            },
+            src: ['**']
         }
     });
 }

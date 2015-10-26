@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     debug: true,
@@ -12,12 +13,21 @@ module.exports = {
     },
     module: {
         loaders: [{
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel'
+        }, {
+            test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
+            loader: 'url?limit=10000'
         }]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true})
+        new ExtractTextPlugin('ReactHtml5Video.css'),
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true
+        })
     ]
 };

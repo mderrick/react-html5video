@@ -96,7 +96,7 @@ All children components receive the following methods via props:
 - `toggleMute`
 - `seek`
 - `fullscreen`
-- `setVolume`.
+- `setVolume`
 
 
 ## TODO
@@ -117,3 +117,4 @@ a little off a long with the drag position.
 - Unit tests and jenkins build.
 - Include pre minified dists.
 - Add Webpack as a Gruntfile task.
+- Trigger Webpack before 'gh-pages' Grunt task.
