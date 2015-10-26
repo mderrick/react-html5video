@@ -9,7 +9,6 @@ A really simple customizeable HTML5 Video that uses the familiar HTML5 video mar
 Then use the component as a normal HTML5 `<video>` element using all the normal [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and include `dist/ReactHtml5Video.css`.
 
 ```
-
     import Video from 'react-html5video';
 
     ...
@@ -22,7 +21,6 @@ Then use the component as a normal HTML5 `<video>` element using all the normal 
             </Video>
         );
     }
-
 ```
 
 ## Customize controls
@@ -30,7 +28,6 @@ Then use the component as a normal HTML5 `<video>` element using all the normal 
 Add/Remove/Reorder the provided custom controls:
 
 ```
-
     import Video, { Controls, Mute, Play, Seek, Fullscreen } from 'react-html5video';
 
     ...
@@ -53,7 +50,6 @@ Add/Remove/Reorder the provided custom controls:
 You can also create your very own custom children components that can also interact with the video. All your custom children components will receive props to access these [video properties and methods](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it.
 
 ```
-
     import Video, { Controls, Play, Mute } from 'react-html5video';
     import YourCustomControl from './your/custom/control';
     import YourCustomOverlayControl from './your/custom/overlay/control';
@@ -82,12 +78,25 @@ You can also create your very own custom children components that can also inter
 ## Props and Methods
 
 All children components of a `react-htmlvideo` will receive the following properties via props:
-
-`duration` `currentTime` `buffered` `paused` `muted` `volume` `percentageBuffered` `percentagePlayed`
+- `duration`
+- `currentTime`
+- `buffered`
+- `paused`
+- `muted`
+- `volume`
+- `percentageBuffered`
+- `percentagePlayed`
 
 All children components receive the following methods via props:
-
-`play` `pause` `togglePlay` `mute` `unmute` `toggleMute` `seek` `fullscreen` `setVolume`.
+- `play`
+- `pause`
+- `togglePlay`
+- `mute`
+- `unmute`
+- `toggleMute`
+- `seek`
+- `fullscreen`
+- `setVolume`.
 
 
 ## TODO
