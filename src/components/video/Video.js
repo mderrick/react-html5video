@@ -233,5 +233,4 @@ var Video = React.createClass({
     }
 });
 
-export {Controls, Seek, Play, Mute, Fullscreen};
-export default Video;
+export {Video as default, Controls, Seek, Play, Mute, Fullscreen};

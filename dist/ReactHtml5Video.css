@@ -5,6 +5,10 @@
     font-family: Helvetica;
     background-color: #000;
     -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 .video__controls {

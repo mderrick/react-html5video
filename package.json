@@ -1,8 +1,8 @@
 {
   "name": "react-html5video",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "./src/components/video/video.js",
+  "main": "./dist/ReactHtml5Video.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

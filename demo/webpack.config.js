@@ -26,7 +26,15 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('ReactHtml5Video.css'),
         new webpack.optimize.UglifyJsPlugin({
-            minimize: true
+            minimize: true,
+            output: {
+                comments: false
+            }
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
         })
     ]
 };

@@ -3,8 +3,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: [
-        './src/components/video/video.js',
-        './src/assets/video.css'
+        // CSS Must be first or the Video component will not be
+        // exported.
+        './src/assets/video.css',
+        './src/components/video/video.js'
     ],
     target: 'web',
     externals: [{
@@ -14,7 +16,12 @@ module.exports = {
             commonjs: 'react',
             amd: 'react'
         },
-        'react-dom': 'react-dom',
+        'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
+        },
         'react-addons-pure-render-mixin': 'react-addons-pure-render-mixin'
     }],
     output: {
@@ -25,15 +32,15 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel'
         }, {
             test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
             loader: 'url?limit=10000'
+        }, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
         }]
     },
     plugins: [

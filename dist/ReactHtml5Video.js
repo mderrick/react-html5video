@@ -6,8 +6,8 @@
 	else if(typeof exports === 'object')
 		exports["ReactHtml5Video"] = factory(require("react"), require("react-dom"), require("react-addons-pure-render-mixin"));
 	else
-		root["ReactHtml5Video"] = factory(root["React"], root["react-dom"], root["react-addons-pure-render-mixin"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_10__) {
+		root["ReactHtml5Video"] = factory(root["React"], root["ReactDOM"], root["react-addons-pure-render-mixin"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_25__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -55,11 +55,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(14);
+	module.exports = __webpack_require__(16);
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74,43 +94,43 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
+	var _reactDom = __webpack_require__(18);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _controlsControls = __webpack_require__(4);
+	var _controlsControls = __webpack_require__(19);
 
 	var _controlsControls2 = _interopRequireDefault(_controlsControls);
 
-	var _controlsSeekSeek = __webpack_require__(7);
+	var _controlsSeekSeek = __webpack_require__(22);
 
 	var _controlsSeekSeek2 = _interopRequireDefault(_controlsSeekSeek);
 
-	var _controlsPlayPlay = __webpack_require__(5);
+	var _controlsPlayPlay = __webpack_require__(20);
 
 	var _controlsPlayPlay2 = _interopRequireDefault(_controlsPlayPlay);
 
-	var _controlsMuteMute = __webpack_require__(8);
+	var _controlsMuteMute = __webpack_require__(23);
 
 	var _controlsMuteMute2 = _interopRequireDefault(_controlsMuteMute);
 
-	var _controlsFullscreenFullscreen = __webpack_require__(9);
+	var _controlsFullscreenFullscreen = __webpack_require__(24);
 
 	var _controlsFullscreenFullscreen2 = _interopRequireDefault(_controlsFullscreenFullscreen);
 
-	var _iconIcon = __webpack_require__(6);
+	var _iconIcon = __webpack_require__(21);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _reactAddonsPureRenderMixin = __webpack_require__(10);
+	var _reactAddonsPureRenderMixin = __webpack_require__(25);
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _lodashThrottle = __webpack_require__(11);
+	var _lodashThrottle = __webpack_require__(26);
 
 	var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
 
@@ -348,27 +368,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	});
 
+	exports['default'] = Video;
 	exports.Controls = _controlsControls2['default'];
 	exports.Seek = _controlsSeekSeek2['default'];
 	exports.Play = _controlsPlayPlay2['default'];
 	exports.Mute = _controlsMuteMute2['default'];
 	exports.Fullscreen = _controlsFullscreenFullscreen2['default'];
-	exports['default'] = Video;
 
 /***/ },
-/* 2 */
+/* 17 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ },
-/* 3 */
+/* 18 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_18__;
 
 /***/ },
-/* 4 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -379,23 +399,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _playPlay = __webpack_require__(5);
+	var _playPlay = __webpack_require__(20);
 
 	var _playPlay2 = _interopRequireDefault(_playPlay);
 
-	var _seekSeek = __webpack_require__(7);
+	var _seekSeek = __webpack_require__(22);
 
 	var _seekSeek2 = _interopRequireDefault(_seekSeek);
 
-	var _muteMute = __webpack_require__(8);
+	var _muteMute = __webpack_require__(23);
 
 	var _muteMute2 = _interopRequireDefault(_muteMute);
 
-	var _fullscreenFullscreen = __webpack_require__(9);
+	var _fullscreenFullscreen = __webpack_require__(24);
 
 	var _fullscreenFullscreen2 = _interopRequireDefault(_fullscreenFullscreen);
 
@@ -439,7 +459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 5 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -450,11 +470,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(6);
+	var _iconIcon = __webpack_require__(21);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -489,7 +509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 6 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*eslint-disable */
@@ -498,13 +518,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	'use strict';
 
-	var React = __webpack_require__(2);
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
-	var IconComponent = React.createClass({
-	    displayName: 'IconComponent',
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(17);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Icon = _react2['default'].createClass({
+	    displayName: 'Icon',
 
 	    propTypes: {
-	        name: React.PropTypes.oneOf(['play-1', 'volume-off', 'volume-down', 'volume-up', 'resize-full', 'resize-small', 'pause-1'])
+	        name: _react2['default'].PropTypes.oneOf(['play-1', 'volume-off', 'volume-down', 'volume-up', 'resize-full', 'resize-small', 'pause-1'])
 	    },
 
 	    /**
@@ -518,15 +546,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        return React.createElement('span', { className: 'video-icon video-icon--' + this.props.name });
+	        return _react2['default'].createElement('span', { className: 'video-icon video-icon--' + this.props.name });
 	    }
 
 	});
 
-	module.exports = IconComponent;
+	exports['default'] = Icon;
+	module.exports = exports['default'];
 
 /***/ },
-/* 7 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -537,11 +566,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
+	var _reactDom = __webpack_require__(18);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -597,7 +626,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 8 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -608,11 +637,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(6);
+	var _iconIcon = __webpack_require__(21);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -688,7 +717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 9 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -699,11 +728,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(2);
+	var _react = __webpack_require__(17);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(6);
+	var _iconIcon = __webpack_require__(21);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -737,13 +766,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 25 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_25__;
 
 /***/ },
-/* 11 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -754,7 +783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var debounce = __webpack_require__(12);
+	var debounce = __webpack_require__(27);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -845,7 +874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 12 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -856,7 +885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(13);
+	var getNative = __webpack_require__(28);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -1085,7 +1114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 13 */
+/* 28 */
 /***/ function(module, exports) {
 
 	/**
@@ -1226,12 +1255,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = getNative;
 
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ])
