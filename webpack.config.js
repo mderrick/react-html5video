@@ -17,7 +17,6 @@ module.exports = {
             loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
         }, {
             test: /\.js$/,
-            exclude: /node_modules/,
             loader: 'babel'
         }, {
             test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
@@ -27,7 +26,15 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('ReactHtml5Video.css'),
         new webpack.optimize.UglifyJsPlugin({
-            minimize: true
+            minimize: true,
+            output: {
+                comments: false
+            }
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
         })
     ]
 };

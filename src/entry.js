@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Video, { Controls } from './../../src/components/video/video';
-import Style from './../../src/assets/video.css';
+import {default as Video, Controls} from 'react-html5video';
+import Style from 'react-html5video/dist/ReactHtml5Video.css';
 
 var Content = React.createClass({
 
