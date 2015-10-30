@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ProgressBar from './../../progressbar/progressbar';
 
 var Seek = React.createClass({
 
@@ -16,7 +17,7 @@ var Seek = React.createClass({
      * @return {undefined}
      */
     seek(e) {
-        this.props.seek(e.target.value * this.props.duration);
+        this.props.seek(e.target.value * this.props.duration / 100);
     },
 
     render() {
@@ -27,18 +28,9 @@ var Seek = React.createClass({
                         width: this.props.percentageBuffered + '%'
                     }} className="video-seek__buffer-bar">
                     </div>
-                    <div style={{
-                        width: this.props.percentagePlayed + '%'
-                    }} className="video-seek__progress-bar">
-                        <div className="video-seek__handle"></div>
-                    </div>
-                    <input className="video-seek__input"
-                           onChange={this.seek}
-                           type="range"
-                           min="0"
-                           max="1"
-                           value={this.props.percentagePlayed / 100}
-                           step="0.01" />
+                    <ProgressBar
+                        onChange={this.seek}
+                        progress={this.props.percentagePlayed} />
                 </div>
             </div>
         );

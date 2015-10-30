@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from './../../icon/icon';
+import ProgressBar from './../../progressbar/progressbar';
 
 var Mute = React.createClass({
 
@@ -31,7 +32,7 @@ var Mute = React.createClass({
      * @return {undefined}
      */
     changeVolume(e) {
-        this.props.setVolume(e.target.value);
+        this.props.setVolume(e.target.value / 100);
         this.props.unmute();
     },
 
@@ -42,21 +43,11 @@ var Mute = React.createClass({
                     {this.props.muted ? <Icon name="volume-off" /> : <Icon name="volume-up" />}
                 </div>
                 <div className="video-mute__volume">
-                    <div className="video-mute__container">
-                        <div className="video-mute__track">
-                            <div className="video-mute__bar"
-                                 style={{
-                                    height: (this.props.muted ? 0 : this.props.volume * 100) + '%'
-                                 }}></div>
-                            <input className="video-mute__input"
-                                orient="vertical"
-                                onChange={this.changeVolume}
-                                type="range"
-                                min="0"
-                                max="1"
-                                value={this.props.volume}
-                                step="0.01" />
-                        </div>
+                    <div className="video-mute__track">
+                        <ProgressBar
+                            orientation="vertical"
+                            onChange={this.changeVolume}
+                            progress={this.props.volume * 100} />
                     </div>
                 </div>
             </div>
