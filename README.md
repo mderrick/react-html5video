@@ -1,83 +1,76 @@
 # react-html5video
 
-A really simple customizeable HTML5 Video that uses the familiar HTML5 video markup with custom controls. View the [demo](http://mderrick.github.io/react-html5video/).
+A simple customizeable HTML5 Video that uses the familiar HTML5 video markup but with added custom and configurable controls.
 
-## Usage
+<img src="http://mderrick.github.io/react-html5video/example.png" align="center" height="262" width="633" />
+
+View the [demo](http://mderrick.github.io/react-html5video/).
+
+## Install
 
 `npm install react-html5video --save`
 
-Then use the component as a normal HTML5 `<video>` element using all the normal [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and include `dist/ReactHtml5Video.css`.
+Include `dist/ReactHtml5Video.css` if you do not want to build your own CSS. Alternatively require `src/assets/video.css` if you want to compile the CSS yourself with [css-loaders](https://github.com/webpack/css-loader) and [url-loaders](https://github.com/webpack/url-loader) etc. See the demo [Webpack config](https://github.com/mderrick/react-html5video/blob/master/demo/webpack.config.js) as an example.
 
-```
-    import Video from 'react-html5video';
+### Peer Dependencies
 
-    ...
+This component uses ES2015 and needs to be transpiled using something like [babel-loader](https://github.com/babel/babel-loader). It depends on:
+- `react@0.14.x`
+- `react-dom@0.14.x`
+- `react-addons-pure-render-mixin@0.14.x`
+- `lodash.throttle@latest`.
 
-    render() {
-        return (
-            <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
-                <source src="http://sourcefile.mp4" type="video/mp4" />
-                <source src="http://sourcefile.webm" type="video/webm" />
-            </Video>
-        );
-    }
-```
+### UMD
 
-## Customize controls
+If using the UMD module it is already transpiled to ES5 and `lodash.throttle` is included. You can find this build in the `dist` directory:
 
-Add/Remove/Reorder the provided custom controls:
-
-```
-    import Video, { Controls, Mute, Play, Seek, Fullscreen } from 'react-html5video';
-
-    ...
-
-    render() {
-        return (
-            <Video controls>
-                <source src="http://sourcefile.mp4" type="video/mp4" />
-                <source src="http://sourcefile.webm" type="video/webm" />
-                <Controls>
-                    <Play />
-                    <Seek />
-                    ... Move them around and/or add more.
-                </Controls>
-            </Video>
-        );
-    }
+```js
+// Includes lodash.throttle and is transpiled already
+var Video = require('react-html5video/dist/ReactHtml5Video');  
 ```
 
-You can also create your very own custom children components that can also interact with the video. All your custom children components will receive props to access these [video properties and methods](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it.
-
+```js
+// Exports to this global
+var Video = window.ReactHtml5Video;
 ```
-    import Video, { Controls, Play, Mute } from 'react-html5video';
-    import YourCustomControl from './your/custom/control';
-    import YourCustomOverlayControl from './your/custom/overlay/control';
 
-    ...
-
-    render() {
-        return (
-            <Video controls autoPlay loop>
-                <source src="http://sourcefile.mp4" type="video/mp4" />
-                <source src="http://sourcefile.webm" type="video/webm" />
-                
-                <h1>Add your own HTML and React components</h1>
-                <YourCustomOverlayControl />
-
-                <Controls>
-                    <Play />
-                    <YourCustomControl />
-                    <Mute />
-                </Controls>
-            </Video>
-        );
-    }
+```js
+// Requires es6 transpiling and all peer dependencies installed
+import { Video as Default, Controls, Play, Mute, Seek, Fullscreen } from 'react-html5video';
 ```
+
+
+## Usage
+
+Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and configure the controls by adding, removing and shuffling them as you desire.
+
+```js
+import { Video as default, Controls, Mute, Play, Seek, Fullscreen } from 'react-html5video';
+render() {
+    return (
+        <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
+            <source src="http://sourcefile.mp4" type="video/mp4" />
+            <source src="http://sourcefile.webm" type="video/webm" />
+            <h1>Optional HTML and components can be added too</h1>
+            <CustomComponent />
+            <Controls>
+                <Play />
+                <Seek />
+                <Mute />
+                <Fullscreen />
+                <CustomControlComponent />
+            </Controls>
+        </Video>
+    );
+}
+```
+
+You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`.
+
 
 ## Props and Methods
 
-All children components of a `react-htmlvideo` will receive the following properties via props:
+All children components will receive the following properties via props:
 - `duration`
 - `currentTime`
 - `buffered`
@@ -99,22 +92,5 @@ All children components receive the following methods via props:
 - `setVolume`
 
 
-## TODO
-
-- Slider click areas need adjusting and fine tuning because of the range inputs are
-a little off a long with the drag position.
-- Firefox fonts need fixing.
-- Need to smooth sliders animation.
-- Add an elapsed time control.
-- Readme to include image/gif.
-- Style the demo to look somewhat respectable (bootstrap?).
-- Allow drag and drop of components in demo.
-- Bower setup.
-- Don't Base64 encoding font files into CSS. Think of a neater way of using this components icons.
-- Create base CSS that is functional and then create some themes!
-- Document the development process
-- Pre-commit hooks, for testing and linting.
-- Unit tests and jenkins build.
-- Include pre minified dists.
-- Add Webpack as a Gruntfile task.
-- Trigger Webpack before 'gh-pages' Grunt task.
+## License
+MIT
