@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         'fontello-react': {
             options: {
+                fontName: 'video-fontello',
                 svgPath: './src/assets/font/fontello.svg',
                 woffPath: './src/assets/font/fontello.woff',
                 eotPath: './src/assets/font/fontello.eot',
