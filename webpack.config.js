@@ -20,7 +20,7 @@ module.exports = {
         root: path.join(__dirname, './node_modules')
     },
     output: {
-        publicPath: '/dist/',
+        publicPath: '/react-html5video/dist/',
         path: path.join(__dirname, './dist'),
         filename: 'app.js',
         chunkFilename: '[id].js'
