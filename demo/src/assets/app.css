@@ -1,18 +1,7 @@
+@import './../../node_modules/css-reset/reset.css';
+@import './../components/icon/icon.css';
+@import './../components/button/button.css';
 @import './../../../src/assets/video.css';
-
-/**
- * Demo CSS
- */
-.video__el {
-    width: 634px;
-    height: 264px;
-}
-.example-video-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    margin: 0;
-    font-size: 15px;
-    background-color: rgba(0,3,0,0.5);
-}
+@import './../components/index/index.css';
+@import './../components/index/header/header.css';
+@import './../components/index/main/main.css';

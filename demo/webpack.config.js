@@ -20,7 +20,7 @@ module.exports = {
         root: path.join(__dirname, './node_modules')
     },
     output: {
-        publicPath: '/dist/',
+        publicPath: '/react-html5video/dist/',
         path: path.join(__dirname, './dist'),
         filename: 'app.js',
         chunkFilename: '[id].js'
@@ -36,7 +36,7 @@ module.exports = {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
         }, {
-            test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
+            test: /\.(svg|woff|ttf|eot|png|jpg|gif)(\?.*)?$/i,
             loader: 'url?limit=10000'
         }]
     },

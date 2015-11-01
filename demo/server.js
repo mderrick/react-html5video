@@ -7,6 +7,8 @@ var server;
 // Source maps
 config.devtool = 'source-map';
 
+config.output.publicPath = '/dist/';
+
 // Remove minification to speed things up.
 config.plugins.splice(1, 2);
 
