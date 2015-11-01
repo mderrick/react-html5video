@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from './../../button/button';
-import {default as Video, Controls} from './../../../../../src/components/video/video';
+import {default as Video, Controls, Overlay} from './../../../../../src/components/video/video';
 
 var videos = [
+    // TODO: Don't hot link these. upload them somewhere.
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
     'http://media.w3.org/2010/05/video/movie_300.mp4',
+    // Purposefully not a video to deomnstrate source error state
     'https://github.com/mderrick/react-html5video'
 ];
 
@@ -78,6 +80,7 @@ var Main = React.createClass({
                 <div className="main__video">
                     <Video controls autoPlay loop muted ref="video">
                         <source src={videos[this.state.videoId]} type="video/mp4" />
+                        <Overlay />
                         <Controls />
                     </Video>
                 </div>
