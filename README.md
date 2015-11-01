@@ -76,10 +76,10 @@ You can create your very own custom children components and controls that can in
 There is some text used that could require translations. This can be done like so:
 
 ```js
-    <Video copyKeys={{ key: value }}>
+<Video copyKeys={{ key: value }}>
 ```
 
-The default english `copyKeys` can be found in [here](https://github.com/mderrick/react-html5video/tree/master/src/assets/copy.js.
+The default english `copyKeys` can be found in [here](https://github.com/mderrick/react-html5video/tree/master/src/assets/copy.js).
 
 
 ## Props and Methods
