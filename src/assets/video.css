@@ -1,5 +1,7 @@
 @import './../components/video/video.css';
+@import './../components/video/overlay/overlay.css';
 @import './../components/icon/icon.css';
+@import './../components/spinner/spinner.css';
 @import './../components/progressbar/progressbar.css';
 @import './../components/controls/controls.css';
 @import './../components/controls/seek/seek.css';

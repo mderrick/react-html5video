@@ -23,37 +23,3 @@
 .video:hover .video__controls {
     opacity: 1;
 }
-
-.video__overlay-play {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    cursor: pointer;
-}
-
-.video__overlay-play .video-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -41px;
-    margin-top: -35px;
-    font-size: 30px;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: rgba(0,0,0,0.7);
-}
-
-.video__error {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    padding: 0 40px;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    text-align: center;
-    color: #fff;
-    font-size: 13px;
-}

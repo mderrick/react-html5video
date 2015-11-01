@@ -7,6 +7,7 @@ import Fullscreen from './fullscreen/fullscreen';
 var Controls = React.createClass({
 
     propTypes: {
+        error: React.PropTypes.bool,
         children: React.PropTypes.arrayOf(React.PropTypes.node)
     },
 
@@ -35,9 +36,11 @@ var Controls = React.createClass({
 
     render() {
         return (
-            <div className="video-controls video__controls">
-                {this.renderChildren()}
-            </div>
+            !this.props.error ? (
+                <div className="video-controls video__controls">
+                    {this.renderChildren()}
+                </div>
+            ) : null
         );
     }
 });

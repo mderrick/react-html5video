@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Overlay from './overlay/overlay';
 import Controls from './../controls/controls';
 import Seek from './../controls/seek/seek';
 import Play from './../controls/play/play';
 import Mute from './../controls/mute/mute';
 import Fullscreen from './../controls/fullscreen/fullscreen';
-import Icon from './../icon/icon';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
-import copy from './../copy';
+import copy from './../../assets/copy';
 
 var Video = React.createClass({
 
     propTypes: {
         // Non-standard props
-        locale: React.PropTypes.object,
+        copyKeys: React.PropTypes.object,
         children: React.PropTypes.node,
 
         // HTML5 Video standard attributes
@@ -27,7 +27,7 @@ var Video = React.createClass({
 
     getDefaultProps() {
         return {
-            locale: copy
+            copyKeys: copy
         };
     },
 
@@ -40,7 +40,9 @@ var Video = React.createClass({
             networkState: 0,
             paused: !this.props.autoPlay,
             muted: !!this.props.muted,
-            volume: 1
+            volume: 1,
+            error: false,
+            loading: false
         };
     },
 
@@ -55,7 +57,7 @@ var Video = React.createClass({
     },
 
     /**
-     * Bind eventlisteners not supported by Reacts synthetic events
+     * Bind eventlisteners not supported by React's synthetic events
      * https://facebook.github.io/react/docs/events.html
      * @return {undefined}
      */
@@ -65,7 +67,11 @@ var Video = React.createClass({
             .addEventListener('error', this._updateStateFromVideo);
     },
 
-    componentDidUnmount() {
+    /**
+     * Removes event listeners bound outside of React's synthetic events
+     * @return {undefined}
+     */
+    componentWillUnmount() {
         // Remove event listener from video.
         this.videoEl.children[this.videoEl.children.length - 1]
             .removeEventListener('error', this._updateStateFromVideo);
@@ -171,6 +177,7 @@ var Video = React.createClass({
 
     /**
      * Updates the React component state from the DOM video properties.
+     * This is where the magic happens.
      * @return {undefined}
      */
     updateStateFromVideo() {
@@ -182,11 +189,13 @@ var Video = React.createClass({
             paused: this.videoEl.paused,
             muted: this.videoEl.muted,
             volume: this.videoEl.volume,
-            error: this.videoEl.networkState === this.videoEl.NETWORK_NO_SOURCE,
+            readyState: this.videoEl.readyState,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
-            percentagePlayed: this.videoEl.currentTime / this.videoEl.duration * 100
+            percentagePlayed: this.videoEl.currentTime / this.videoEl.duration * 100,
+            error: this.videoEl.networkState === this.videoEl.NETWORK_NO_SOURCE,
+            loading: this.videoEl.readyState < this.videoEl.HAVE_ENOUGH_DATA
         });
     },
 
@@ -209,7 +218,7 @@ var Video = React.createClass({
             seek: this.seek,
             fullscreen: this.fullscreen,
             setVolume: this.setVolume
-        }, this.state);
+        }, this.state, {copyKeys: this.props.copyKeys});
 
         var controls = React.Children.map(this.props.children, (child) => {
             if (child.type === 'source') {
@@ -219,7 +228,12 @@ var Video = React.createClass({
         });
 
         if (!controls.length) {
-            controls = <Controls {...extendedProps} />;
+            controls = (
+                <div>
+                    <Overlay {...extendedProps} />
+                    <Controls {...extendedProps} />
+                </div>
+            );
         }
         return controls;
     },
@@ -237,12 +251,31 @@ var Video = React.createClass({
         });
     },
 
+    /**
+     * Gets the video class name based on its state
+     * @return {string} Class string
+     */
+    getVideoClassName() {
+        var classString = 'video';
+
+        if (this.state.error) {
+            classString += ' video--error';
+        } else if (this.state.loading) {
+            classString += ' video--loading';
+        } else if (this.state.paused) {
+            classString += ' video--paused';
+        } else {
+            classString += ' video--playing';
+        }
+        return classString;
+    },
+
     render() {
         // If controls prop is provided remove it
         // and use our own controls.
         var {controls, ...otherProps} = this.props;
         return (
-            <div className={'video ' + (!this.state.paused ? 'video--playing' : 'video--paused')}>
+            <div className={this.getVideoClassName()}>
                 <video
                     {...otherProps}
                     className="video__el"
@@ -254,23 +287,14 @@ var Video = React.createClass({
                     onVolumeChange={this._updateStateFromVideo}
                     onTimeUpdate={this._updateStateFromVideo}
                     onProgress={this._updateStateFromVideo}
-                    onCanPlay={this._updateStateFromVideo}>
+                    onCanPlay={this._updateStateFromVideo}
+                    onCanPlayThrough={this._updateStateFromVideo}>
                         {this.renderSources()}
                 </video>
-
-                {this.state.error ? (
-                    <div className="video__error">
-                        {this.props.locale.sourceError}
-                    </div>
-                ) : (
-                    <div className="video__overlay-play" onClick={this.togglePlay}>
-                        {this.state.paused ? <Icon name="play-1" /> : ''}
-                    </div>
-                )}
-                {controls && !this.state.error ? this.renderControls() : ''}
+                {controls ? this.renderControls() : ''}
             </div>
         );
     }
 });
 
-export {Video as default, Controls, Seek, Play, Mute, Fullscreen};
+export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Overlay};
