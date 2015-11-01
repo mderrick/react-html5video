@@ -2,7 +2,7 @@
 
 A simple customizeable HTML5 Video that uses the familiar HTML5 video markup but with added custom and configurable controls.
 
-<img src="http://mderrick.github.io/react-html5video/example.png" align="center" height="262" width="633" />
+<img src="http://mderrick.github.io/react-html5video/example.png?v=1" align="center" height="337" width="600" />
 
 View the [demo](http://mderrick.github.io/react-html5video/).
 
