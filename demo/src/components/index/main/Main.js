@@ -5,7 +5,8 @@ import {default as Video, Controls} from './../../../../../src/components/video/
 var videos = [
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
-    'http://media.w3.org/2010/05/video/movie_300.mp4'
+    'http://media.w3.org/2010/05/video/movie_300.mp4',
+    'https://github.com/mderrick/react-html5video'
 ];
 
 var Main = React.createClass({
@@ -87,6 +88,7 @@ var Main = React.createClass({
                             <li><Button active={this.state.videoId === 0} onClick={this.showVideo.bind(this, 0)}>1</Button></li>
                             <li><Button active={this.state.videoId === 1} onClick={this.showVideo.bind(this, 1)}>2</Button></li>
                             <li><Button active={this.state.videoId === 2} onClick={this.showVideo.bind(this, 2)}>3</Button></li>
+                            <li><Button active={this.state.videoId === 3} onClick={this.showVideo.bind(this, 3)}>Unsupported Source</Button></li>
                         </ul>
                     </div>
                     <div className="main__col2">

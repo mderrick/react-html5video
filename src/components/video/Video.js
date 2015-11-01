@@ -8,17 +8,28 @@ import Fullscreen from './../controls/fullscreen/fullscreen';
 import Icon from './../icon/icon';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
+import copy from './../copy';
 
 var Video = React.createClass({
 
     propTypes: {
+        // Non-standard props
+        locale: React.PropTypes.object,
+        children: React.PropTypes.node,
+
+        // HTML5 Video standard attributes
         autoPlay: React.PropTypes.bool,
         muted: React.PropTypes.bool,
-        controls: React.PropTypes.bool,
-        children: React.PropTypes.node
+        controls: React.PropTypes.bool
     },
 
     mixins: [PureRenderMixin],
+
+    getDefaultProps() {
+        return {
+            locale: copy
+        };
+    },
 
     getInitialState() {
         // Set state from props and always use these
@@ -26,6 +37,7 @@ var Video = React.createClass({
         // on the video events. Changing this state however will not
         // change the video. The API methods must be used.
         return {
+            networkState: 0,
             paused: !this.props.autoPlay,
             muted: !!this.props.muted,
             volume: 1
@@ -36,8 +48,27 @@ var Video = React.createClass({
      * Creates a throttle update method.
      * @return {undefined}
      */
-    componentWillMount: function() {
-        this._updateStateFromVideo = throttle(this.updateStateFromVideo, 100);
+    componentWillMount() {
+        // Also bind 'this' as we call _updateStateFromVideo outside
+        // of Reacts synthetic events as well.
+        this._updateStateFromVideo = throttle(this.updateStateFromVideo, 100).bind(this);
+    },
+
+    /**
+     * Bind eventlisteners not supported by Reacts synthetic events
+     * https://facebook.github.io/react/docs/events.html
+     * @return {undefined}
+     */
+    componentDidMount() {
+        // Listen to error of last source.
+        this.videoEl.children[this.videoEl.children.length - 1]
+            .addEventListener('error', this._updateStateFromVideo);
+    },
+
+    componentDidUnmount() {
+        // Remove event listener from video.
+        this.videoEl.children[this.videoEl.children.length - 1]
+            .removeEventListener('error', this._updateStateFromVideo);
     },
 
     /**
@@ -151,6 +182,7 @@ var Video = React.createClass({
             paused: this.videoEl.paused,
             muted: this.videoEl.muted,
             volume: this.videoEl.volume,
+            error: this.videoEl.networkState === this.videoEl.NETWORK_NO_SOURCE,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
@@ -221,13 +253,21 @@ var Video = React.createClass({
                     onPause={this._updateStateFromVideo}
                     onVolumeChange={this._updateStateFromVideo}
                     onTimeUpdate={this._updateStateFromVideo}
-                    onProgress={this._updateStateFromVideo}>
+                    onProgress={this._updateStateFromVideo}
+                    onCanPlay={this._updateStateFromVideo}>
                         {this.renderSources()}
                 </video>
-                <div className="video__overlay-play" onClick={this.togglePlay}>
-                    {this.state.paused ? <Icon name="play-1" /> : ''}
-                </div>
-                {controls ? this.renderControls() : ''}
+
+                {this.state.error ? (
+                    <div className="video__error">
+                        {this.props.locale.sourceError}
+                    </div>
+                ) : (
+                    <div className="video__overlay-play" onClick={this.togglePlay}>
+                        {this.state.paused ? <Icon name="play-1" /> : ''}
+                    </div>
+                )}
+                {controls && !this.state.error ? this.renderControls() : ''}
             </div>
         );
     }

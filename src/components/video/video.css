@@ -44,3 +44,16 @@
     padding: 20px;
     background-color: rgba(0,0,0,0.7);
 }
+
+.video__error {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    padding: 0 40px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+}
