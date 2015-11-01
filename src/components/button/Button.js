@@ -22,9 +22,9 @@ var Button = React.createClass({
 
     render() {
         return (
-            <a className={'button ' + (this.props.active ? 'button--active' : '')} onClick={this.props.onClick} href="#">
+            <button className={'button ' + (this.props.active ? 'button--active' : '')} onClick={this.props.onClick} href="#">
                 {this.props.children}
-            </a>
+            </button>
         );
     }
 
