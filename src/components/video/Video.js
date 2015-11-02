@@ -6,6 +6,7 @@ import Seek from './../controls/seek/seek';
 import Play from './../controls/play/play';
 import Mute from './../controls/mute/mute';
 import Fullscreen from './../controls/fullscreen/fullscreen';
+import Time from './../controls/time/time';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
 import copy from './../../assets/copy';
@@ -297,4 +298,4 @@ var Video = React.createClass({
     }
 });
 
-export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Overlay};
+export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Time, Overlay};
