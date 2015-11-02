@@ -18,17 +18,26 @@ var ProgressBar = React.createClass({
         };
     },
 
-    onChange() {},
+    componentDidMount() {
+        // 'orient' is not supported by React but
+        // is required for Firefox. Setting manually.
+        // https://github.com/facebook/react/issues/2453
+        this.refs.input.setAttribute('orient', this.props.orientation);
+    },
+
+    onChange() {
+        // Placeholder
+    },
 
     render() {
         return (
-            <div className={'video-progress-bar ' + (this.props.orientation === 'horizontal' ?
-                'video-progress-bar--horizontal' : 'video-progress-bar--vertical')}>
+            <div className={'video-progress-bar ' + (this.props.orientation === 'horizontal'
+                ? 'video-progress-bar--horizontal' : 'video-progress-bar--vertical')}>
                 <div className="video-progress-bar__fill" style={{
                     [this.props.orientation === 'horizontal' ? 'width' : 'height']: this.props.progress + '%'
                 }} />
                 <input className="video-progress-bar__input"
-                    orient={this.props.orientation}
+                    ref="input"
                     onChange={this.props.onChange}
                     type="range"
                     min="0"

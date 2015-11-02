@@ -36,18 +36,33 @@ var Mute = React.createClass({
         this.props.unmute();
     },
 
+    toggleMute() {
+        // If we volume has been dragged to 0, assume it is in
+        // a muted state and then toggle to full volume.
+        if (this.props.volume <= 0) {
+            this.props.setVolume(1);
+        } else {
+            this.props.toggleMute();
+        }
+    },
+
     render() {
         return (
             <div className="video-mute video__control" >
-                <div className="video-mute__inner" onClick={this.props.toggleMute}>
-                    {this.props.muted ? <Icon name="volume-off" /> : <Icon name="volume-up" />}
+                <div className="video-mute__inner" onClick={this.toggleMute}>
+                    {this.props.muted || this.props.volume <= 0
+                        ? <Icon name="volume-off" />
+                        : <Icon name="volume-up" />}
                 </div>
                 <div className="video-mute__volume">
                     <div className="video-mute__track">
                         <ProgressBar
                             orientation="vertical"
                             onChange={this.changeVolume}
-                            progress={this.props.volume * 100} />
+                            progress={this.props.muted
+                                ? 0
+                                : this.props.volume * 100}
+                            />
                     </div>
                 </div>
             </div>
