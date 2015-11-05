@@ -1,6 +1,6 @@
 # react-html5video
 
-A customizeable HTML5 Video that uses the familiar HTML5 video markup but with custom and configurable controls.
+A customizeable HTML5 Video that uses the familiar HTML5 video markup but with custom and configurable controls with i18n and a11y.
 
 <img src="http://mderrick.github.io/react-html5video/example.png?v=1" align="center" height="337" width="600" />
 
@@ -83,6 +83,12 @@ There is some text used that could require translations. This can be done like s
 ```
 
 The default english `copyKeys` can be found in [here](https://github.com/mderrick/react-html5video/tree/master/src/assets/copy.js).
+
+## a11y*
+
+The custom controls provided are built using `<button>` and `<input type="range">` which means basic keyboard controls are available when they are focused. For example, you can and hit the space bar on mute, play and fullscreen buttons as well as seek using the arrow keys when focused on the slider. All inputs have a visible focus outline and can be tabbed to. `aria-label` attributes for screen readers have been used where user interaction is required. Try tabbing through the [demo](http://mderrick.github.io/react-html5video/) with [Vox](http://www.chromevox.com/) enabled.
+
+*Disclaimer: Unfortuantely I don't much experience with a11y but I have tried to use some of the features from [PayPal's accessible HTML5 player](https://github.com/paypal/accessible-html5-video-player). If anyone has further input on this please raise an issue or a pull request.
 
 
 ## Props and Methods
