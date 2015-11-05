@@ -5,6 +5,7 @@ import ProgressBar from './../../progressbar/progressbar';
 var Mute = React.createClass({
 
     propTypes: {
+        copyKeys: React.PropTypes.object,
         volume: React.PropTypes.number,
         unmute: React.PropTypes.func,
         setVolume: React.PropTypes.func,
@@ -49,7 +50,11 @@ var Mute = React.createClass({
     render() {
         return (
             <div className="video-mute video__control" >
-                <button className="video-mute__inner" onClick={this.toggleMute}>
+                <button
+                    className="video-mute__inner"
+                    onClick={this.toggleMute}
+                    aria-label={this.props.muted || this.props.volume <= 0
+                        ? this.props.copyKeys.unmute : this.props.copyKeys.mute}>
                     {this.props.muted || this.props.volume <= 0
                         ? <Icon name="volume-off" />
                         : <Icon name="volume-up" />}

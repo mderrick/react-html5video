@@ -4,6 +4,7 @@ import Icon from './../../icon/icon';
 var Play = React.createClass({
 
     propTypes: {
+        copyKeys: React.PropTypes.object,
         togglePlay: React.PropTypes.func,
         paused: React.PropTypes.bool
     },
@@ -21,7 +22,11 @@ var Play = React.createClass({
 
     render() {
         return (
-            <button onClick={this.props.togglePlay} className="video-play video__control">
+            <button
+                className="video-play video__control"
+                onClick={this.props.togglePlay}
+                aria-label={this.props.paused
+                        ? this.props.copyKeys.play : this.props.copyKeys.pause}>
                 {this.props.paused ? <Icon name="play-1" /> : <Icon name="pause-1" />}
             </button>
         );

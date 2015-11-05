@@ -4,6 +4,7 @@ import Icon from './../../icon/icon';
 var Fullscreen = React.createClass({
 
     propTypes: {
+        copyKeys: React.PropTypes.object,
         fullscreen: React.PropTypes.func
     },
 
@@ -21,7 +22,8 @@ var Fullscreen = React.createClass({
         return (
             <button
                 onClick={this.props.fullscreen}
-                className="video-fullscreen video__control">
+                className="video-fullscreen video__control"
+                aria-label={this.props.copyKeys.fullscreen}>
                 <Icon name="resize-full" />
             </button>
         );

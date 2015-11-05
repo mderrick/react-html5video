@@ -5,6 +5,7 @@ import ProgressBar from './../../progressbar/progressbar';
 var Seek = React.createClass({
 
     propTypes: {
+        copyKeys: React.PropTypes.object,
         seek: React.PropTypes.func,
         percentageBuffered: React.PropTypes.number,
         percentagePlayed: React.PropTypes.number,
@@ -44,8 +45,10 @@ var Seek = React.createClass({
 
     render() {
         return (
-            <div className={'video-seek video__control' + (this.state.focused
-                ? ' video__control--focused' : '')}>
+            <div
+                className={'video-seek video__control' + (this.state.focused
+                    ? ' video__control--focused' : '')}
+                aria-label={this.props.copyKeys.seek}>
                 <div className="video-seek__container">
                     <div style={{
                         width: this.props.percentageBuffered + '%'
