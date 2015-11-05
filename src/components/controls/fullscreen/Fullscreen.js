@@ -19,9 +19,11 @@ var Fullscreen = React.createClass({
 
     render() {
         return (
-            <div onClick={this.props.fullscreen} className="video-fullscreen video__control" >
+            <button
+                onClick={this.props.fullscreen}
+                className="video-fullscreen video__control">
                 <Icon name="resize-full" />
-            </div>
+            </button>
         );
     }
 });

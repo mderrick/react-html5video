@@ -49,11 +49,11 @@ var Mute = React.createClass({
     render() {
         return (
             <div className="video-mute video__control" >
-                <div className="video-mute__inner" onClick={this.toggleMute}>
+                <button className="video-mute__inner" onClick={this.toggleMute}>
                     {this.props.muted || this.props.volume <= 0
                         ? <Icon name="volume-off" />
                         : <Icon name="volume-up" />}
-                </div>
+                </button>
                 <div className="video-mute__volume">
                     <div className="video-mute__track">
                         <ProgressBar

@@ -268,7 +268,32 @@ var Video = React.createClass({
         } else {
             classString += ' video--playing';
         }
+
+        if (this.state.focused) {
+            classString += ' video--focused';
+        }
         return classString;
+    },
+
+    /**
+     * Sets state to show focused class on video player.
+     * @return {undefined}
+     */
+    onFocus() {
+        this.setState({
+            focused: true
+        });
+    },
+
+    /**
+     * Sets state to not be focused to remove class form video
+     * player.
+     * @return {undefined}
+     */
+    onBlur() {
+        this.setState({
+            focused: false
+        });
     },
 
     render() {
@@ -276,7 +301,10 @@ var Video = React.createClass({
         // and use our own controls.
         var {controls, ...otherProps} = this.props;
         return (
-            <div className={this.getVideoClassName()}>
+            <div className={this.getVideoClassName()}
+                tabIndex="0"
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}>
                 <video
                     {...otherProps}
                     className="video__el"

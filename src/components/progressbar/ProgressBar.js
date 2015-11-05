@@ -6,7 +6,9 @@ var ProgressBar = React.createClass({
         orientation: React.PropTypes.string,
         step: React.PropTypes.number,
         progress: React.PropTypes.number,
-        onChange: React.PropTypes.func
+        onChange: React.PropTypes.func,
+        onFocus: React.PropTypes.func,
+        onBlur: React.PropTypes.func
     },
 
     getDefaultProps() {
@@ -14,7 +16,9 @@ var ProgressBar = React.createClass({
             orientation: 'horizontal',
             step: 0.1,
             progress: 0,
-            onChange: this.onChange
+            onChange: this.onChange,
+            onFocus: this.onFocus,
+            onBlur: this.onBlur
         };
     },
 
@@ -29,6 +33,14 @@ var ProgressBar = React.createClass({
         // Placeholder
     },
 
+    onFocus() {
+        // Placeholder
+    },
+
+    onBlur() {
+        // Placeholder
+    },
+
     render() {
         return (
             <div className={'video-progress-bar ' + (this.props.orientation === 'horizontal'
@@ -37,6 +49,8 @@ var ProgressBar = React.createClass({
                     [this.props.orientation === 'horizontal' ? 'width' : 'height']: this.props.progress + '%'
                 }} />
                 <input className="video-progress-bar__input"
+                    onBlur={this.props.onBlur}
+                    onFocus={this.props.onFocus}
                     ref="input"
                     onChange={this.props.onChange}
                     type="range"

@@ -21,9 +21,9 @@ var Play = React.createClass({
 
     render() {
         return (
-            <div onClick={this.props.togglePlay} className="video-play video__control">
+            <button onClick={this.props.togglePlay} className="video-play video__control">
                 {this.props.paused ? <Icon name="play-1" /> : <Icon name="pause-1" />}
-            </div>
+            </button>
         );
     }
 });

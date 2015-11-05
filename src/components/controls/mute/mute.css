@@ -23,6 +23,7 @@
     display: none;
 }
 
+.video-mute--focused .video-mute__volume,
 .video-mute:hover .video-mute__volume {
     display: block;
 }
