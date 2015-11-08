@@ -8,7 +8,7 @@ View the [demo](http://mderrick.github.io/react-html5video/).
 
 ## Install
 
-`npm install react-html5video --save`
+`npm install react-html5video --save` or `bower install react-html5video --save`
 
 Include `dist/ReactHtml5Video.css` if you do not want to build your own CSS. Alternatively require `src/assets/video.css` if you want to compile the CSS yourself with [css-loaders](https://github.com/webpack/css-loader) and [url-loaders](https://github.com/webpack/url-loader) etc. See the demo [Webpack config](https://github.com/mderrick/react-html5video/blob/master/demo/webpack.config.js) as an example.
 
