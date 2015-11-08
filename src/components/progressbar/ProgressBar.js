@@ -6,7 +6,9 @@ var ProgressBar = React.createClass({
         orientation: React.PropTypes.string,
         step: React.PropTypes.number,
         progress: React.PropTypes.number,
-        onChange: React.PropTypes.func
+        onChange: React.PropTypes.func,
+        onFocus: React.PropTypes.func,
+        onBlur: React.PropTypes.func
     },
 
     getDefaultProps() {
@@ -14,21 +16,42 @@ var ProgressBar = React.createClass({
             orientation: 'horizontal',
             step: 0.1,
             progress: 0,
-            onChange: this.onChange
+            onChange: this.onChange,
+            onFocus: this.onFocus,
+            onBlur: this.onBlur
         };
     },
 
-    onChange() {},
+    componentDidMount() {
+        // 'orient' is not supported by React but
+        // is required for Firefox. Setting manually.
+        // https://github.com/facebook/react/issues/2453
+        this.refs.input.setAttribute('orient', this.props.orientation);
+    },
+
+    onChange() {
+        // Placeholder
+    },
+
+    onFocus() {
+        // Placeholder
+    },
+
+    onBlur() {
+        // Placeholder
+    },
 
     render() {
         return (
-            <div className={'video-progress-bar ' + (this.props.orientation === 'horizontal' ?
-                'video-progress-bar--horizontal' : 'video-progress-bar--vertical')}>
+            <div className={'video-progress-bar ' + (this.props.orientation === 'horizontal'
+                ? 'video-progress-bar--horizontal' : 'video-progress-bar--vertical')}>
                 <div className="video-progress-bar__fill" style={{
                     [this.props.orientation === 'horizontal' ? 'width' : 'height']: this.props.progress + '%'
                 }} />
                 <input className="video-progress-bar__input"
-                    orient={this.props.orientation}
+                    onBlur={this.props.onBlur}
+                    onFocus={this.props.onFocus}
+                    ref="input"
                     onChange={this.props.onChange}
                     type="range"
                     min="0"

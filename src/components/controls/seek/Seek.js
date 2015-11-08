@@ -5,10 +5,21 @@ import ProgressBar from './../../progressbar/progressbar';
 var Seek = React.createClass({
 
     propTypes: {
+        copyKeys: React.PropTypes.object,
         seek: React.PropTypes.func,
         percentageBuffered: React.PropTypes.number,
         percentagePlayed: React.PropTypes.number,
         duration: React.PropTypes.number
+    },
+
+    getInitialState() {
+        return {
+            // When the child range input becomes focused,
+            // we need to set this custom seek bar to look
+            // 'focused' with the correct styles. Need to 
+            // do this via a class.
+            focused: false
+        };
     },
 
     /**
@@ -20,15 +31,33 @@ var Seek = React.createClass({
         this.props.seek(e.target.value * this.props.duration / 100);
     },
 
+    onFocus() {
+        this.setState({
+            focused: true
+        });
+    },
+
+    onBlur() {
+        this.setState({
+            focused: false
+        });
+    },
+
     render() {
         return (
-            <div className="video-seek video__control">
+            <div
+                className={'video-seek video__control' + (this.state.focused
+                    ? ' video__control--focused' : '')}
+                aria-label={this.props.copyKeys.seek}>
                 <div className="video-seek__container">
                     <div style={{
                         width: this.props.percentageBuffered + '%'
                     }} className="video-seek__buffer-bar">
                     </div>
                     <ProgressBar
+                        step={5}
+                        onBlur={this.onBlur}
+                        onFocus={this.onFocus}
                         onChange={this.seek}
                         progress={this.props.percentagePlayed} />
                 </div>

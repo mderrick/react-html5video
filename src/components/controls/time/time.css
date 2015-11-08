@@ -1,0 +1,13 @@
+.video-time {
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.video-time__current {
+    margin-right: 5px;
+}
+
+.video-time__duration {
+    margin-left: 5px;
+    color: #919191;
+}

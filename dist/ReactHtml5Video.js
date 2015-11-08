@@ -7,7 +7,7 @@
 		exports["ReactHtml5Video"] = factory(require("react"), require("react-dom"), require("react-addons-pure-render-mixin"));
 	else
 		root["ReactHtml5Video"] = factory(root["React"], root["ReactDOM"], root["react-addons-pure-render-mixin"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_21__, __WEBPACK_EXTERNAL_MODULE_31__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_21__, __WEBPACK_EXTERNAL_MODULE_22__, __WEBPACK_EXTERNAL_MODULE_33__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -55,7 +55,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(19);
+	module.exports = __webpack_require__(20);
 
 
 /***/ },
@@ -82,7 +82,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */
+/* 19 */,
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97,47 +98,51 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(21);
+	var _reactDom = __webpack_require__(22);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _overlayOverlay = __webpack_require__(22);
+	var _overlayOverlay = __webpack_require__(23);
 
 	var _overlayOverlay2 = _interopRequireDefault(_overlayOverlay);
 
-	var _controlsControls = __webpack_require__(25);
+	var _controlsControls = __webpack_require__(26);
 
 	var _controlsControls2 = _interopRequireDefault(_controlsControls);
 
-	var _controlsSeekSeek = __webpack_require__(27);
+	var _controlsSeekSeek = __webpack_require__(28);
 
 	var _controlsSeekSeek2 = _interopRequireDefault(_controlsSeekSeek);
 
-	var _controlsPlayPlay = __webpack_require__(26);
+	var _controlsPlayPlay = __webpack_require__(27);
 
 	var _controlsPlayPlay2 = _interopRequireDefault(_controlsPlayPlay);
 
-	var _controlsMuteMute = __webpack_require__(29);
+	var _controlsMuteMute = __webpack_require__(30);
 
 	var _controlsMuteMute2 = _interopRequireDefault(_controlsMuteMute);
 
-	var _controlsFullscreenFullscreen = __webpack_require__(30);
+	var _controlsFullscreenFullscreen = __webpack_require__(32);
 
 	var _controlsFullscreenFullscreen2 = _interopRequireDefault(_controlsFullscreenFullscreen);
 
-	var _reactAddonsPureRenderMixin = __webpack_require__(31);
+	var _controlsTimeTime = __webpack_require__(31);
+
+	var _controlsTimeTime2 = _interopRequireDefault(_controlsTimeTime);
+
+	var _reactAddonsPureRenderMixin = __webpack_require__(33);
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _lodashThrottle = __webpack_require__(32);
+	var _lodashThrottle = __webpack_require__(34);
 
 	var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
 
-	var _assetsCopy = __webpack_require__(35);
+	var _assetsCopy = __webpack_require__(37);
 
 	var _assetsCopy2 = _interopRequireDefault(_assetsCopy);
 
@@ -397,7 +402,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	        } else {
 	            classString += ' video--playing';
 	        }
+
+	        if (this.state.focused) {
+	            classString += ' video--focused';
+	        }
 	        return classString;
+	    },
+
+	    /**
+	     * Sets state to show focused class on video player.
+	     * @return {undefined}
+	     */
+	    onFocus: function onFocus() {
+	        this.setState({
+	            focused: true
+	        });
+	    },
+
+	    /**
+	     * Sets state to not be focused to remove class form video
+	     * player.
+	     * @return {undefined}
+	     */
+	    onBlur: function onBlur() {
+	        this.setState({
+	            focused: false
+	        });
 	    },
 
 	    render: function render() {
@@ -412,7 +442,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return _react2['default'].createElement(
 	            'div',
-	            { className: this.getVideoClassName() },
+	            { className: this.getVideoClassName(),
+	                tabIndex: '0',
+	                onFocus: this.onFocus,
+	                onBlur: this.onBlur },
 	            _react2['default'].createElement(
 	                'video',
 	                _extends({}, otherProps, {
@@ -440,13 +473,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Play = _controlsPlayPlay2['default'];
 	exports.Mute = _controlsMuteMute2['default'];
 	exports.Fullscreen = _controlsFullscreenFullscreen2['default'];
+	exports.Time = _controlsTimeTime2['default'];
 	exports.Overlay = _overlayOverlay2['default'];
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
 
 /***/ },
 /* 21 */
@@ -456,6 +484,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 22 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_22__;
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -466,15 +500,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(23);
+	var _iconIcon = __webpack_require__(24);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _spinnerSpinner = __webpack_require__(24);
+	var _spinnerSpinner = __webpack_require__(25);
 
 	var _spinnerSpinner2 = _interopRequireDefault(_spinnerSpinner);
 
@@ -531,7 +565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*eslint-disable */
@@ -546,7 +580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -577,7 +611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -588,7 +622,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -613,7 +647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -624,23 +658,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _playPlay = __webpack_require__(26);
+	var _playPlay = __webpack_require__(27);
 
 	var _playPlay2 = _interopRequireDefault(_playPlay);
 
-	var _seekSeek = __webpack_require__(27);
+	var _seekSeek = __webpack_require__(28);
 
 	var _seekSeek2 = _interopRequireDefault(_seekSeek);
 
-	var _muteMute = __webpack_require__(29);
+	var _muteMute = __webpack_require__(30);
 
 	var _muteMute2 = _interopRequireDefault(_muteMute);
 
-	var _fullscreenFullscreen = __webpack_require__(30);
+	var _timeTime = __webpack_require__(31);
+
+	var _timeTime2 = _interopRequireDefault(_timeTime);
+
+	var _fullscreenFullscreen = __webpack_require__(32);
 
 	var _fullscreenFullscreen2 = _interopRequireDefault(_fullscreenFullscreen);
 
@@ -654,7 +692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            children: [_react2['default'].createElement(_playPlay2['default'], null), _react2['default'].createElement(_seekSeek2['default'], null), _react2['default'].createElement(_muteMute2['default'], null), _react2['default'].createElement(_fullscreenFullscreen2['default'], null)]
+	            children: [_react2['default'].createElement(_playPlay2['default'], null), _react2['default'].createElement(_seekSeek2['default'], null), _react2['default'].createElement(_timeTime2['default'], null), _react2['default'].createElement(_muteMute2['default'], null), _react2['default'].createElement(_fullscreenFullscreen2['default'], null)]
 	        };
 	    },
 
@@ -685,7 +723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -696,11 +734,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(23);
+	var _iconIcon = __webpack_require__(24);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -708,6 +746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: 'Play',
 
 	    propTypes: {
+	        copyKeys: _react2['default'].PropTypes.object,
 	        togglePlay: _react2['default'].PropTypes.func,
 	        paused: _react2['default'].PropTypes.bool
 	    },
@@ -724,78 +763,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    render: function render() {
 	        return _react2['default'].createElement(
-	            'div',
-	            { onClick: this.props.togglePlay, className: 'video-play video__control' },
+	            'button',
+	            {
+	                className: 'video-play video__control',
+	                onClick: this.props.togglePlay,
+	                'aria-label': this.props.paused ? this.props.copyKeys.play : this.props.copyKeys.pause },
 	            this.props.paused ? _react2['default'].createElement(_iconIcon2['default'], { name: 'play-1' }) : _react2['default'].createElement(_iconIcon2['default'], { name: 'pause-1' })
 	        );
 	    }
 	});
 
 	exports['default'] = Play;
-	module.exports = exports['default'];
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(20);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(21);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _progressbarProgressbar = __webpack_require__(28);
-
-	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
-
-	var Seek = _react2['default'].createClass({
-	    displayName: 'Seek',
-
-	    propTypes: {
-	        seek: _react2['default'].PropTypes.func,
-	        percentageBuffered: _react2['default'].PropTypes.number,
-	        percentagePlayed: _react2['default'].PropTypes.number,
-	        duration: _react2['default'].PropTypes.number
-	    },
-
-	    /**
-	     * Calculates the seek time based on change of input.
-	     * @param  {object} e Event object
-	     * @return {undefined}
-	     */
-	    seek: function seek(e) {
-	        this.props.seek(e.target.value * this.props.duration / 100);
-	    },
-
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            { className: 'video-seek video__control' },
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'video-seek__container' },
-	                _react2['default'].createElement('div', { style: {
-	                        width: this.props.percentageBuffered + '%'
-	                    }, className: 'video-seek__buffer-bar' }),
-	                _react2['default'].createElement(_progressbarProgressbar2['default'], {
-	                    onChange: this.seek,
-	                    progress: this.props.percentagePlayed })
-	            )
-	        );
-	    }
-	});
-
-	exports['default'] = Seek;
 	module.exports = exports['default'];
 
 /***/ },
@@ -810,51 +788,84 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var ProgressBar = _react2['default'].createClass({
-	    displayName: 'ProgressBar',
+	var _reactDom = __webpack_require__(22);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _progressbarProgressbar = __webpack_require__(29);
+
+	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
+
+	var Seek = _react2['default'].createClass({
+	    displayName: 'Seek',
 
 	    propTypes: {
-	        orientation: _react2['default'].PropTypes.string,
-	        step: _react2['default'].PropTypes.number,
-	        progress: _react2['default'].PropTypes.number,
-	        onChange: _react2['default'].PropTypes.func
+	        copyKeys: _react2['default'].PropTypes.object,
+	        seek: _react2['default'].PropTypes.func,
+	        percentageBuffered: _react2['default'].PropTypes.number,
+	        percentagePlayed: _react2['default'].PropTypes.number,
+	        duration: _react2['default'].PropTypes.number
 	    },
 
-	    getDefaultProps: function getDefaultProps() {
+	    getInitialState: function getInitialState() {
 	        return {
-	            orientation: 'horizontal',
-	            step: 0.1,
-	            progress: 0,
-	            onChange: this.onChange
+	            // When the child range input becomes focused,
+	            // we need to set this custom seek bar to look
+	            // 'focused' with the correct styles. Need to
+	            // do this via a class.
+	            focused: false
 	        };
 	    },
 
-	    onChange: function onChange() {},
+	    /**
+	     * Calculates the seek time based on change of input.
+	     * @param  {object} e Event object
+	     * @return {undefined}
+	     */
+	    seek: function seek(e) {
+	        this.props.seek(e.target.value * this.props.duration / 100);
+	    },
+
+	    onFocus: function onFocus() {
+	        this.setState({
+	            focused: true
+	        });
+	    },
+
+	    onBlur: function onBlur() {
+	        this.setState({
+	            focused: false
+	        });
+	    },
 
 	    render: function render() {
 	        return _react2['default'].createElement(
 	            'div',
-	            { className: 'video-progress-bar ' + (this.props.orientation === 'horizontal' ? 'video-progress-bar--horizontal' : 'video-progress-bar--vertical') },
-	            _react2['default'].createElement('div', { className: 'video-progress-bar__fill', style: _defineProperty({}, this.props.orientation === 'horizontal' ? 'width' : 'height', this.props.progress + '%') }),
-	            _react2['default'].createElement('input', { className: 'video-progress-bar__input',
-	                orient: this.props.orientation,
-	                onChange: this.props.onChange,
-	                type: 'range',
-	                min: '0',
-	                max: '100',
-	                value: this.props.progress,
-	                step: this.props.step })
+	            {
+	                className: 'video-seek video__control' + (this.state.focused ? ' video__control--focused' : ''),
+	                'aria-label': this.props.copyKeys.seek },
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'video-seek__container' },
+	                _react2['default'].createElement('div', { style: {
+	                        width: this.props.percentageBuffered + '%'
+	                    }, className: 'video-seek__buffer-bar' }),
+	                _react2['default'].createElement(_progressbarProgressbar2['default'], {
+	                    step: 5,
+	                    onBlur: this.onBlur,
+	                    onFocus: this.onFocus,
+	                    onChange: this.seek,
+	                    progress: this.props.percentagePlayed })
+	            )
 	        );
 	    }
 	});
 
-	exports['default'] = ProgressBar;
+	exports['default'] = Seek;
 	module.exports = exports['default'];
 
 /***/ },
@@ -869,15 +880,97 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(23);
+	var ProgressBar = _react2['default'].createClass({
+	    displayName: 'ProgressBar',
+
+	    propTypes: {
+	        orientation: _react2['default'].PropTypes.string,
+	        step: _react2['default'].PropTypes.number,
+	        progress: _react2['default'].PropTypes.number,
+	        onChange: _react2['default'].PropTypes.func,
+	        onFocus: _react2['default'].PropTypes.func,
+	        onBlur: _react2['default'].PropTypes.func
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            orientation: 'horizontal',
+	            step: 0.1,
+	            progress: 0,
+	            onChange: this.onChange,
+	            onFocus: this.onFocus,
+	            onBlur: this.onBlur
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        // 'orient' is not supported by React but
+	        // is required for Firefox. Setting manually.
+	        // https://github.com/facebook/react/issues/2453
+	        this.refs.input.setAttribute('orient', this.props.orientation);
+	    },
+
+	    onChange: function onChange() {
+	        // Placeholder
+	    },
+
+	    onFocus: function onFocus() {
+	        // Placeholder
+	    },
+
+	    onBlur: function onBlur() {
+	        // Placeholder
+	    },
+
+	    render: function render() {
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: 'video-progress-bar ' + (this.props.orientation === 'horizontal' ? 'video-progress-bar--horizontal' : 'video-progress-bar--vertical') },
+	            _react2['default'].createElement('div', { className: 'video-progress-bar__fill', style: _defineProperty({}, this.props.orientation === 'horizontal' ? 'width' : 'height', this.props.progress + '%') }),
+	            _react2['default'].createElement('input', { className: 'video-progress-bar__input',
+	                onBlur: this.props.onBlur,
+	                onFocus: this.props.onFocus,
+	                ref: 'input',
+	                onChange: this.props.onChange,
+	                type: 'range',
+	                min: '0',
+	                max: '100',
+	                value: this.props.progress,
+	                step: this.props.step })
+	        );
+	    }
+	});
+
+	exports['default'] = ProgressBar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(21);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _iconIcon = __webpack_require__(24);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _progressbarProgressbar = __webpack_require__(28);
+	var _progressbarProgressbar = __webpack_require__(29);
 
 	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
 
@@ -885,6 +978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: 'Mute',
 
 	    propTypes: {
+	        copyKeys: _react2['default'].PropTypes.object,
 	        volume: _react2['default'].PropTypes.number,
 	        unmute: _react2['default'].PropTypes.func,
 	        setVolume: _react2['default'].PropTypes.func,
@@ -912,14 +1006,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.unmute();
 	    },
 
+	    toggleMute: function toggleMute() {
+	        // If we volume has been dragged to 0, assume it is in
+	        // a muted state and then toggle to full volume.
+	        if (this.props.volume <= 0) {
+	            this.props.setVolume(1);
+	        } else {
+	            this.props.toggleMute();
+	        }
+	    },
+
 	    render: function render() {
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'video-mute video__control' },
 	            _react2['default'].createElement(
-	                'div',
-	                { className: 'video-mute__inner', onClick: this.props.toggleMute },
-	                this.props.muted ? _react2['default'].createElement(_iconIcon2['default'], { name: 'volume-off' }) : _react2['default'].createElement(_iconIcon2['default'], { name: 'volume-up' })
+	                'button',
+	                {
+	                    className: 'video-mute__inner',
+	                    onClick: this.toggleMute,
+	                    'aria-label': this.props.muted || this.props.volume <= 0 ? this.props.copyKeys.unmute : this.props.copyKeys.mute },
+	                this.props.muted || this.props.volume <= 0 ? _react2['default'].createElement(_iconIcon2['default'], { name: 'volume-off' }) : _react2['default'].createElement(_iconIcon2['default'], { name: 'volume-up' })
 	            ),
 	            _react2['default'].createElement(
 	                'div',
@@ -930,7 +1037,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2['default'].createElement(_progressbarProgressbar2['default'], {
 	                        orientation: 'vertical',
 	                        onChange: this.changeVolume,
-	                        progress: this.props.volume * 100 })
+	                        progress: this.props.muted ? 0 : this.props.volume * 100
+	                    })
 	                )
 	            )
 	        );
@@ -941,7 +1049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -952,11 +1060,73 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(20);
+	var _react = __webpack_require__(21);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(23);
+	var _iconIcon = __webpack_require__(24);
+
+	var _iconIcon2 = _interopRequireDefault(_iconIcon);
+
+	var Time = _react2['default'].createClass({
+	    displayName: 'Time',
+
+	    propTypes: {
+	        currentTime: _react2['default'].PropTypes.number,
+	        duration: _react2['default'].PropTypes.number
+	    },
+
+	    /**
+	     * Formats time into a friendlier format
+	     * @param  {number} seconds Time in seconds
+	     * @return {string}         Timestamp in the format of HH:MM:SS
+	     */
+	    formatTime: function formatTime(seconds) {
+	        var date = new Date(null);
+	        seconds = isNaN(seconds) ? 0 : Math.floor(seconds);
+	        date.setSeconds(seconds);
+	        return date.toISOString().substr(11, 8);
+	    },
+
+	    render: function render() {
+	        return _react2['default'].createElement(
+	            'div',
+	            { className: 'video-time video__control' },
+	            _react2['default'].createElement(
+	                'span',
+	                { className: 'video-time__current' },
+	                this.formatTime(this.props.currentTime)
+	            ),
+	            '/',
+	            _react2['default'].createElement(
+	                'span',
+	                { className: 'video-time__duration' },
+	                this.formatTime(this.props.duration)
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = Time;
+	module.exports = exports['default'];
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(21);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _iconIcon = __webpack_require__(24);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -964,6 +1134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: 'Fullscreen',
 
 	    propTypes: {
+	        copyKeys: _react2['default'].PropTypes.object,
 	        fullscreen: _react2['default'].PropTypes.func
 	    },
 
@@ -979,8 +1150,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    render: function render() {
 	        return _react2['default'].createElement(
-	            'div',
-	            { onClick: this.props.fullscreen, className: 'video-fullscreen video__control' },
+	            'button',
+	            {
+	                onClick: this.props.fullscreen,
+	                className: 'video-fullscreen video__control',
+	                'aria-label': this.props.copyKeys.fullscreen },
 	            _react2['default'].createElement(_iconIcon2['default'], { name: 'resize-full' })
 	        );
 	    }
@@ -990,13 +1164,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_31__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_33__;
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1007,7 +1181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var debounce = __webpack_require__(33);
+	var debounce = __webpack_require__(35);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -1098,7 +1272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1109,7 +1283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(34);
+	var getNative = __webpack_require__(36);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -1338,7 +1512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/**
@@ -1481,7 +1655,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1490,7 +1664,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 	var copy = {
-	    sourceError: 'Video cannot be played in this browser.'
+	    sourceError: 'Video cannot be played in this browser.',
+	    play: 'Play video',
+	    pause: 'Pause video',
+	    mute: 'Mute video',
+	    unmute: 'Unmute video',
+	    fullscreen: 'View video fullscreen',
+	    seek: 'Seek video'
 	};
 	exports['default'] = copy;
 	module.exports = exports['default'];

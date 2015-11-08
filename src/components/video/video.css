@@ -11,6 +11,10 @@
             user-select: none;
 }
 
+.video:focus {
+    outline: thin dotted;
+}
+
 .video__controls {
     position: absolute;
     bottom: 0;
@@ -20,6 +24,7 @@
     transition: opacity 0.2s ease-in;
 }
 
+.video--focused .video__controls,
 .video:hover .video__controls {
     opacity: 1;
 }

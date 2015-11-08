@@ -2,6 +2,7 @@
     flex-grow: 1;
     height: 100%;
     position: relative;
+    padding: 0 10px;
 }
 
 .video-seek__container {

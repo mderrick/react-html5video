@@ -6,6 +6,7 @@ import Seek from './../controls/seek/seek';
 import Play from './../controls/play/play';
 import Mute from './../controls/mute/mute';
 import Fullscreen from './../controls/fullscreen/fullscreen';
+import Time from './../controls/time/time';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
 import copy from './../../assets/copy';
@@ -267,7 +268,32 @@ var Video = React.createClass({
         } else {
             classString += ' video--playing';
         }
+
+        if (this.state.focused) {
+            classString += ' video--focused';
+        }
         return classString;
+    },
+
+    /**
+     * Sets state to show focused class on video player.
+     * @return {undefined}
+     */
+    onFocus() {
+        this.setState({
+            focused: true
+        });
+    },
+
+    /**
+     * Sets state to not be focused to remove class form video
+     * player.
+     * @return {undefined}
+     */
+    onBlur() {
+        this.setState({
+            focused: false
+        });
     },
 
     render() {
@@ -275,7 +301,10 @@ var Video = React.createClass({
         // and use our own controls.
         var {controls, ...otherProps} = this.props;
         return (
-            <div className={this.getVideoClassName()}>
+            <div className={this.getVideoClassName()}
+                tabIndex="0"
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}>
                 <video
                     {...otherProps}
                     className="video__el"
@@ -297,4 +326,4 @@ var Video = React.createClass({
     }
 });
 
-export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Overlay};
+export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Time, Overlay};

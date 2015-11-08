@@ -2,6 +2,7 @@ import React from 'react';
 import Play from './play/play';
 import Seek from './seek/seek';
 import Mute from './mute/mute';
+import Time from './time/time';
 import Fullscreen from './fullscreen/fullscreen';
 
 var Controls = React.createClass({
@@ -16,6 +17,7 @@ var Controls = React.createClass({
             children: [
                 <Play />,
                 <Seek />,
+                <Time />,
                 <Mute />,
                 <Fullscreen />
             ]

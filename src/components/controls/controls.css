@@ -4,10 +4,23 @@
     display: flex;
 }
 
+.video-controls button {
+    background: none;
+    border: none;
+    margin: 0;
+    color: #fff;
+}
+
 .video__control {
     position: relative;
     padding: 10px;
     height: 100%;
     font-size: 14px;
     box-sizing: border-box;
+}
+
+.video__control--focused,
+.video__control:focus,
+.video-controls button:focus {
+    outline: thin dotted;
 }
