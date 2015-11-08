@@ -45,7 +45,24 @@ import { Video as Default, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay
 
 ## Usage
 
-Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and configure the controls by adding, removing and shuffling them as you desire.
+### Simple Usage
+
+Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video):
+
+```js
+import Video from 'react-html5video';
+render() {
+    return (
+        <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
+            <source src="http://sourcefile.webm" type="video/webm" />
+        </Video>
+    );
+}
+```
+
+### Advanced Usage
+
+ You can configure, customize and modify the controls by adding, removing and shuffling them as you desire. You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`:
 
 ```js
 import { Video as default, Controls, Mute, Play, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
@@ -74,8 +91,6 @@ render() {
     );
 }
 ```
-
-You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`.
 
 ## i18n
 
