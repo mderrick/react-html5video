@@ -2,6 +2,9 @@
 
 A customizeable HTML5 Video that uses the familiar HTML5 video markup but with custom and configurable controls with i18n and a11y.
 
+[![npm version](https://img.shields.io/npm/v/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
+[![npm downloads](https://img.shields.io/npm/dm/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
+
 <img src="http://mderrick.github.io/react-html5video/example.png?v=1" align="center" height="337" width="600" />
 
 View the [demo](http://mderrick.github.io/react-html5video/).
