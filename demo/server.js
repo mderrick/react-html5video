@@ -5,7 +5,7 @@ var compiler;
 var server;
 
 // Source maps
-config.devtool = 'source-map';
+config.devtool = 'eval';
 
 config.output.publicPath = '/dist/';
 
