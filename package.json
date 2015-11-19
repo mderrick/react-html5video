@@ -3,6 +3,10 @@
   "version": "1.2.0",
   "description": "",
   "main": "./dist/ReactHtml5Video.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mderrick/react-html5video.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
