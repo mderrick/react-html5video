@@ -1,16 +1,24 @@
 {
   "name": "react-html5video",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "./dist/ReactHtml5Video.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mderrick/react-html5video.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/mderrick/react-html5video/issues"
   },
-  "author": "",
+  "homepage": "https://github.com/mderrick/react-html5video",
+  "author": {
+    "name": "Matt Derrick",
+    "email": "me@mattderrick.co.uk",
+    "url": "http://mattderrick.co.uk"
+  },
   "license": "MIT",
   "dependencies": {
     "lodash.throttle": "^3.0.4",
