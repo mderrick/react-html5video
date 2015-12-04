@@ -39,7 +39,7 @@ var Video = window.ReactHtml5Video;
 
 ```js
 // Requires es6 transpiling and all peer dependencies installed
-import { Video as Default, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
+import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 ```
 
 
@@ -65,7 +65,7 @@ render() {
  You can configure, customize and modify the controls by adding, removing and shuffling them as you desire. You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`:
 
 ```js
-import { Video as default, Controls, Mute, Play, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
+import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 render() {
     return (
         <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
