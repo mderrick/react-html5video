@@ -55,7 +55,6 @@ var Seek = React.createClass({
                     }} className="video-seek__buffer-bar">
                     </div>
                     <ProgressBar
-                        step={5}
                         onBlur={this.onBlur}
                         onFocus={this.onFocus}
                         onChange={this.seek}
