@@ -37,7 +37,7 @@ module.exports = {
             loader: 'babel'
         }, {
             test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
-            loader: 'url?limit=10000'
+            loader: 'url-loader?limit=10000'
         }, {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
