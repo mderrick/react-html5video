@@ -855,7 +855,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        width: this.props.percentageBuffered + '%'
 	                    }, className: 'video-seek__buffer-bar' }),
 	                _react2['default'].createElement(_progressbarProgressbar2['default'], {
-	                    step: 5,
 	                    onBlur: this.onBlur,
 	                    onFocus: this.onFocus,
 	                    onChange: this.seek,
