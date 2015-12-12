@@ -30,7 +30,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             // Must be an array as server.js adds 'react-hot' loader
-            loaders: ['babel'],
+            loaders: ['babel?optional=runtime'],
             exclude: /node_modules/
         }, {
             test: /\.css$/,

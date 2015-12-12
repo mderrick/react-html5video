@@ -71,4 +71,19 @@
     margin-bottom: 10px;
 }
 
+.main__browser-stack {
+    font-size: 12px;
+    text-align: center;
+    padding: 40px 80px;
+}
 
+.main__browser-stack p a {
+    top: 6px;
+    position: relative;
+    margin: 0 5px;
+}
+
+.main__browser-stack-logo {
+    width: 100px;
+    height: auto;
+}
