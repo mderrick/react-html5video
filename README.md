@@ -17,7 +17,7 @@ Include `dist/ReactHtml5Video.css` if you do not want to build your own CSS. Alt
 
 ### Peer Dependencies
 
-This component uses ES2015 and needs to be transpiled using something like [babel-loader](https://github.com/babel/babel-loader). It depends on:
+This component uses ES2015 and needs to be transpiled using something like [babel-loader](https://github.com/babel/babel-loader). You will also need to either [polyfill](https://babeljs.io/docs/usage/polyfill/) or use [babel-runtime](https://www.npmjs.com/package/babel-runtime). It depends on:
 - `react@0.14.x`
 - `react-dom@0.14.x`
 - `react-addons-pure-render-mixin@0.14.x`
@@ -25,10 +25,10 @@ This component uses ES2015 and needs to be transpiled using something like [babe
 
 ### UMD
 
-If using the UMD module it is already transpiled to ES5 and `lodash.throttle` is included. You can find this build in the `dist` directory:
+Alternatively if using the UMD module it is already transpiled to ES5 and `lodash.throttle` is included. You can find this build in the `dist` directory:
 
 ```js
-// Includes lodash.throttle and is transpiled already
+// Includes lodash.throttle and is transpiled already. No ES2015 polyfill is required.
 var Video = require('react-html5video/dist/ReactHtml5Video');  
 ```
 
@@ -38,7 +38,7 @@ var Video = window.ReactHtml5Video;
 ```
 
 ```js
-// Requires es6 transpiling and all peer dependencies installed
+// Requires es6 transpiling, an es6 polyfill/babel-runtime and all peer dependencies installed
 import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
 ```
 

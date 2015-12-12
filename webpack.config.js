@@ -34,7 +34,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel?optional=runtime'
         }, {
             test: /\.(svg|woff([\?]?.*)|ttf([\?]?.*)|eot([\?]?.*)|svg([\?]?.*))$/i,
             loader: 'url-loader?limit=10000'
