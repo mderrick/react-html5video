@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './../../button/button';
+import browserStackLogo from './../../../../browserstack.png';
 import {default as Video, Controls, Overlay} from './../../../../../src/components/video/video';
 
 var videos = [
@@ -130,7 +131,7 @@ var Main = React.createClass({
                     </div>
                 </div>
                 <div className="main__browser-stack">
-                    <p>Thanks to <a href="http://www.browserstack.com" target="_blank"><img className="main__browser-stack-logo" src="./../../../browserstack.png" /></a> for a free subscription to help test cross browser.</p>
+                    <p>Thanks to <a href="http://www.browserstack.com" target="_blank"><img className="main__browser-stack-logo" src={browserStackLogo} /></a> for a free subscription to help test cross browser.</p>
                 </div>
             </div>
         );
