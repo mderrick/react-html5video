@@ -129,6 +129,9 @@ var Main = React.createClass({
                         </ul>
                     </div>
                 </div>
+                <div className="main__browser-stack">
+                    <p>Thanks to <a href="http://www.browserstack.com" target="_blank"><img className="main__browser-stack-logo" src="./../../../browserstack.png" /></a> for a free subscription to help test cross browser.</p>
+                </div>
             </div>
         );
     }

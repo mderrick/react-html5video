@@ -133,6 +133,10 @@ All children components receive the following methods via props:
 - `fullscreen`
 - `setVolume`
 
+## Thank You
+
+<img src="http://mderrick.github.io/react-html5video/browserstack.png?v=1" height="22" width="100" />
+[BrowserStack](http://www.browserstack.com) for a free subscription to help test cross browser.
 
 ## License
 MIT
