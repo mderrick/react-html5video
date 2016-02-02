@@ -4,7 +4,9 @@
   "description": "",
   "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev-server": "webpack-dev-server --host localhost --port 8000 --history-api-fallback --inline --hot --progress"
   },
   "author": "",
   "license": "ISC",
