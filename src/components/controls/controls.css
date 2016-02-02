@@ -1,6 +1,9 @@
 .video-controls {
     height: 34px;
     background-color: rgba(0,0,0,0.8);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -16,7 +19,8 @@
     padding: 10px;
     height: 100%;
     font-size: 14px;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 .video__control--focused,

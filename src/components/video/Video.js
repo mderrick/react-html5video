@@ -311,13 +311,32 @@ var Video = React.createClass({
                     ref={(el) => {
                         this.videoEl = el;
                     }}
-                    onPlay={this._updateStateFromVideo}
-                    onPause={this._updateStateFromVideo}
-                    onVolumeChange={this._updateStateFromVideo}
-                    onTimeUpdate={this._updateStateFromVideo}
-                    onProgress={this._updateStateFromVideo}
+                    //  We have throttled `_updateStateFromVideo` so listen to
+                    //  every available Media event that React allows and
+                    //  infer the Video state in that method from the Video properties.
+                    onAbort={this._updateStateFromVideo}
                     onCanPlay={this._updateStateFromVideo}
-                    onCanPlayThrough={this._updateStateFromVideo}>
+                    onCanPlayThrough={this._updateStateFromVideo}
+                    onDurationChange={this._updateStateFromVideo}
+                    onEmptied={this._updateStateFromVideo}
+                    onEncrypted={this._updateStateFromVideo}
+                    onEnded={this._updateStateFromVideo}
+                    onError={this._updateStateFromVideo}
+                    onLoadedData={this._updateStateFromVideo}
+                    onLoadedMetadata={this._updateStateFromVideo}
+                    onLoadStart={this._updateStateFromVideo}
+                    onPause={this._updateStateFromVideo}
+                    onPlay={this._updateStateFromVideo}
+                    onPlaying={this._updateStateFromVideo}
+                    onProgress={this._updateStateFromVideo}
+                    onRateChange={this._updateStateFromVideo}
+                    onSeeked={this._updateStateFromVideo}
+                    onSeeking={this._updateStateFromVideo}
+                    onStalled={this._updateStateFromVideo}
+                    onSuspend={this._updateStateFromVideo}
+                    onTimeUpdate={this._updateStateFromVideo}
+                    onVolumeChange={this._updateStateFromVideo}
+                    onWaiting={this._updateStateFromVideo}>
                         {this.renderSources()}
                 </video>
                 {controls ? this.renderControls() : ''}
