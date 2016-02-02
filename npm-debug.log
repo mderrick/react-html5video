@@ -1,0 +1,24 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'dev' ]
+2 info using npm@3.5.0
+3 info using node@v0.12.4
+4 verbose stack Error: missing script: dev
+4 verbose stack     at run (/usr/local/Cellar/node/0.10.3/lib/node_modules/npm/lib/run-script.js:147:19)
+4 verbose stack     at /usr/local/Cellar/node/0.10.3/lib/node_modules/npm/lib/run-script.js:57:5
+4 verbose stack     at /usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+4 verbose stack     at checkBinReferences_ (/usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+4 verbose stack     at final (/usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+4 verbose stack     at then (/usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+4 verbose stack     at /usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/read-package-json/read-json.js:284:20
+4 verbose stack     at /usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16
+4 verbose stack     at fs.js:263:20
+4 verbose stack     at /usr/local/Cellar/node/0.10.3/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:230:16
+5 verbose cwd /Users/Shared/Work/react-html5video/demo
+6 error Darwin 15.2.0
+7 error argv "node" "/usr/local/bin/npm" "run" "dev"
+8 error node v0.12.4
+9 error npm  v3.5.0
+10 error missing script: dev
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
