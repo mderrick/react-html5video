@@ -133,6 +133,21 @@ All children components receive the following methods via props:
 - `fullscreen`
 - `setVolume`
 
+## Contributing
+
+### Dev Setup
+
+To run a server with hot module replacement:
+
+```bash
+    $ npm install
+    $ cd demo
+    $ npm install
+    $ npm run dev-server
+```
+
+Open [http://localhost:8080](http://localhost:8080). You can now modify the files in both `src` and `demo/src`.
+
 ## Thank You
 
 <img src="http://mderrick.github.io/react-html5video/browserstack.png?v=1" height="22" width="100" />
