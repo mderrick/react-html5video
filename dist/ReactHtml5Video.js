@@ -7,7 +7,7 @@
 		exports["ReactHtml5Video"] = factory(require("react"), require("react-dom"), require("react-addons-pure-render-mixin"));
 	else
 		root["ReactHtml5Video"] = factory(root["React"], root["ReactDOM"], root["react-addons-pure-render-mixin"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_39__, __WEBPACK_EXTERNAL_MODULE_40__, __WEBPACK_EXTERNAL_MODULE_54__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_41__, __WEBPACK_EXTERNAL_MODULE_42__, __WEBPACK_EXTERNAL_MODULE_57__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -90,61 +90,61 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _objectWithoutProperties = __webpack_require__(21)['default'];
 
-	var _extends = __webpack_require__(22)['default'];
+	var _extends = __webpack_require__(23)['default'];
 
-	var _Object$assign = __webpack_require__(23)['default'];
+	var _Object$assign = __webpack_require__(24)['default'];
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(40);
+	var _reactDom = __webpack_require__(42);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _overlayOverlay = __webpack_require__(41);
+	var _overlayOverlay = __webpack_require__(43);
 
 	var _overlayOverlay2 = _interopRequireDefault(_overlayOverlay);
 
-	var _controlsControls = __webpack_require__(44);
+	var _controlsControls = __webpack_require__(46);
 
 	var _controlsControls2 = _interopRequireDefault(_controlsControls);
 
-	var _controlsSeekSeek = __webpack_require__(46);
+	var _controlsSeekSeek = __webpack_require__(48);
 
 	var _controlsSeekSeek2 = _interopRequireDefault(_controlsSeekSeek);
 
-	var _controlsPlayPlay = __webpack_require__(45);
+	var _controlsPlayPlay = __webpack_require__(47);
 
 	var _controlsPlayPlay2 = _interopRequireDefault(_controlsPlayPlay);
 
-	var _controlsMuteMute = __webpack_require__(51);
+	var _controlsMuteMute = __webpack_require__(54);
 
 	var _controlsMuteMute2 = _interopRequireDefault(_controlsMuteMute);
 
-	var _controlsFullscreenFullscreen = __webpack_require__(53);
+	var _controlsFullscreenFullscreen = __webpack_require__(56);
 
 	var _controlsFullscreenFullscreen2 = _interopRequireDefault(_controlsFullscreenFullscreen);
 
-	var _controlsTimeTime = __webpack_require__(52);
+	var _controlsTimeTime = __webpack_require__(55);
 
 	var _controlsTimeTime2 = _interopRequireDefault(_controlsTimeTime);
 
-	var _reactAddonsPureRenderMixin = __webpack_require__(54);
+	var _reactAddonsPureRenderMixin = __webpack_require__(57);
 
 	var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-	var _lodashThrottle = __webpack_require__(55);
+	var _lodashThrottle = __webpack_require__(58);
 
 	var _lodashThrottle2 = _interopRequireDefault(_lodashThrottle);
 
-	var _assetsCopy = __webpack_require__(58);
+	var _assetsCopy = __webpack_require__(61);
 
 	var _assetsCopy2 = _interopRequireDefault(_assetsCopy);
 
@@ -455,13 +455,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ref: function (el) {
 	                        _this.videoEl = el;
 	                    },
-	                    onPlay: this._updateStateFromVideo,
-	                    onPause: this._updateStateFromVideo,
-	                    onVolumeChange: this._updateStateFromVideo,
-	                    onTimeUpdate: this._updateStateFromVideo,
-	                    onProgress: this._updateStateFromVideo,
+	                    //  We have throttled `_updateStateFromVideo` so listen to
+	                    //  every available Media event that React allows and
+	                    //  infer the Video state in that method from the Video properties.
+	                    onAbort: this._updateStateFromVideo,
 	                    onCanPlay: this._updateStateFromVideo,
-	                    onCanPlayThrough: this._updateStateFromVideo }),
+	                    onCanPlayThrough: this._updateStateFromVideo,
+	                    onDurationChange: this._updateStateFromVideo,
+	                    onEmptied: this._updateStateFromVideo,
+	                    onEncrypted: this._updateStateFromVideo,
+	                    onEnded: this._updateStateFromVideo,
+	                    onError: this._updateStateFromVideo,
+	                    onLoadedData: this._updateStateFromVideo,
+	                    onLoadedMetadata: this._updateStateFromVideo,
+	                    onLoadStart: this._updateStateFromVideo,
+	                    onPause: this._updateStateFromVideo,
+	                    onPlay: this._updateStateFromVideo,
+	                    onPlaying: this._updateStateFromVideo,
+	                    onProgress: this._updateStateFromVideo,
+	                    onRateChange: this._updateStateFromVideo,
+	                    onSeeked: this._updateStateFromVideo,
+	                    onSeeking: this._updateStateFromVideo,
+	                    onStalled: this._updateStateFromVideo,
+	                    onSuspend: this._updateStateFromVideo,
+	                    onTimeUpdate: this._updateStateFromVideo,
+	                    onVolumeChange: this._updateStateFromVideo,
+	                    onWaiting: this._updateStateFromVideo }),
 	                this.renderSources()
 	            ),
 	            controls ? this.renderControls() : ''
@@ -480,9 +499,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(22);
+
+/***/ },
+/* 22 */
 /***/ function(module, exports) {
 
 	"use strict";
+
+	exports.__esModule = true;
 
 	exports.default = function (obj, keys) {
 	  var target = {};
@@ -496,15 +523,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return target;
 	};
 
-	exports.__esModule = true;
-
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _assign = __webpack_require__(23);
+	exports.__esModule = true;
+
+	var _assign = __webpack_require__(24);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -524,37 +551,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return target;
 	};
 
-	exports.__esModule = true;
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(24), __esModule: true };
-
 /***/ },
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(25);
-	module.exports = __webpack_require__(28).Object.assign;
+	module.exports = { "default": __webpack_require__(25), __esModule: true };
 
 /***/ },
 /* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(26);
-
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(31)});
+	__webpack_require__(26);
+	module.exports = __webpack_require__(29).Object.assign;
 
 /***/ },
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(27)
-	  , core      = __webpack_require__(28)
-	  , ctx       = __webpack_require__(29)
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(27);
+
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(32)});
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(28)
+	  , core      = __webpack_require__(29)
+	  , ctx       = __webpack_require__(30)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -600,7 +625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = $export;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -609,18 +634,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '1.2.6'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(30);
+	var aFunction = __webpack_require__(31);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -641,7 +666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -650,16 +675,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var $        = __webpack_require__(32)
-	  , toObject = __webpack_require__(33)
-	  , IObject  = __webpack_require__(35);
+	var $        = __webpack_require__(33)
+	  , toObject = __webpack_require__(34)
+	  , IObject  = __webpack_require__(36);
 
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = __webpack_require__(37)(function(){
+	module.exports = __webpack_require__(38)(function(){
 	  var a = Object.assign
 	    , A = {}
 	    , B = {}
@@ -688,7 +713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	} : Object.assign;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	var $Object = Object;
@@ -706,17 +731,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(34);
+	var defined = __webpack_require__(35);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -726,17 +751,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(36);
+	var cof = __webpack_require__(37);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -746,7 +771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -758,10 +783,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 38 */
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(40);
+
+/***/ },
+/* 40 */
 /***/ function(module, exports) {
 
 	"use strict";
+
+	exports.__esModule = true;
 
 	exports.default = function (obj) {
 	  return obj && obj.__esModule ? obj : {
@@ -769,41 +802,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	};
 
-	exports.__esModule = true;
-
-/***/ },
-/* 39 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_39__;
-
-/***/ },
-/* 40 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_40__;
-
 /***/ },
 /* 41 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_41__;
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_42__;
+
+/***/ },
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(42);
+	var _iconIcon = __webpack_require__(44);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _spinnerSpinner = __webpack_require__(43);
+	var _spinnerSpinner = __webpack_require__(45);
 
 	var _spinnerSpinner2 = _interopRequireDefault(_spinnerSpinner);
 
@@ -860,7 +891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*eslint-disable */
@@ -869,13 +900,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -906,18 +937,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _interopRequireDefault = __webpack_require__(38)["default"];
+	var _interopRequireDefault = __webpack_require__(39)["default"];
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -942,38 +973,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 44 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _playPlay = __webpack_require__(45);
+	var _playPlay = __webpack_require__(47);
 
 	var _playPlay2 = _interopRequireDefault(_playPlay);
 
-	var _seekSeek = __webpack_require__(46);
+	var _seekSeek = __webpack_require__(48);
 
 	var _seekSeek2 = _interopRequireDefault(_seekSeek);
 
-	var _muteMute = __webpack_require__(51);
+	var _muteMute = __webpack_require__(54);
 
 	var _muteMute2 = _interopRequireDefault(_muteMute);
 
-	var _timeTime = __webpack_require__(52);
+	var _timeTime = __webpack_require__(55);
 
 	var _timeTime2 = _interopRequireDefault(_timeTime);
 
-	var _fullscreenFullscreen = __webpack_require__(53);
+	var _fullscreenFullscreen = __webpack_require__(56);
 
 	var _fullscreenFullscreen2 = _interopRequireDefault(_fullscreenFullscreen);
 
@@ -1018,22 +1049,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 45 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(42);
+	var _iconIcon = __webpack_require__(44);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -1072,26 +1103,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(40);
+	var _reactDom = __webpack_require__(42);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _progressbarProgressbar = __webpack_require__(47);
+	var _progressbarProgressbar = __webpack_require__(49);
 
 	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
 
@@ -1163,20 +1194,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _defineProperty = __webpack_require__(48)['default'];
+	var _defineProperty = __webpack_require__(50)['default'];
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
@@ -1245,12 +1276,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 48 */
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(51);
+
+/***/ },
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _defineProperty = __webpack_require__(49);
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(52);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -1271,44 +1310,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return obj;
 	};
 
-	exports.__esModule = true;
-
 /***/ },
-/* 49 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(50), __esModule: true };
+	module.exports = { "default": __webpack_require__(53), __esModule: true };
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(32);
+	var $ = __webpack_require__(33);
 	module.exports = function defineProperty(it, key, desc){
 	  return $.setDesc(it, key, desc);
 	};
 
 /***/ },
-/* 51 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(42);
+	var _iconIcon = __webpack_require__(44);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _progressbarProgressbar = __webpack_require__(47);
+	var _progressbarProgressbar = __webpack_require__(49);
 
 	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
 
@@ -1387,22 +1424,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(42);
+	var _iconIcon = __webpack_require__(44);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -1449,22 +1486,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(38)['default'];
+	var _interopRequireDefault = __webpack_require__(39)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _react = __webpack_require__(39);
+	var _react = __webpack_require__(41);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _iconIcon = __webpack_require__(42);
+	var _iconIcon = __webpack_require__(44);
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
@@ -1502,13 +1539,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_54__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_57__;
 
 /***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1519,7 +1556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var debounce = __webpack_require__(56);
+	var debounce = __webpack_require__(59);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -1610,7 +1647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 56 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1621,7 +1658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(57);
+	var getNative = __webpack_require__(60);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -1850,7 +1887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 60 */
 /***/ function(module, exports) {
 
 	/**
@@ -1993,7 +2030,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 61 */
 /***/ function(module, exports) {
 
 	'use strict';
