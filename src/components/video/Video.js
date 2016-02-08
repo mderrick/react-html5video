@@ -66,6 +66,10 @@ var Video = React.createClass({
         // Listen to error of last source.
         this.videoEl.children[this.videoEl.children.length - 1]
             .addEventListener('error', this._updateStateFromVideo);
+
+        // bind shortcuts
+        document.addEventListener('keyup', this.handleKeyup);
+
     },
 
     /**
@@ -76,6 +80,27 @@ var Video = React.createClass({
         // Remove event listener from video.
         this.videoEl.children[this.videoEl.children.length - 1]
             .removeEventListener('error', this._updateStateFromVideo);
+
+        document.removeEventListener('keyup', this.handleKeyup)
+    },
+
+    /**
+     * Handle keyup for shortcuts
+     * @param {object} event in callback keyup
+     * @return {undefined}
+     */
+    handleKeyup(event) {
+        const keyCode = (event.keyCode ? event.keyCode : event.which);
+
+        // space
+        if (keyCode == '32') {
+            this.togglePlay();
+        }
+
+        // F
+        if (keyCode == '70') {
+            this.fullscreen();
+        }
     },
 
     /**
