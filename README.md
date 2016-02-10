@@ -47,13 +47,17 @@ import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay
 
 ### Simple Usage
 
-Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video):
+Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and supported [React media events](https://facebook.github.io/react/docs/events.html#media-events):
 
 ```js
 import Video from 'react-html5video';
 render() {
     return (
-        <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
+        <Video controls autoPlay loop muted
+            poster="http://sourceposter.jpg"
+            onCanPlayThrough={() => {
+                // Do stuff
+            }}>
             <source src="http://sourcefile.webm" type="video/webm" />
         </Video>
     );

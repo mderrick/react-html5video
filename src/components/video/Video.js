@@ -11,6 +11,32 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
 import copy from './../../assets/copy';
 
+var EVENTS = [
+    'onAbort',
+    'onCanPlay',
+    'onCanPlayThrough',
+    'onDurationChange',
+    'onEmptied',
+    'onEncrypted',
+    'onEnded',
+    'onError',
+    'onLoadedData',
+    'onLoadedMetadata',
+    'onLoadStart',
+    'onPause',
+    'onPlay',
+    'onPlaying',
+    'onProgress',
+    'onRateChange',
+    'onSeeked',
+    'onSeeking',
+    'onStalled',
+    'onSuspend',
+    'onTimeUpdate',
+    'onVolumeChange',
+    'onWaiting'
+];
+
 var Video = React.createClass({
 
     propTypes: {
@@ -55,6 +81,18 @@ var Video = React.createClass({
         // Also bind 'this' as we call _updateStateFromVideo outside
         // of Reacts synthetic events as well.
         this._updateStateFromVideo = throttle(this.updateStateFromVideo, 100).bind(this);
+        // Set up all React media events and call method
+        // on props if provided.
+        this.mediaEventProps = EVENTS.reduce((p, c) => {
+            p[c] = () => {
+                if (c in this.props && typeof this.props[c] === 'function') {
+                    // A prop exists for this mediaEvent, call it.
+                    this.props[c]();
+                }
+                this._updateStateFromVideo();
+            };
+            return p;
+        }, {});
     },
 
     /**
@@ -314,29 +352,7 @@ var Video = React.createClass({
                     //  We have throttled `_updateStateFromVideo` so listen to
                     //  every available Media event that React allows and
                     //  infer the Video state in that method from the Video properties.
-                    onAbort={this._updateStateFromVideo}
-                    onCanPlay={this._updateStateFromVideo}
-                    onCanPlayThrough={this._updateStateFromVideo}
-                    onDurationChange={this._updateStateFromVideo}
-                    onEmptied={this._updateStateFromVideo}
-                    onEncrypted={this._updateStateFromVideo}
-                    onEnded={this._updateStateFromVideo}
-                    onError={this._updateStateFromVideo}
-                    onLoadedData={this._updateStateFromVideo}
-                    onLoadedMetadata={this._updateStateFromVideo}
-                    onLoadStart={this._updateStateFromVideo}
-                    onPause={this._updateStateFromVideo}
-                    onPlay={this._updateStateFromVideo}
-                    onPlaying={this._updateStateFromVideo}
-                    onProgress={this._updateStateFromVideo}
-                    onRateChange={this._updateStateFromVideo}
-                    onSeeked={this._updateStateFromVideo}
-                    onSeeking={this._updateStateFromVideo}
-                    onStalled={this._updateStateFromVideo}
-                    onSuspend={this._updateStateFromVideo}
-                    onTimeUpdate={this._updateStateFromVideo}
-                    onVolumeChange={this._updateStateFromVideo}
-                    onWaiting={this._updateStateFromVideo}>
+                    {...this.mediaEventProps}>
                         {this.renderSources()}
                 </video>
                 {controls ? this.renderControls() : ''}
