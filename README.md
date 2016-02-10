@@ -53,7 +53,11 @@ Use normal HTML5 `<video>` markup with all the standard [html attributes](https:
 import Video from 'react-html5video';
 render() {
     return (
-        <Video controls autoPlay loop muted poster="http://sourceposter.jpg" onCanPlayThrough={() => { // Do stuff }}>
+        <Video controls autoPlay loop muted
+            poster="http://sourceposter.jpg"
+            onCanPlayThrough={() => {
+                // Do stuff
+            }}>
             <source src="http://sourcefile.webm" type="video/webm" />
         </Video>
     );
