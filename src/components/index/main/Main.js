@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Button from './../../button/button';
 import browserStackLogo from './../../../../browserstack.png';
 import {default as Video, Controls, Overlay} from './../../../../../src/components/video/video';
@@ -72,6 +73,13 @@ var Main = React.createClass({
         this.refs.video.setVolume(this._volumeInput.valueAsNumber);
     },
 
+    onProgress() {
+        var el = ReactDOM.findDOMNode(this.refs.video).getElementsByTagName('video')[0];
+        this.setState({
+            percentageLoaded: el.buffered.length && el.buffered.end(el.buffered.length - 1) / el.duration * 100
+        });
+    },
+
     render() {
         return (
             <div className="main">
@@ -79,7 +87,7 @@ var Main = React.createClass({
                     <span className="main__react-logo"></span> React HTML5 Video
                 </h1>
                 <div className="main__video">
-                    <Video controls autoPlay loop muted ref="video">
+                    <Video controls autoPlay loop muted ref="video" onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
                         <Controls />
@@ -94,6 +102,8 @@ var Main = React.createClass({
                             <li><Button active={this.state.videoId === 2} onClick={this.showVideo.bind(this, 2)}>3</Button></li>
                             <li><Button active={this.state.videoId === 3} onClick={this.showVideo.bind(this, 3)}>Unsupported Source</Button></li>
                         </ul>
+                        <h2 className="main__h2">Video Loaded</h2>
+                        {this.state.percentageLoaded}%
                     </div>
                     <div className="main__col2">
                         <h2 className="main__h2">Video API</h2>
