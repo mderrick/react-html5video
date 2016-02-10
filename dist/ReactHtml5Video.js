@@ -148,6 +148,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _assetsCopy2 = _interopRequireDefault(_assetsCopy);
 
+	var EVENTS = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
+
 	var Video = _react2['default'].createClass({
 	    displayName: 'Video',
 
@@ -190,9 +192,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @return {undefined}
 	     */
 	    componentWillMount: function componentWillMount() {
+	        var _this = this;
+
 	        // Also bind 'this' as we call _updateStateFromVideo outside
 	        // of Reacts synthetic events as well.
 	        this._updateStateFromVideo = (0, _lodashThrottle2['default'])(this.updateStateFromVideo, 100).bind(this);
+	        // Set up all React media events and call method
+	        // on props if provided.
+	        this.mediaEventProps = EVENTS.reduce(function (p, c) {
+	            p[c] = function () {
+	                if (c in _this.props && typeof _this.props[c] === 'function') {
+	                    // A prop exists for this mediaEvent, call it.
+	                    _this.props[c]();
+	                }
+	                _this._updateStateFromVideo();
+	            };
+	            return p;
+	        }, {});
 	    },
 
 	    /**
@@ -433,7 +449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    render: function render() {
-	        var _this = this;
+	        var _this2 = this;
 
 	        // If controls prop is provided remove it
 	        // and use our own controls.
@@ -453,34 +469,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _extends({}, otherProps, {
 	                    className: 'video__el',
 	                    ref: function (el) {
-	                        _this.videoEl = el;
-	                    },
+	                        _this2.videoEl = el;
+	                    }
 	                    //  We have throttled `_updateStateFromVideo` so listen to
 	                    //  every available Media event that React allows and
 	                    //  infer the Video state in that method from the Video properties.
-	                    onAbort: this._updateStateFromVideo,
-	                    onCanPlay: this._updateStateFromVideo,
-	                    onCanPlayThrough: this._updateStateFromVideo,
-	                    onDurationChange: this._updateStateFromVideo,
-	                    onEmptied: this._updateStateFromVideo,
-	                    onEncrypted: this._updateStateFromVideo,
-	                    onEnded: this._updateStateFromVideo,
-	                    onError: this._updateStateFromVideo,
-	                    onLoadedData: this._updateStateFromVideo,
-	                    onLoadedMetadata: this._updateStateFromVideo,
-	                    onLoadStart: this._updateStateFromVideo,
-	                    onPause: this._updateStateFromVideo,
-	                    onPlay: this._updateStateFromVideo,
-	                    onPlaying: this._updateStateFromVideo,
-	                    onProgress: this._updateStateFromVideo,
-	                    onRateChange: this._updateStateFromVideo,
-	                    onSeeked: this._updateStateFromVideo,
-	                    onSeeking: this._updateStateFromVideo,
-	                    onStalled: this._updateStateFromVideo,
-	                    onSuspend: this._updateStateFromVideo,
-	                    onTimeUpdate: this._updateStateFromVideo,
-	                    onVolumeChange: this._updateStateFromVideo,
-	                    onWaiting: this._updateStateFromVideo }),
+	                }, this.mediaEventProps),
 	                this.renderSources()
 	            ),
 	            controls ? this.renderControls() : ''
