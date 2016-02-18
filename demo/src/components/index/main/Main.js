@@ -9,7 +9,7 @@ var videos = [
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
     'http://media.w3.org/2010/05/video/movie_300.mp4',
-    // Purposefully not a video to deomnstrate source error state
+    // Purposefully not a video to demonstrate source error state
     'https://github.com/mderrick/react-html5video'
 ];
 
@@ -94,7 +94,7 @@ var Main = React.createClass({
                     </Video>
                 </div>
                 <div className="main__cols">
-                    <div className="main__col1">                        
+                    <div className="main__col1">
                         <h2 className="main__h2">Change Video Source</h2>
                         <ul className="main__ul">
                             <li><Button active={this.state.videoId === 0} onClick={this.showVideo.bind(this, 0)}>1</Button></li>

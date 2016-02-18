@@ -9,7 +9,10 @@ var Controls = React.createClass({
 
     propTypes: {
         error: React.PropTypes.bool,
-        children: React.PropTypes.arrayOf(React.PropTypes.node)
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.arrayOf(React.PropTypes.node),
+            React.PropTypes.node
+        ])
     },
 
     getDefaultProps() {
