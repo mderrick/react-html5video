@@ -27,6 +27,15 @@ var Controls = React.createClass({
         };
     },
 
+    getControlsClassName() {
+        let base = "video-controls video__controls";
+        if (this.props.isFullscreen()) {
+            return base;
+        } else {
+            return base + " video__fullhover";
+        }
+    },
+
     /**
      * Returns children components with props
      * from the parent Video component. Needed
@@ -42,7 +51,7 @@ var Controls = React.createClass({
     render() {
         return (
             !this.props.error ? (
-                <div className="video-controls video__controls">
+                <div className={this.getControlsClassName()}>
                     {this.renderChildren()}
                 </div>
             ) : null

@@ -154,8 +154,7 @@ var Video = React.createClass({
      */
     toggleFullscreen() {
         const ce = this.containerEl;
-        if (!document.fullscreenElement &&    // alternative standard method
-            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+        if (!this.isFullscreen()) {
             if (ce.requestFullscreen) {
                 ce.requestFullscreen();
             } else if (ce.msRequestFullscreen) {
@@ -165,6 +164,7 @@ var Video = React.createClass({
             } else if (ce.webkitRequestFullscreen) {
                 ce.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
             }
+            this.onBlur();
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -176,6 +176,16 @@ var Video = React.createClass({
                 document.webkitExitFullscreen();
             }
         }
+    },
+
+    /**
+     * Is full screen?
+     */
+    isFullscreen() {
+        return document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement ||
+            document.msFullscreenElement;
     },
 
     /**
@@ -270,6 +280,7 @@ var Video = React.createClass({
             unmute: this.unmute,
             seek: this.seek,
             toggleFullscreen: this.toggleFullscreen,
+            isFullscreen: this.isFullscreen,
             setVolume: this.setVolume
         }, this.state, {copyKeys: this.props.copyKeys});
 
@@ -332,9 +343,11 @@ var Video = React.createClass({
      * @return {undefined}
      */
     onFocus() {
-        this.setState({
-            focused: true
-        });
+        if (!this.isFullscreen()) {
+            this.setState({
+                focused: true
+            });
+        }
     },
 
     /**
