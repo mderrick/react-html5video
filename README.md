@@ -134,7 +134,7 @@ All children components receive the following methods via props:
 - `unmute`
 - `toggleMute`
 - `seek`
-- `fullscreen`
+- `toggleFullscreen`
 - `setVolume`
 
 ## Contributing

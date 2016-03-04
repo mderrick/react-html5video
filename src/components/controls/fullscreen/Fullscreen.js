@@ -5,7 +5,7 @@ var Fullscreen = React.createClass({
 
     propTypes: {
         copyKeys: React.PropTypes.object,
-        fullscreen: React.PropTypes.func
+        toggleFullscreen: React.PropTypes.func
     },
 
     /**
@@ -15,13 +15,13 @@ var Fullscreen = React.createClass({
      * @return {boolean}          Whether we re-render or not
      */
     shouldComponentUpdate(nextProps) {
-        return this.props.fullscreen !== nextProps.fullscreen;
+        return this.props.toggleFullscreen !== nextProps.toggleFullscreen;
     },
 
     render() {
         return (
             <button
-                onClick={this.props.fullscreen}
+                onClick={this.props.toggleFullscreen}
                 className="video-fullscreen video__control"
                 aria-label={this.props.copyKeys.fullscreen}>
                 <Icon name="resize-full" />
