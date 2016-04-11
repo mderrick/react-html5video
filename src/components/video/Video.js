@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Overlay from './overlay/overlay';
 import Controls from './../controls/controls';
 import Seek from './../controls/seek/seek';
@@ -7,7 +6,6 @@ import Play from './../controls/play/play';
 import Mute from './../controls/mute/mute';
 import Fullscreen from './../controls/fullscreen/fullscreen';
 import Time from './../controls/time/time';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import throttle from 'lodash.throttle';
 import copy from './../../assets/copy';
 
@@ -49,8 +47,6 @@ var Video = React.createClass({
         muted: React.PropTypes.bool,
         controls: React.PropTypes.bool
     },
-
-    mixins: [PureRenderMixin],
 
     getDefaultProps() {
         return {

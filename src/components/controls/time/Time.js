@@ -9,6 +9,17 @@ var Time = React.createClass({
     },
 
     /**
+     * As controls receive all props for extensibility, we do a quick
+     * check and make sure only the props we care about have changed.
+     * @param  {object} nextProps The next props from parent
+     * @return {boolean}          Whether we re-render or not
+     */
+    shouldComponentUpdate(nextProps) {
+        return this.props.currentTime !== nextProps.currentTime ||
+               this.props.duration !== nextProps.duration;
+    },
+
+    /**
      * Formats time into a friendlier format
      * @param  {number} seconds Time in seconds
      * @return {string}         Timestamp in the format of HH:MM:SS
