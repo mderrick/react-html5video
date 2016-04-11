@@ -150,7 +150,7 @@ To run a server with hot module replacement:
     $ npm run dev-server
 ```
 
-Open [http://localhost:8080](http://localhost:8080). You can now modify the files in both `src` and `demo/src`.
+Open [http://localhost:8082](http://localhost:8082). You can now modify the files in both `src` and `demo/src`.
 
 ## Thank You
 

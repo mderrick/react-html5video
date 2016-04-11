@@ -14,7 +14,7 @@ config.plugins.splice(1, 2);
 
 // Add Hot Loader server entry points.
 config.entry.app.unshift(
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:8082',
     'webpack/hot/dev-server'
 );
 
@@ -29,4 +29,4 @@ server = new webpackDevServer(compiler, {
     publicPath: config.output.publicPath,
     hot: true
 });
-server.listen(8080);
+server.listen(8082);
