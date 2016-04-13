@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ProgressBar from './../../progressbar/progressbar';
 
 var Seek = React.createClass({
@@ -20,6 +19,19 @@ var Seek = React.createClass({
             // do this via a class.
             focused: false
         };
+    },
+
+    /**
+     * As controls receive all props for extensibility, we do a quick
+     * check and make sure only the props we care about have changed.
+     * @param  {object} nextProps The next props from parent
+     * @return {boolean}          Whether we re-render or not
+     */
+    shouldComponentUpdate(nextProps) {
+        return this.props.seek !== nextProps.seek ||
+               this.props.percentageBuffered !== nextProps.percentageBuffered ||
+               this.props.percentagePlayed !== nextProps.percentagePlayed ||
+               this.props.duration !== nextProps.duration;
     },
 
     /**

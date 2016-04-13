@@ -18,9 +18,7 @@ Include `dist/ReactHtml5Video.css` if you do not want to build your own CSS. Alt
 ### Peer Dependencies
 
 This component uses ES2015 and needs to be transpiled using something like [babel-loader](https://github.com/babel/babel-loader). You will also need to either [polyfill](https://babeljs.io/docs/usage/polyfill/) or use [babel-runtime](https://www.npmjs.com/package/babel-runtime). It depends on:
-- `react@0.14.x`
-- `react-dom@0.14.x`
-- `react-addons-pure-render-mixin@0.14.x`
+- `react@>=0.14.x`
 - `lodash.throttle@latest`.
 
 ### UMD
@@ -150,7 +148,7 @@ To run a server with hot module replacement:
     $ npm run dev-server
 ```
 
-Open [http://localhost:8080](http://localhost:8080). You can now modify the files in both `src` and `demo/src`.
+Open [http://localhost:8082](http://localhost:8082). You can now modify the files in both `src` and `demo/src`.
 
 ## Thank You
 
