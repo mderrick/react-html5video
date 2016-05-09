@@ -1230,6 +1230,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = __webpack_require__(23)['default'];
+
 	var _interopRequireDefault = __webpack_require__(61)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
@@ -1284,7 +1286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = this;
 
 	        return _react2['default'].Children.map(this.props.children, function (child) {
-	            return _react2['default'].cloneElement(child, _this.props);
+	            return _react2['default'].cloneElement(child, _extends({}, _this.props));
 	        });
 	    },
 
