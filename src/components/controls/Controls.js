@@ -34,8 +34,8 @@ var Controls = React.createClass({
      * @return {Array.<ReactElement>} An array of components.
      */
     renderChildren() {
-        return React.Children.map(this.props.children, (child) => {
-            return React.cloneElement(child, this.props);
+        return React.Children.map(this.props.children, child => {
+            return React.cloneElement(child, {...this.props});
         });
     },
 
