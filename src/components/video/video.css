@@ -25,6 +25,7 @@
 }
 
 .video--focused .video__controls,
-.video:hover .video__controls {
+.video:hover .video__controls:hover,
+.video:hover .video__fullhover {
     opacity: 1;
 }

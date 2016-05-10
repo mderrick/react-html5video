@@ -145,19 +145,43 @@ var Video = React.createClass({
     },
 
     /**
-     * Sets the video to fullscreen.
+     * toggle the video to fullscreen and window.
      * @return {undefined}
      */
-    fullscreen() {
-        if (this.videoEl.requestFullscreen) {
-            this.videoEl.requestFullscreen();
-        } else if (this.videoEl.msRequestFullscreen) {
-            this.videoEl.msRequestFullscreen();
-        } else if (this.videoEl.mozRequestFullScreen) {
-            this.videoEl.mozRequestFullScreen();
-        } else if (this.videoEl.webkitRequestFullscreen) {
-            this.videoEl.webkitRequestFullscreen();
+    toggleFullscreen() {
+        const ce = this.containerEl;
+        if (!this.isFullscreen()) {
+            if (ce.requestFullscreen) {
+                ce.requestFullscreen();
+            } else if (ce.msRequestFullscreen) {
+                ce.msRequestFullscreen();
+            } else if (ce.mozRequestFullScreen) {
+                ce.mozRequestFullScreen();
+            } else if (ce.webkitRequestFullscreen) {
+                ce.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+            this.onBlur();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
         }
+    },
+
+    /**
+     * Is full screen?
+     */
+    isFullscreen() {
+        return document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement ||
+            document.msFullscreenElement;
     },
 
     /**
@@ -251,7 +275,8 @@ var Video = React.createClass({
             mute: this.mute,
             unmute: this.unmute,
             seek: this.seek,
-            fullscreen: this.fullscreen,
+            toggleFullscreen: this.toggleFullscreen,
+            isFullscreen: this.isFullscreen,
             setVolume: this.setVolume
         }, this.state, {copyKeys: this.props.copyKeys});
 
@@ -314,9 +339,11 @@ var Video = React.createClass({
      * @return {undefined}
      */
     onFocus() {
-        this.setState({
-            focused: true
-        });
+        if (!this.isFullscreen()) {
+            this.setState({
+                focused: true
+            });
+        }
     },
 
     /**
@@ -338,7 +365,10 @@ var Video = React.createClass({
             <div className={this.getVideoClassName()}
                 tabIndex="0"
                 onFocus={this.onFocus}
-                onBlur={this.onBlur}>
+                onBlur={this.onBlur}
+                ref={ref => {
+                    this.containerEl = ref;
+                }}>
                 <video
                     {...otherProps}
                     className="video__el"
