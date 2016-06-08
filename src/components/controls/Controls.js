@@ -1,9 +1,9 @@
 import React from 'react';
-import Play from './play/play';
-import Seek from './seek/seek';
-import Mute from './mute/mute';
-import Time from './time/time';
-import Fullscreen from './fullscreen/fullscreen';
+import Play from './play/Play';
+import Seek from './seek/Seek';
+import Mute from './mute/Mute';
+import Time from './time/Time';
+import Fullscreen from './fullscreen/Fullscreen';
 
 var Controls = React.createClass({
 

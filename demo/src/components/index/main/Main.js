@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from './../../button/button';
+import Button from './../../button/Button';
 import browserStackLogo from './../../../../browserstack.png';
-import {default as Video, Controls, Overlay} from './../../../../../src/components/video/video';
+import {default as Video, Controls, Overlay} from './../../../../../src/components/video/Video';
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.

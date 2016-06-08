@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Index from './components/index/index';
+import Index from './components/index/Index';
 
 // For hot reloading to work it is essential
 // that our entry point only contains this render
