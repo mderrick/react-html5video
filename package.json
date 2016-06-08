@@ -1,6 +1,6 @@
 {
   "name": "react-html5video",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "",
   "main": "./dist/ReactHtml5Video.js",
   "scripts": {

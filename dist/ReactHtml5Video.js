@@ -1372,9 +1372,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _progressbarProgressbar = __webpack_require__(70);
+	var _progressbarProgressBar = __webpack_require__(70);
 
-	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
+	var _progressbarProgressBar2 = _interopRequireDefault(_progressbarProgressBar);
 
 	var Seek = _react2['default'].createClass({
 	    displayName: 'Seek',
@@ -1440,7 +1440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2['default'].createElement('div', { style: {
 	                        width: this.props.percentageBuffered + '%'
 	                    }, className: 'video-seek__buffer-bar' }),
-	                _react2['default'].createElement(_progressbarProgressbar2['default'], {
+	                _react2['default'].createElement(_progressbarProgressBar2['default'], {
 	                    onBlur: this.onBlur,
 	                    onFocus: this.onFocus,
 	                    onChange: this.seek,
@@ -1614,9 +1614,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _iconIcon2 = _interopRequireDefault(_iconIcon);
 
-	var _progressbarProgressbar = __webpack_require__(70);
+	var _progressbarProgressBar = __webpack_require__(70);
 
-	var _progressbarProgressbar2 = _interopRequireDefault(_progressbarProgressbar);
+	var _progressbarProgressBar2 = _interopRequireDefault(_progressbarProgressBar);
 
 	var Mute = _react2['default'].createClass({
 	    displayName: 'Mute',
@@ -1678,7 +1678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'video-mute__track' },
-	                    _react2['default'].createElement(_progressbarProgressbar2['default'], {
+	                    _react2['default'].createElement(_progressbarProgressBar2['default'], {
 	                        orientation: 'vertical',
 	                        onChange: this.changeVolume,
 	                        progress: this.props.muted ? 0 : this.props.volume * 100
