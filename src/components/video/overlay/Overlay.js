@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from './../../icon/icon';
-import Spinner from './../../spinner/spinner';
+import Icon from './../../icon/Icon';
+import Spinner from './../../spinner/Spinner';
 
 var Overlay = React.createClass({
 

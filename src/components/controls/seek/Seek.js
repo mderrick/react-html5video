@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from './../../progressbar/progressbar';
+import ProgressBar from './../../progressbar/ProgressBar';
 
 var Seek = React.createClass({
 
@@ -15,7 +15,7 @@ var Seek = React.createClass({
         return {
             // When the child range input becomes focused,
             // we need to set this custom seek bar to look
-            // 'focused' with the correct styles. Need to 
+            // 'focused' with the correct styles. Need to
             // do this via a class.
             focused: false
         };

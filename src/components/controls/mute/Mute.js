@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from './../../icon/icon';
-import ProgressBar from './../../progressbar/progressbar';
+import Icon from './../../icon/Icon';
+import ProgressBar from './../../progressbar/ProgressBar';
 
 var Mute = React.createClass({
 
