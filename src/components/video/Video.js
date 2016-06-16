@@ -161,18 +161,24 @@ var Video = React.createClass({
     },
 
     /**
-     * Plays the video.
+     * Plays the video and hides the player's seek bar.
      * @return {undefined}
      */
     play() {
+        this.setState({
+            focused: false
+        });
         this.videoEl.play();
     },
 
     /**
-     * Pauses the video.
+     * Pauses the video and keeps the player's seek bar visible (as implemented in YouTube)
      * @return {undefined}
      */
     pause() {
+        this.setState({
+            focused: true
+        });
         this.videoEl.pause();
     },
 
@@ -320,14 +326,16 @@ var Video = React.createClass({
     },
 
     /**
-     * Sets state to not be focused to remove class form video
-     * player.
+     * Sets state to not be focused to remove class from video
+     * player, except when playback is paused
      * @return {undefined}
      */
     onBlur() {
-        this.setState({
-            focused: false
-        });
+        if (!this.state.paused) {
+            this.setState({
+                focused: false
+            });
+        }
     },
 
     render() {
