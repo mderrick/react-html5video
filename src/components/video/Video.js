@@ -41,6 +41,7 @@ var Video = React.createClass({
         // Non-standard props
         copyKeys: React.PropTypes.object,
         children: React.PropTypes.node,
+        className: React.PropTypes.string,
 
         // HTML5 Video standard attributes
         autoPlay: React.PropTypes.bool,
@@ -291,6 +292,7 @@ var Video = React.createClass({
      * @return {string} Class string
      */
     getVideoClassName() {
+        var {className} = this.props;
         var classString = 'video';
 
         if (this.state.error) {
@@ -305,6 +307,9 @@ var Video = React.createClass({
 
         if (this.state.focused) {
             classString += ' video--focused';
+        }
+        if (className) {
+            classString += ' ' + className;
         }
         return classString;
     },

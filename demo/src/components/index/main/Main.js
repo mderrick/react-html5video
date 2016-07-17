@@ -87,7 +87,14 @@ var Main = React.createClass({
                     <span className="main__react-logo"></span> React HTML5 Video
                 </h1>
                 <div className="main__video">
-                    <Video controls autoPlay loop muted ref="video" onProgress={this.onProgress}>
+                    <Video
+                        className="custom-class"
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                        ref="video"
+                        onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
                         <Controls />
