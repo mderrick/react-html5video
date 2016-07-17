@@ -149,6 +149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // Non-standard props
 	        copyKeys: _react2['default'].PropTypes.object,
 	        children: _react2['default'].PropTypes.node,
+	        className: _react2['default'].PropTypes.string,
 
 	        // HTML5 Video standard attributes
 	        autoPlay: _react2['default'].PropTypes.bool,
@@ -399,6 +400,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @return {string} Class string
 	     */
 	    getVideoClassName: function getVideoClassName() {
+	        var className = this.props.className;
+
 	        var classString = 'video';
 
 	        if (this.state.error) {
@@ -413,6 +416,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        if (this.state.focused) {
 	            classString += ' video--focused';
+	        }
+	        if (className) {
+	            classString += ' ' + className;
 	        }
 	        return classString;
 	    },
@@ -443,10 +449,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        // If controls prop is provided remove it
 	        // and use our own controls.
+	        // Leave `copyKeys` here even though not used
+	        // as per issue #36.
 	        var _props = this.props;
 	        var controls = _props.controls;
+	        var copyKeys = _props.copyKeys;
 
-	        var otherProps = _objectWithoutProperties(_props, ['controls']);
+	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys']);
 
 	        return _react2['default'].createElement(
 	            'div',
