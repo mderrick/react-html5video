@@ -51,7 +51,8 @@ var Video = React.createClass({
 
     getDefaultProps() {
         return {
-            copyKeys: copy
+            copyKeys: copy,
+            focusedClassName: 'video--focused'
         };
     },
 
@@ -306,7 +307,7 @@ var Video = React.createClass({
         }
 
         if (this.state.focused) {
-            classString += ' video--focused';
+            classString += ` ${this.props.focusedClassName}`;
         }
         if (className) {
             classString += ' ' + className;
