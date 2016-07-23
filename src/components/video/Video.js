@@ -348,7 +348,7 @@ var Video = React.createClass({
                 onBlur={this.onBlur}>
                 <video
                     {...otherProps}
-                    className="video__el"
+                    className={`video__el ${this.props.innerClassName}`}
                     ref={(el) => {
                         this.videoEl = el;
                     }}
