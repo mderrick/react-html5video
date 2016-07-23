@@ -32,7 +32,7 @@ var Video = require('react-html5video/dist/ReactHtml5Video');
 
 ```js
 // Exports to this global
-var Video = window.ReactHtml5Video;
+var Video = window.ReactHtml5Video.default;
 ```
 
 ```js
@@ -149,6 +149,10 @@ To run a server with hot module replacement:
 ```
 
 Open [http://localhost:8082](http://localhost:8082). You can now modify the files in both `src` and `demo/src`.
+
+### Issues
+
+Feel free to raise and solve any existing issues as desired. Where possible please do try and replicate any bugs you may have using the [react-html5video jsfiddle](https://jsfiddle.net/mderrick/7s9a311q/1/) and include them in your ticket.
 
 ## Thank You
 
