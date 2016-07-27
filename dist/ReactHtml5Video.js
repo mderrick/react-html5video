@@ -308,6 +308,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    seek: function seek(time) {
 	        this.videoEl.currentTime = time;
+	        this.setState({
+	            currentTime: time,
+	            percentagePlayed: time / this.videoEl.duration * 100
+	        });
 	    },
 
 	    /**
@@ -317,6 +321,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    setVolume: function setVolume(volume) {
 	        this.videoEl.volume = volume;
+	        this.setState({
+	            volume: volume
+	        });
 	    },
 
 	    /**
@@ -332,7 +339,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            buffered: this.videoEl.buffered,
 	            paused: this.videoEl.paused,
 	            muted: this.videoEl.muted,
-	            volume: this.videoEl.volume,
 	            readyState: this.videoEl.readyState,
 
 	            // Non-standard state computed from properties
@@ -645,7 +651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 29 */
 /***/ function(module, exports) {
 
-	var core = module.exports = {version: '2.2.2'};
+	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },

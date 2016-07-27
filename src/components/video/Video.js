@@ -200,6 +200,10 @@ var Video = React.createClass({
      */
     seek(time) {
         this.videoEl.currentTime = time;
+        this.setState({
+            currentTime: time,
+            percentagePlayed: time / this.videoEl.duration * 100
+        });
     },
 
     /**
@@ -209,6 +213,9 @@ var Video = React.createClass({
      */
     setVolume(volume) {
         this.videoEl.volume = volume;
+        this.setState({
+            volume: volume
+        });
     },
 
     /**
@@ -224,7 +231,6 @@ var Video = React.createClass({
             buffered: this.videoEl.buffered,
             paused: this.videoEl.paused,
             muted: this.videoEl.muted,
-            volume: this.videoEl.volume,
             readyState: this.videoEl.readyState,
 
             // Non-standard state computed from properties
