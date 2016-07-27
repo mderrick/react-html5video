@@ -40,7 +40,7 @@ var Seek = React.createClass({
      * @return {undefined}
      */
     seek(e) {
-        this.props.seek(e.target.value * this.props.duration / 100);
+        this.props.seek(e.target.value * this.props.duration / 100, true);
     },
 
     onFocus() {

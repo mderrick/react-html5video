@@ -33,7 +33,7 @@ var Mute = React.createClass({
      * @return {undefined}
      */
     changeVolume(e) {
-        this.props.setVolume(e.target.value / 100);
+        this.props.setVolume(e.target.value / 100, true);
         this.props.unmute();
     },
 

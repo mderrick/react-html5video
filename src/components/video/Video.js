@@ -196,19 +196,37 @@ var Video = React.createClass({
     /**
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
+     * @param  {bool}   forceUpdate Forces a state update without waiting for
+     *                              throttled event.          
      * @return {undefined}
      */
-    seek(time) {
+    seek(time, forceUpdate) {
         this.videoEl.currentTime = time;
+        // In some use cases, we wish not to wait for `onSeeked` or `onSeeking`
+        // throttled event to update state so we force it. This is because
+        // this method is often triggered when dragging a bar and can feel janky.
+        // See https://github.com/mderrick/react-html5video/issues/43
+        if (forceUpdate) {
+            this.updateStateFromVideo();
+        }
     },
 
     /**
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
+     * @param  {bool}   forceUpdate Forces a state update without waiting for
+     *                              throttled event.  
      * @return {undefined}
      */
-    setVolume(volume) {
+    setVolume(volume, forceUpdate) {
         this.videoEl.volume = volume;
+        // In some use cases, we wish not to wait for `onVolumeChange`
+        // throttled event to update state so we force it. This is because
+        // this method is often triggered when dragging a bar and can feel janky.
+        // See https://github.com/mderrick/react-html5video/issues/43
+        if (forceUpdate) {
+            this.updateStateFromVideo();
+        }
     },
 
     /**
