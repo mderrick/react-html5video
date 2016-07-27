@@ -12,9 +12,8 @@
   "dependencies": {
     "css-reset": "git+https://github.com/60frames/css-reset.git",
     "lodash.throttle": "^3.0.4",
-    "react": "^0.14.0",
-    "react-addons-pure-render-mixin": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.25",

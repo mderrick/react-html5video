@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from './../../button/button';
+import Button from './../../button/Button';
 import browserStackLogo from './../../../../browserstack.png';
-import {default as Video, Controls, Overlay} from './../../../../../src/components/video/video';
+import {default as Video, Controls, Overlay} from './../../../../../src/components/video/Video';
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
     'http://media.w3.org/2010/05/video/movie_300.mp4',
-    // Purposefully not a video to deomnstrate source error state
+    // Purposefully not a video to demonstrate source error state
     'https://github.com/mderrick/react-html5video'
 ];
 
@@ -87,14 +87,21 @@ var Main = React.createClass({
                     <span className="main__react-logo"></span> React HTML5 Video
                 </h1>
                 <div className="main__video">
-                    <Video controls autoPlay loop muted ref="video" onProgress={this.onProgress}>
+                    <Video
+                        className="custom-class"
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                        ref="video"
+                        onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
                         <Controls />
                     </Video>
                 </div>
                 <div className="main__cols">
-                    <div className="main__col1">                        
+                    <div className="main__col1">
                         <h2 className="main__h2">Change Video Source</h2>
                         <ul className="main__ul">
                             <li><Button active={this.state.videoId === 0} onClick={this.showVideo.bind(this, 0)}>1</Button></li>
