@@ -304,19 +304,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * Seeks the video timeline.
 	     * @param  {number} time The value in seconds to seek to
+	     * @param  {bool}   forceUpdate Forces a state update without waiting for
+	     *                              throttled event.          
 	     * @return {undefined}
 	     */
-	    seek: function seek(time) {
+	    seek: function seek(time, forceUpdate) {
 	        this.videoEl.currentTime = time;
+	        // In some use cases, we wish not to wait for `onSeeked` or `onSeeking`
+	        // throttled event to update state so we force it. This is because
+	        // this method is often triggered when dragging a bar and can feel janky.
+	        // See https://github.com/mderrick/react-html5video/issues/43
+	        if (forceUpdate) {
+	            this.updateStateFromVideo();
+	        }
 	    },
 
 	    /**
 	     * Sets the video volume.
 	     * @param  {number} volume The volume level between 0 and 1.
+	     * @param  {bool}   forceUpdate Forces a state update without waiting for
+	     *                              throttled event.  
 	     * @return {undefined}
 	     */
-	    setVolume: function setVolume(volume) {
+	    setVolume: function setVolume(volume, forceUpdate) {
 	        this.videoEl.volume = volume;
+	        // In some use cases, we wish not to wait for `onVolumeChange`
+	        // throttled event to update state so we force it. This is because
+	        // this method is often triggered when dragging a bar and can feel janky.
+	        // See https://github.com/mderrick/react-html5video/issues/43
+	        if (forceUpdate) {
+	            this.updateStateFromVideo();
+	        }
 	    },
 
 	    /**
@@ -1422,7 +1440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @return {undefined}
 	     */
 	    seek: function seek(e) {
-	        this.props.seek(e.target.value * this.props.duration / 100);
+	        this.props.seek(e.target.value * this.props.duration / 100, true);
 	    },
 
 	    onFocus: function onFocus() {
@@ -1655,7 +1673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @return {undefined}
 	     */
 	    changeVolume: function changeVolume(e) {
-	        this.props.setVolume(e.target.value / 100);
+	        this.props.setVolume(e.target.value / 100, true);
 	        this.props.unmute();
 	    },
 
