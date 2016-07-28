@@ -81,10 +81,10 @@ var Video = React.createClass({
         // Set up all React media events and call method
         // on props if provided.
         this.mediaEventProps = EVENTS.reduce((p, c) => {
-            p[c] = () => {
+            p[c] = (e) => {
                 if (c in this.props && typeof this.props[c] === 'function') {
                     // A prop exists for this mediaEvent, call it.
-                    this.props[c]();
+                    this.props[c](e);
                 }
                 this._updateStateFromVideo();
             };
