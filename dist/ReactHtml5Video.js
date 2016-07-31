@@ -185,16 +185,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    componentWillMount: function componentWillMount() {
 	        var _this = this;
 
-	        // Also bind 'this' as we call _updateStateFromVideo outside
-	        // of Reacts synthetic events as well.
-	        this._updateStateFromVideo = (0, _lodashThrottle2['default'])(this.updateStateFromVideo, 100).bind(this);
+	        this._updateStateFromVideo = (0, _lodashThrottle2['default'])(this.updateStateFromVideo, 100);
 	        // Set up all React media events and call method
 	        // on props if provided.
 	        this.mediaEventProps = EVENTS.reduce(function (p, c) {
-	            p[c] = function () {
+	            p[c] = function (e) {
 	                if (c in _this.props && typeof _this.props[c] === 'function') {
 	                    // A prop exists for this mediaEvent, call it.
-	                    _this.props[c]();
+	                    _this.props[c](e);
 	                }
 	                _this._updateStateFromVideo();
 	            };
@@ -219,6 +217,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    componentWillUnmount: function componentWillUnmount() {
 	        // Remove event listener from video.
 	        this.videoEl.children[this.videoEl.children.length - 1].removeEventListener('error', this._updateStateFromVideo);
+	        // Cancel the throttled function from being called once
+	        // the video has been unmounted.
+	        // https://github.com/mderrick/react-html5video/issues/35
+	        this._updateStateFromVideo.cancel();
 	    },
 
 	    /**
@@ -663,7 +665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 29 */
 /***/ function(module, exports) {
 
-	var core = module.exports = {version: '2.2.2'};
+	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
