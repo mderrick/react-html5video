@@ -75,9 +75,7 @@ var Video = React.createClass({
      * @return {undefined}
      */
     componentWillMount() {
-        // Also bind 'this' as we call _updateStateFromVideo outside
-        // of Reacts synthetic events as well.
-        this._updateStateFromVideo = throttle(this.updateStateFromVideo, 100).bind(this);
+        this._updateStateFromVideo = throttle(this.updateStateFromVideo, 100);
         // Set up all React media events and call method
         // on props if provided.
         this.mediaEventProps = EVENTS.reduce((p, c) => {
@@ -111,6 +109,10 @@ var Video = React.createClass({
         // Remove event listener from video.
         this.videoEl.children[this.videoEl.children.length - 1]
             .removeEventListener('error', this._updateStateFromVideo);
+        // Cancel the throttled function from being called once
+        // the video has been unmounted.
+        // https://github.com/mderrick/react-html5video/issues/35
+        this._updateStateFromVideo.cancel();
     },
 
     /**
