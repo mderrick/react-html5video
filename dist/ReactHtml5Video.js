@@ -492,11 +492,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // and use our own controls.
 	        // Leave `copyKeys` here even though not used
 	        // as per issue #36.
+	        // Remove `onPlaybackRateChange` since it is
+	        // not a valid prop for the <video> tag.
 	        var _props = this.props;
 	        var controls = _props.controls;
 	        var copyKeys = _props.copyKeys;
+	        var onPlaybackRateChange = _props.onPlaybackRateChange;
 
-	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys']);
+	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys', 'onPlaybackRateChange']);
 
 	        return _react2['default'].createElement(
 	            'div',

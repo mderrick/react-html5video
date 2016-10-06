@@ -382,7 +382,9 @@ var Video = React.createClass({
         // and use our own controls.
         // Leave `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys, ...otherProps} = this.props;
+        // Remove `onPlaybackRateChange` since it is
+        // not a valid prop for the <video> tag.
+        var {controls, copyKeys, onPlaybackRateChange, ...otherProps} = this.props;
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"
