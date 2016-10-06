@@ -46,7 +46,8 @@ var Video = React.createClass({
         // HTML5 Video standard attributes
         autoPlay: React.PropTypes.bool,
         muted: React.PropTypes.bool,
-        controls: React.PropTypes.bool
+        controls: React.PropTypes.bool,
+        sources: React.PropTypes.array
     },
 
     getDefaultProps() {
@@ -199,7 +200,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -217,7 +218,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -356,11 +357,12 @@ var Video = React.createClass({
     },
 
     render() {
+      // console.log('this.props.sources', this.props.sources);
         // If controls prop is provided remove it
         // and use our own controls.
         // Leave `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys, ...otherProps} = this.props;
+        var {controls, copyKeys,sources, ...otherProps} = this.props;
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"
@@ -377,6 +379,7 @@ var Video = React.createClass({
                     //  infer the Video state in that method from the Video properties.
                     {...this.mediaEventProps}>
                         {this.renderSources()}
+                    <track label={sources[0].label} kind="subtitles" srcLang={sources[0].lang} src={sources[0].link} default/>
                 </video>
                 {controls ? this.renderControls() : ''}
             </div>

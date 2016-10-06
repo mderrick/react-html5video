@@ -94,6 +94,7 @@ var Main = React.createClass({
                         loop
                         muted
                         ref="video"
+                        sources={[{'link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt', 'label': 'Arabic', 'srcLang': 'ar'}, {'srcLang':'en-us', 'label':'English','link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt'}]}
                         onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
