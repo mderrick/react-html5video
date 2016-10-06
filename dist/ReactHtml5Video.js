@@ -140,7 +140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _assetsCopy2 = _interopRequireDefault(_assetsCopy);
 
-	var EVENTS = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
+	var EVENTS = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onPlaybackRateChange', 'onWaiting'];
 
 	var Video = _react2['default'].createClass({
 	    displayName: 'Video',
@@ -173,6 +173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            paused: !this.props.autoPlay,
 	            muted: !!this.props.muted,
 	            volume: 1,
+	            playbackRate: 1,
 	            error: false,
 	            loading: false
 	        };
@@ -340,6 +341,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    /**
+	     * Sets the video playback rate.
+	     * @param  {number} rate The playback rate (default 1.0).
+	     * @param  {bool}   forceUpdate Forces a state update without waiting for
+	     *                              throttled event.  
+	     * @return {undefined}
+	     */
+	    setPlaybackRate: function setPlaybackRate(rate, forceUpdate) {
+	        this.videoEl.playbackRate = rate;
+	        // In some use cases, we wish not to wait for `onPlaybackRateChange`
+	        // throttled event to update state so we force it. This is because
+	        // this method is often triggered when dragging a bar and can feel janky.
+	        // See https://github.com/mderrick/react-html5video/issues/43
+	        if (forceUpdate) {
+	            this.updateStateFromVideo();
+	        }
+	    },
+
+	    /**
 	     * Updates the React component state from the DOM video properties.
 	     * This is where the magic happens.
 	     * @return {undefined}
@@ -353,6 +372,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            paused: this.videoEl.paused,
 	            muted: this.videoEl.muted,
 	            volume: this.videoEl.volume,
+	            playbackRate: this.videoEl.playbackRate,
 	            readyState: this.videoEl.readyState,
 
 	            // Non-standard state computed from properties
@@ -381,7 +401,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            unmute: this.unmute,
 	            seek: this.seek,
 	            fullscreen: this.fullscreen,
-	            setVolume: this.setVolume
+	            setVolume: this.setVolume,
+	            setPlaybackRate: this.setPlaybackRate
 	        }, this.state, { copyKeys: this.props.copyKeys });
 
 	        var controls = _react2['default'].Children.map(this.props.children, function (child) {
