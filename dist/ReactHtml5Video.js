@@ -140,7 +140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _assetsCopy2 = _interopRequireDefault(_assetsCopy);
 
-	var EVENTS = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onPlaybackRateChange', 'onWaiting'];
+	var EVENTS = ['onAbort', 'onCanPlay', 'onCanPlayThrough', 'onDurationChange', 'onEmptied', 'onEncrypted', 'onEnded', 'onError', 'onLoadedData', 'onLoadedMetadata', 'onLoadStart', 'onPause', 'onPlay', 'onPlaying', 'onProgress', 'onRateChange', 'onSeeked', 'onSeeking', 'onStalled', 'onSuspend', 'onTimeUpdate', 'onVolumeChange', 'onWaiting'];
 
 	var Video = _react2['default'].createClass({
 	    displayName: 'Video',
@@ -343,19 +343,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * Sets the video playback rate.
 	     * @param  {number} rate The playback rate (default 1.0).
-	     * @param  {bool}   forceUpdate Forces a state update without waiting for
-	     *                              throttled event.  
 	     * @return {undefined}
 	     */
-	    setPlaybackRate: function setPlaybackRate(rate, forceUpdate) {
+	    setPlaybackRate: function setPlaybackRate(rate) {
 	        this.videoEl.playbackRate = rate;
-	        // In some use cases, we wish not to wait for `onPlaybackRateChange`
-	        // throttled event to update state so we force it. This is because
-	        // this method is often triggered when dragging a bar and can feel janky.
-	        // See https://github.com/mderrick/react-html5video/issues/43
-	        if (forceUpdate) {
-	            this.updateStateFromVideo();
-	        }
+	        this.updateStateFromVideo();
 	    },
 
 	    /**
@@ -492,18 +484,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // and use our own controls.
 	        // Leave `copyKeys` here even though not used
 	        // as per issue #36.
-	        // Remove `onPlaybackRateChange` since it is
-	        // not a valid prop for the <video> tag.
 	        var _props = this.props;
 	        var controls = _props.controls;
 	        var copyKeys = _props.copyKeys;
 
 	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys']);
-
-	        var _mediaEventProps = this.mediaEventProps;
-	        var onPlaybackRateChange = _mediaEventProps.onPlaybackRateChange;
-
-	        var mediaEventProps = _objectWithoutProperties(_mediaEventProps, ['onPlaybackRateChange']);
 
 	        return _react2['default'].createElement(
 	            'div',
@@ -521,7 +506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    //  We have throttled `_updateStateFromVideo` so listen to
 	                    //  every available Media event that React allows and
 	                    //  infer the Video state in that method from the Video properties.
-	                }, mediaEventProps),
+	                }, this.mediaEventProps),
 	                this.renderSources()
 	            ),
 	            controls ? this.renderControls() : ''
