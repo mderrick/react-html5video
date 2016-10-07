@@ -497,9 +497,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _props = this.props;
 	        var controls = _props.controls;
 	        var copyKeys = _props.copyKeys;
-	        var onPlaybackRateChange = _props.onPlaybackRateChange;
 
-	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys', 'onPlaybackRateChange']);
+	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys']);
+
+	        var _mediaEventProps = this.mediaEventProps;
+	        var onPlaybackRateChange = _mediaEventProps.onPlaybackRateChange;
+
+	        var mediaEventProps = _objectWithoutProperties(_mediaEventProps, ['onPlaybackRateChange']);
 
 	        return _react2['default'].createElement(
 	            'div',
@@ -517,7 +521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    //  We have throttled `_updateStateFromVideo` so listen to
 	                    //  every available Media event that React allows and
 	                    //  infer the Video state in that method from the Video properties.
-	                }, this.mediaEventProps),
+	                }, mediaEventProps),
 	                this.renderSources()
 	            ),
 	            controls ? this.renderControls() : ''

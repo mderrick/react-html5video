@@ -384,7 +384,8 @@ var Video = React.createClass({
         // as per issue #36.
         // Remove `onPlaybackRateChange` since it is
         // not a valid prop for the <video> tag.
-        var {controls, copyKeys, onPlaybackRateChange, ...otherProps} = this.props;
+        var {controls, copyKeys, ...otherProps} = this.props;
+        var {onPlaybackRateChange, ...mediaEventProps} = this.mediaEventProps;
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"
@@ -399,7 +400,7 @@ var Video = React.createClass({
                     //  We have throttled `_updateStateFromVideo` so listen to
                     //  every available Media event that React allows and
                     //  infer the Video state in that method from the Video properties.
-                    {...this.mediaEventProps}>
+                    {...mediaEventProps}>
                         {this.renderSources()}
                 </video>
                 {controls ? this.renderControls() : ''}
