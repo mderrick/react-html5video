@@ -6,6 +6,7 @@ import {default as Video, Controls, Overlay} from './../../../../../src/componen
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.
+    '../../src/assets/videos/--Pc1ASVjmM.mp4',
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
     'http://media.w3.org/2010/05/video/movie_300.mp4',
@@ -98,7 +99,7 @@ var Main = React.createClass({
                         loop
                         muted
                         ref="video"
-                        sources={[{'link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt', 'label': 'Arabic', 'srcLang': 'ar'}, {'srcLang':'en-us', 'label':'English','link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt'}]}
+                        sources={[{'link': '../../src/assets/subtitles/en-cn/--Pc1ASVjmM.vtt', 'label': 'Chinese-English', 'srcLang': 'en-cn', 'default':true}, {'link': '../../src/assets/subtitles/en-us/--Pc1ASVjmM.vtt', 'label': 'English', 'srcLang': 'en-us'}, {'srcLang':'zh-cn', 'label':'Chinese','link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt'}]}
                         onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />

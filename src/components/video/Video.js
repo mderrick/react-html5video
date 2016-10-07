@@ -402,8 +402,16 @@ var Video = React.createClass({
                     //  infer the Video state in that method from the Video properties.
                     {...this.mediaEventProps}>
                         {this.renderSources()}
-                    <track label={sources[0].label} kind="subtitles" srcLang={sources[0].lang} src={sources[0].link} default/>
-                    <track label={sources[1].label} kind="subtitles" srcLang={sources[1].lang} src={sources[1].link}/>
+
+                    {
+                      // Add subtitles to video
+                      sources.map((source, index) => {
+                        if(source.default) {
+                          return <track label={source.label} kind="subtitles" srcLang={source.lang} src={source.link} default/>
+                        }
+                        return <track label={source.label} kind="subtitles" srcLang={source.lang} src={source.link}/>
+                      })
+                    }
                 </video>
                 {controls ? this.renderControls() : ''}
             </div>
