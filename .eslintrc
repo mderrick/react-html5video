@@ -1,4 +1,26 @@
+# Used to configure eslint in our project
 {
-    "parser": "babel-eslint",
-    "extends": "./node_modules/coding-standards/.eslintrc-node"
+  # Extend recommended settings as a baseline
+  extends: [
+    "./node_modules/coding-standards/.eslintrc-node"
+  ],
+  # To use react specific linting rules
+  plugins: [
+    "react"
+  ],
+  # Support for ES6 and JSX
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: "module",
+    ecmaFeatures: {
+        "jsx": true
+    },
+  },
+  # Declares some different environments ESLint should be aware of.
+  # Each of these environments tells ESLint to expect certain global variables.
+  env: {
+    es6: true,
+    browser: true,
+    node: true
+  }
 }

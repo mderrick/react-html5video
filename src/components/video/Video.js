@@ -32,6 +32,7 @@ var EVENTS = [
     'onSuspend',
     'onTimeUpdate',
     'onVolumeChange',
+    'onPlaybackRateChange',
     'onWaiting'
 ];
 
@@ -66,6 +67,7 @@ var Video = React.createClass({
             paused: !this.props.autoPlay,
             muted: !!this.props.muted,
             volume: 1,
+            playbackRate: 1,
             error: false,
             loading: false
         };
@@ -233,6 +235,24 @@ var Video = React.createClass({
     },
 
     /**
+     * Sets the video playback rate.
+     * @param  {number} rate The playback rate (default 1.0).
+     * @param  {bool}   forceUpdate Forces a state update without waiting for
+     *                              throttled event.
+     * @return {undefined}
+     */
+    setPlaybackRate(rate, forceUpdate) {
+        this.videoEl.playbackRate = rate;
+        // In some use cases, we wish not to wait for `onPlaybackRateChange`
+        // throttled event to update state so we force it. This is because
+        // this method is often triggered when dragging a bar and can feel janky.
+        // See https://github.com/mderrick/react-html5video/issues/43
+        if (forceUpdate) {
+            this.updateStateFromVideo();
+        }
+    },
+
+    /**
      * Updates the React component state from the DOM video properties.
      * This is where the magic happens.
      * @return {undefined}
@@ -246,6 +266,7 @@ var Video = React.createClass({
             paused: this.videoEl.paused,
             muted: this.videoEl.muted,
             volume: this.videoEl.volume,
+            playbackRate: this.videoEl.playbackRate,
             readyState: this.videoEl.readyState,
 
             // Non-standard state computed from properties
@@ -274,7 +295,8 @@ var Video = React.createClass({
             unmute: this.unmute,
             seek: this.seek,
             fullscreen: this.fullscreen,
-            setVolume: this.setVolume
+            setVolume: this.setVolume,
+            setPlaybackRate: this.setPlaybackRate,
         }, this.state, {copyKeys: this.props.copyKeys});
 
         var controls = React.Children.map(this.props.children, (child) => {
@@ -362,7 +384,8 @@ var Video = React.createClass({
         // and use our own controls.
         // Leave `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys,sources, ...otherProps} = this.props;
+        var {controls, copyKeys, onPlaybackRateChange, sources, ...otherProps} = this.props;
+
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"
@@ -380,6 +403,7 @@ var Video = React.createClass({
                     {...this.mediaEventProps}>
                         {this.renderSources()}
                     <track label={sources[0].label} kind="subtitles" srcLang={sources[0].lang} src={sources[0].link} default/>
+                    <track label={sources[1].label} kind="subtitles" srcLang={sources[1].lang} src={sources[1].link}/>
                 </video>
                 {controls ? this.renderControls() : ''}
             </div>
