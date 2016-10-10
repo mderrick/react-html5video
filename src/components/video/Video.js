@@ -36,6 +36,12 @@ var EVENTS = [
     'onWaiting'
 ];
 
+var subtitlesMap = {
+  'English': 'en',
+  'Chinese-English': 'en-cn',
+  'Chinese': 'cn'
+};
+
 var Video = React.createClass({
 
     propTypes: {
@@ -69,7 +75,8 @@ var Video = React.createClass({
             volume: 1,
             playbackRate: 1,
             error: false,
-            loading: false
+            loading: false,
+            subtitles: 'en-cn'
         };
     },
 
@@ -148,6 +155,10 @@ var Video = React.createClass({
      */
     load() {
         this.videoEl.load();
+        // turn off all subtitles
+        for (var i = 0; i < this.videoEl.textTracks.length; i++) {
+           this.videoEl.textTracks[i].mode = 'hidden';
+        }
     },
 
     /**
@@ -251,6 +262,22 @@ var Video = React.createClass({
             this.updateStateFromVideo();
         }
     },
+    setSubtitles(subtitles, forceUpdate) {
+      this.videoEl.subtitles = subtitles;
+
+      for (var i = 0; i < this.videoEl.textTracks.length; i++) {
+         if (subtitlesMap[this.videoEl.textTracks[i].label] == subtitles) {
+            this.videoEl.textTracks[i].mode = 'showing';
+         }
+         else {
+            this.videoEl.textTracks[i].mode = 'hidden';
+         }
+      }
+
+      if (forceUpdate) {
+          this.updateStateFromVideo();
+      }
+    },
 
     /**
      * Updates the React component state from the DOM video properties.
@@ -268,6 +295,7 @@ var Video = React.createClass({
             volume: this.videoEl.volume,
             playbackRate: this.videoEl.playbackRate,
             readyState: this.videoEl.readyState,
+            subtitles: this.videoEl.subtitles,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
@@ -297,6 +325,8 @@ var Video = React.createClass({
             fullscreen: this.fullscreen,
             setVolume: this.setVolume,
             setPlaybackRate: this.setPlaybackRate,
+            subtitles: this.subtitles,
+            setSubtitles: this.setSubtitles
         }, this.state, {copyKeys: this.props.copyKeys});
 
         var controls = React.Children.map(this.props.children, (child) => {
@@ -384,7 +414,7 @@ var Video = React.createClass({
         // and use our own controls.
         // Leave `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys, onPlaybackRateChange, sources, ...otherProps} = this.props;
+        var {controls, copyKeys, onPlaybackRateChange, sources, subtitles, ...otherProps} = this.props;
 
         return (
             <div className={this.getVideoClassName()}
@@ -407,9 +437,9 @@ var Video = React.createClass({
                       // Add subtitles to video
                       sources.map((source, index) => {
                         if(source.default) {
-                          return <track label={source.label} kind="subtitles" srcLang={source.lang} src={source.link} default/>
+                          return <track label={source.label} kind="subtitles" srclang={source.lang} src={source.link} default/>
                         }
-                        return <track label={source.label} kind="subtitles" srcLang={source.lang} src={source.link}/>
+                        return <track label={source.label} kind="subtitles" srclang={source.lang} src={source.link}/>
                       })
                     }
                 </video>

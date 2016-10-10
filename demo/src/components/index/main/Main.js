@@ -14,11 +14,18 @@ var videos = [
     'https://github.com/mderrick/react-html5video'
 ];
 
+var subtitles = [
+  {'link': '../../src/assets/subtitles/en-cn/--Pc1ASVjmM.vtt', 'label': 'Chinese-English', 'srclang': 'en-cn', 'default':true},
+  {'link': '../../src/assets/subtitles/en-us/--Pc1ASVjmM.vtt', 'label': 'English', 'srclang': 'en-us'},
+  {'link': '../../src/assets/subtitles/zh-cn/--Pc1ASVjmM.vtt', 'label':'Chinese', 'srclang': 'zh-cn'}
+];
+
 var Main = React.createClass({
 
     getInitialState() {
         return {
-            videoId: 0
+            videoId: 0,
+            subtitles: 'en-cn'
         };
     },
 
@@ -84,6 +91,12 @@ var Main = React.createClass({
             percentageLoaded: el.buffered.length && el.buffered.end(el.buffered.length - 1) / el.duration * 100
         });
     },
+    setSubtitles(subtitles) {
+      this.setState({
+          subtitles: subtitles
+      });
+        this.refs.video.setSubtitles(subtitles);
+    },
 
     render() {
         return (
@@ -99,7 +112,7 @@ var Main = React.createClass({
                         loop
                         muted
                         ref="video"
-                        sources={[{'link': '../../src/assets/subtitles/en-cn/--Pc1ASVjmM.vtt', 'label': 'Chinese-English', 'srcLang': 'en-cn', 'default':true}, {'link': '../../src/assets/subtitles/en-us/--Pc1ASVjmM.vtt', 'label': 'English', 'srcLang': 'en-us'}, {'srcLang':'zh-cn', 'label':'Chinese','link': '../../src/assets/subtitles/ar/--Pc1ASVjmM.vtt'}]}
+                        sources={subtitles}
                         onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
@@ -153,6 +166,13 @@ var Main = React.createClass({
                             </li>
                             <li>
                                 <Button onClick={this.fullscreen}>fullscreen</Button>
+                            </li>
+                            <li>
+                              <ul className="main__ul">
+                                <li><Button active={this.state.subtitles === 'en-cn'} onClick={this.setSubtitles.bind(this, 'en-cn')}>en-cn</Button></li>
+                                <li><Button active={this.state.subtitles === 'en'} onClick={this.setSubtitles.bind(this, 'en')}>en</Button></li>
+                                <li><Button active={this.state.subtitles === 'cn'} onClick={this.setSubtitles.bind(this, 'cn')}>cn</Button></li>
+                              </ul>
                             </li>
                         </ul>
                     </div>

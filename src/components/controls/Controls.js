@@ -4,6 +4,7 @@ import Seek from './seek/Seek';
 import Mute from './mute/Mute';
 import Time from './time/Time';
 import Fullscreen from './fullscreen/Fullscreen';
+import Subtitles from './subtitles/Subtitles';
 
 var Controls = React.createClass({
 
@@ -22,7 +23,8 @@ var Controls = React.createClass({
                 <Seek />,
                 <Time />,
                 <Mute />,
-                <Fullscreen />
+                <Fullscreen />,
+                <Subtitles />
             ]
         };
     },
