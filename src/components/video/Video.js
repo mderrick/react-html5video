@@ -32,8 +32,15 @@ var EVENTS = [
     'onSuspend',
     'onTimeUpdate',
     'onVolumeChange',
+    'onPlaybackRateChange',
     'onWaiting'
 ];
+
+var subtitlesMap = {
+  'English': 'en',
+  'Chinese-English': 'en-cn',
+  'Chinese': 'cn'
+};
 
 var Video = React.createClass({
 
@@ -46,7 +53,8 @@ var Video = React.createClass({
         // HTML5 Video standard attributes
         autoPlay: React.PropTypes.bool,
         muted: React.PropTypes.bool,
-        controls: React.PropTypes.bool
+        controls: React.PropTypes.bool,
+        sources: React.PropTypes.array
     },
 
     getDefaultProps() {
@@ -65,8 +73,10 @@ var Video = React.createClass({
             paused: !this.props.autoPlay,
             muted: !!this.props.muted,
             volume: 1,
+            playbackRate: 1,
             error: false,
-            loading: false
+            loading: false,
+            subtitles: 'en-cn'
         };
     },
 
@@ -145,6 +155,10 @@ var Video = React.createClass({
      */
     load() {
         this.videoEl.load();
+        // turn off all subtitles
+        for (var i = 0; i < this.videoEl.textTracks.length; i++) {
+           this.videoEl.textTracks[i].mode = 'hidden';
+        }
     },
 
     /**
@@ -199,7 +213,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -217,7 +231,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -229,6 +243,40 @@ var Video = React.createClass({
         if (forceUpdate) {
             this.updateStateFromVideo();
         }
+    },
+
+    /**
+     * Sets the video playback rate.
+     * @param  {number} rate The playback rate (default 1.0).
+     * @param  {bool}   forceUpdate Forces a state update without waiting for
+     *                              throttled event.
+     * @return {undefined}
+     */
+    setPlaybackRate(rate, forceUpdate) {
+        this.videoEl.playbackRate = rate;
+        // In some use cases, we wish not to wait for `onPlaybackRateChange`
+        // throttled event to update state so we force it. This is because
+        // this method is often triggered when dragging a bar and can feel janky.
+        // See https://github.com/mderrick/react-html5video/issues/43
+        if (forceUpdate) {
+            this.updateStateFromVideo();
+        }
+    },
+    setSubtitles(subtitles, forceUpdate) {
+      this.videoEl.subtitles = subtitles;
+
+      for (var i = 0; i < this.videoEl.textTracks.length; i++) {
+         if (subtitlesMap[this.videoEl.textTracks[i].label] == subtitles) {
+            this.videoEl.textTracks[i].mode = 'showing';
+         }
+         else {
+            this.videoEl.textTracks[i].mode = 'hidden';
+         }
+      }
+
+      if (forceUpdate) {
+          this.updateStateFromVideo();
+      }
     },
 
     /**
@@ -245,7 +293,9 @@ var Video = React.createClass({
             paused: this.videoEl.paused,
             muted: this.videoEl.muted,
             volume: this.videoEl.volume,
+            playbackRate: this.videoEl.playbackRate,
             readyState: this.videoEl.readyState,
+            subtitles: this.videoEl.subtitles,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
@@ -273,7 +323,10 @@ var Video = React.createClass({
             unmute: this.unmute,
             seek: this.seek,
             fullscreen: this.fullscreen,
-            setVolume: this.setVolume
+            setVolume: this.setVolume,
+            setPlaybackRate: this.setPlaybackRate,
+            subtitles: this.subtitles,
+            setSubtitles: this.setSubtitles
         }, this.state, {copyKeys: this.props.copyKeys});
 
         var controls = React.Children.map(this.props.children, (child) => {
@@ -356,11 +409,13 @@ var Video = React.createClass({
     },
 
     render() {
+      // console.log('this.props.sources', this.props.sources);
         // If controls prop is provided remove it
         // and use our own controls.
         // Leave `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys, ...otherProps} = this.props;
+        var {controls, copyKeys, onPlaybackRateChange, sources, subtitles, ...otherProps} = this.props;
+
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"
@@ -377,6 +432,16 @@ var Video = React.createClass({
                     //  infer the Video state in that method from the Video properties.
                     {...this.mediaEventProps}>
                         {this.renderSources()}
+
+                    {
+                      // Add subtitles to video
+                      sources.map((source, index) => {
+                        if(source.default) {
+                          return <track label={source.label} kind="subtitles" srclang={source.lang} src={source.link} default/>
+                        }
+                        return <track label={source.label} kind="subtitles" srclang={source.lang} src={source.link}/>
+                      })
+                    }
                 </video>
                 {controls ? this.renderControls() : ''}
             </div>

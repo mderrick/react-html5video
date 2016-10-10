@@ -6,6 +6,7 @@ import {default as Video, Controls, Overlay} from './../../../../../src/componen
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.
+    '../../src/assets/videos/--Pc1ASVjmM.mp4',
     'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov',
     'http://media.w3.org/2010/05/sintel/trailer.mp4',
     'http://media.w3.org/2010/05/video/movie_300.mp4',
@@ -13,11 +14,18 @@ var videos = [
     'https://github.com/mderrick/react-html5video'
 ];
 
+var subtitles = [
+  {'link': '../../src/assets/subtitles/en-cn/--Pc1ASVjmM.vtt', 'label': 'Chinese-English', 'srclang': 'en-cn', 'default':true},
+  {'link': '../../src/assets/subtitles/en-us/--Pc1ASVjmM.vtt', 'label': 'English', 'srclang': 'en-us'},
+  {'link': '../../src/assets/subtitles/zh-cn/--Pc1ASVjmM.vtt', 'label':'Chinese', 'srclang': 'zh-cn'}
+];
+
 var Main = React.createClass({
 
     getInitialState() {
         return {
-            videoId: 0
+            videoId: 0,
+            subtitles: 'en-cn'
         };
     },
 
@@ -73,11 +81,21 @@ var Main = React.createClass({
         this.refs.video.setVolume(this._volumeInput.valueAsNumber);
     },
 
+    setPlaybackRate() {
+        this.refs.video.setPlaybackRate(this._playbackRateInput.valueAsNumber);
+    },
+
     onProgress() {
         var el = ReactDOM.findDOMNode(this.refs.video).getElementsByTagName('video')[0];
         this.setState({
             percentageLoaded: el.buffered.length && el.buffered.end(el.buffered.length - 1) / el.duration * 100
         });
+    },
+    setSubtitles(subtitles) {
+      this.setState({
+          subtitles: subtitles
+      });
+        this.refs.video.setSubtitles(subtitles);
     },
 
     render() {
@@ -94,6 +112,7 @@ var Main = React.createClass({
                         loop
                         muted
                         ref="video"
+                        sources={subtitles}
                         onProgress={this.onProgress}>
                         <source src={videos[this.state.videoId]} type="video/mp4" />
                         <Overlay />
@@ -142,7 +161,18 @@ var Main = React.createClass({
                                 <input className="main__input" defaultValue="1" ref={(c) => this._volumeInput = c} type="number" min="0" max="1" step="0.1"/>
                             </li>
                             <li>
+                                <Button onClick={this.setPlaybackRate}>setPlaybackRate</Button>
+                                <input className="main__input" defaultValue="1" ref={(c) => this._playbackRateInput = c} type="number" min="0.5" max="2" step="0.25"/>
+                            </li>
+                            <li>
                                 <Button onClick={this.fullscreen}>fullscreen</Button>
+                            </li>
+                            <li>
+                              <ul className="main__ul">
+                                <li><Button active={this.state.subtitles === 'en-cn'} onClick={this.setSubtitles.bind(this, 'en-cn')}>en-cn</Button></li>
+                                <li><Button active={this.state.subtitles === 'en'} onClick={this.setSubtitles.bind(this, 'en')}>en</Button></li>
+                                <li><Button active={this.state.subtitles === 'cn'} onClick={this.setSubtitles.bind(this, 'cn')}>cn</Button></li>
+                              </ul>
                             </li>
                         </ul>
                     </div>
