@@ -25,7 +25,7 @@ var Time = React.createClass({
      * @return {string}         Timestamp in the format of HH:MM:SS
      */
     formatTime(seconds) {
-        var date = new Date(null);
+        var date = new Date(Date.UTC(2000,1,1,0,0,0,0);
         seconds = isNaN(seconds) ? 0 : Math.floor(seconds);
         date.setSeconds(seconds);
         return date.toISOString().substr(11, 8);
