@@ -474,15 +474,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _props = this.props;
 	        var controls = _props.controls;
 	        var copyKeys = _props.copyKeys;
+	        var style = _props.style;
 
-	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys']);
+	        var otherProps = _objectWithoutProperties(_props, ['controls', 'copyKeys', 'style']);
 
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: this.getVideoClassName(),
 	                tabIndex: '0',
 	                onFocus: this.onFocus,
-	                onBlur: this.onBlur },
+	                onBlur: this.onBlur,
+	                style: style },
 	            _react2['default'].createElement(
 	                'video',
 	                _extends({}, otherProps, {
@@ -1765,7 +1767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @return {string}         Timestamp in the format of HH:MM:SS
 	     */
 	    formatTime: function formatTime(seconds) {
-	        var date = new Date(null);
+	        var date = new Date(Date.UTC(1970, 1, 1, 0, 0, 0, 0));
 	        seconds = isNaN(seconds) ? 0 : Math.floor(seconds);
 	        date.setSeconds(seconds);
 	        return date.toISOString().substr(11, 8);
