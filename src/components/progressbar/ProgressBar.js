@@ -1,4 +1,5 @@
 import React from 'react';
+import throttle from 'lodash.throttle';
 
 var ProgressBar = React.createClass({
 
@@ -27,10 +28,22 @@ var ProgressBar = React.createClass({
         // is required for Firefox. Setting manually.
         // https://github.com/facebook/react/issues/2453
         this.refs.input.setAttribute('orient', this.props.orientation);
+
+        // There is a known issue with the range input onChange event in IE
+        // https://github.com/facebook/react/issues/3096
+        //
+        // Until that is resolved, the workaround here is to also use the
+        // onClick event in addition to onChange.
+        //
+        // And here we throttle our event handler so we don't double
+        // post events in browsers that support both onChange and onClick.
+        this.throttledOnChange = throttle(this.onChange, 200);
     },
 
-    onChange() {
-        // Placeholder
+    onChange(e) {
+        if (e.target) {
+            this.props.onChange(e);
+        }
     },
 
     onFocus() {
@@ -52,7 +65,8 @@ var ProgressBar = React.createClass({
                     onBlur={this.props.onBlur}
                     onFocus={this.props.onFocus}
                     ref="input"
-                    onChange={this.props.onChange}
+                    onChange={this.throttledOnChange}
+                    onClick={this.throttledOnChange}
                     type="range"
                     min="0"
                     max="100"
