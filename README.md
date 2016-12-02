@@ -121,6 +121,7 @@ All children components will receive the following properties via props:
 - `paused`
 - `muted`
 - `volume`
+- `playbackRate`
 - `percentageBuffered`
 - `percentagePlayed`
 
@@ -134,6 +135,7 @@ All children components receive the following methods via props:
 - `seek`
 - `fullscreen`
 - `setVolume`
+- `setPlaybackRate`
 
 ## Contributing
 

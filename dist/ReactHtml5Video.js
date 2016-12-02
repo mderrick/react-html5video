@@ -173,6 +173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            paused: !this.props.autoPlay,
 	            muted: !!this.props.muted,
 	            volume: 1,
+	            playbackRate: 1,
 	            error: false,
 	            loading: false
 	        };
@@ -340,6 +341,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    /**
+	     * Sets the video playback rate.
+	     * @param  {number} rate The playback rate (default 1.0).
+	     * @return {undefined}
+	     */
+	    setPlaybackRate: function setPlaybackRate(rate) {
+	        this.videoEl.playbackRate = rate;
+	        this.updateStateFromVideo();
+	    },
+
+	    /**
 	     * Updates the React component state from the DOM video properties.
 	     * This is where the magic happens.
 	     * @return {undefined}
@@ -353,6 +364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            paused: this.videoEl.paused,
 	            muted: this.videoEl.muted,
 	            volume: this.videoEl.volume,
+	            playbackRate: this.videoEl.playbackRate,
 	            readyState: this.videoEl.readyState,
 
 	            // Non-standard state computed from properties
@@ -381,7 +393,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            unmute: this.unmute,
 	            seek: this.seek,
 	            fullscreen: this.fullscreen,
-	            setVolume: this.setVolume
+	            setVolume: this.setVolume,
+	            setPlaybackRate: this.setPlaybackRate
 	        }, this.state, { copyKeys: this.props.copyKeys });
 
 	        var controls = _react2['default'].Children.map(this.props.children, function (child) {

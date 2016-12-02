@@ -73,6 +73,10 @@ var Main = React.createClass({
         this.refs.video.setVolume(this._volumeInput.valueAsNumber);
     },
 
+    setPlaybackRate() {
+        this.refs.video.setPlaybackRate(this._playbackRateInput.valueAsNumber);
+    },
+
     onProgress() {
         var el = ReactDOM.findDOMNode(this.refs.video).getElementsByTagName('video')[0];
         this.setState({
@@ -140,6 +144,10 @@ var Main = React.createClass({
                             <li>
                                 <Button onClick={this.setVolume}>setVolume</Button>
                                 <input className="main__input" defaultValue="1" ref={(c) => this._volumeInput = c} type="number" min="0" max="1" step="0.1"/>
+                            </li>
+                            <li>
+                                <Button onClick={this.setPlaybackRate}>setPlaybackRate</Button>
+                                <input className="main__input" defaultValue="1" ref={(c) => this._playbackRateInput = c} type="number" min="0.5" max="2" step="0.25"/>
                             </li>
                             <li>
                                 <Button onClick={this.fullscreen}>fullscreen</Button>
