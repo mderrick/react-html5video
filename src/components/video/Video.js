@@ -382,7 +382,7 @@ var Video = React.createClass({
                 style={style}>
                 <video
                     {...otherProps}
-                    className="video__el"
+                    className={`video__el ${this.props.innerClassName}`}
                     ref={(el) => {
                         this.videoEl = el;
                     }}
