@@ -200,7 +200,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -218,7 +218,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -371,9 +371,10 @@ var Video = React.createClass({
     render() {
         // If controls prop is provided remove it
         // and use our own controls.
-        // Leave `copyKeys` here even though not used
+        var {controls, style, ...otherProps} = this.props;
+        // Remove `copyKeys` here even though not used
         // as per issue #36.
-        var {controls, copyKeys, style, ...otherProps} = this.props;
+        delete otherProps.copyKeys;
         return (
             <div className={this.getVideoClassName()}
                 tabIndex="0"

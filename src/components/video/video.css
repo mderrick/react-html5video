@@ -11,6 +11,11 @@
             user-select: none;
 }
 
+.video__el {
+    height: 100%;
+    width: 100%;
+}
+
 .video:focus {
     outline: thin dotted;
 }

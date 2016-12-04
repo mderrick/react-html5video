@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from './../../icon/Icon';
 
 var Time = React.createClass({
 
