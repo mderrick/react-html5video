@@ -46,7 +46,7 @@ module.exports = ({ optimize, extractCss, hot, publicPath = '/' }) => {
                     ? ExtractTextPlugin.extract('style', 'css')
                     : 'style!css'
             }, {
-                test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|svg)(\?.*)?$/,
+                test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|svg|vtt)(\?.*)?$/,
                 loader: 'file'
             }]
         },

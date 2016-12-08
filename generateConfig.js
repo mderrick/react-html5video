@@ -9,7 +9,7 @@ const distPath = path.resolve(__dirname, 'dist');
 module.exports = (options = {}) => {
     return {
         entry: [
-            path.resolve(srcPath, 'Entry.js')
+            path.resolve(srcPath, 'entry.js')
         ],
         target: 'web',
         output: {
@@ -27,6 +27,12 @@ module.exports = (options = {}) => {
                 commonjs2: 'react',
                 commonjs: 'react',
                 amd: 'react'
+            },
+            'react-dom': {
+                root: 'ReactDOM',
+                commonjs2: 'react-dom',
+                commonjs: 'react-dom',
+                amd: 'react-dom'
             }
         }],
         module: {
@@ -40,7 +46,7 @@ module.exports = (options = {}) => {
             }, {
                 test: /\.css$/,
                 include: srcPath,
-                loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1&localIdentName=[hash:base64:5]&hashPrefix=react-html5video&-autoprefixer!postcss')
+                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[hash:base64:5]&hashPrefix=react-html5video&-autoprefixer!postcss')
             }, {
                 test: /\.(eot|ttf|woff|woff2|svg)(\?.*)?$/,
                 loader: 'url'

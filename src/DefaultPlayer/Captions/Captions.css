@@ -1,0 +1,30 @@
+.component {
+    position: relative;
+    color: #fff;
+}
+
+.button {}
+
+.trackList {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    display: none;
+    background: #000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.component:hover .trackList {
+    display: block;
+}
+
+.trackItem {
+    padding: 5px;
+}
+
+.activeTrack {
+    composes: trackItem;
+    text-decoration: underline;
+}
