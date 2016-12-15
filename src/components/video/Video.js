@@ -200,7 +200,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -218,7 +218,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -368,6 +368,15 @@ var Video = React.createClass({
         });
     },
 
+    /**
+     * Sets a ref to the video element.
+     * @param  {node} el The video element reference
+     * @return {undefined}
+     */
+    setVideoRef(el) {
+        this.videoEl = el;
+    },
+
     render() {
         // If controls prop is provided remove it
         // and use our own controls.
@@ -383,9 +392,7 @@ var Video = React.createClass({
                 <video
                     {...otherProps}
                     className="video__el"
-                    ref={(el) => {
-                        this.videoEl = el;
-                    }}
+                    ref={this.setVideoRef}
                     //  We have throttled `_updateStateFromVideo` so listen to
                     //  every available Media event that React allows and
                     //  infer the Video state in that method from the Video properties.
