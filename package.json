@@ -13,7 +13,7 @@
     "i:demo": "npm run install:demo",
     "test": "jest --env=jsdom",
     "test:watch": "npm run test -- --watch",
-    "build": "webpack",
+    "build": "webpack --display-error-details",
     "build:demo": "cd demo && webpack",
     "deploy:demo": "node scripts/deploy:demo.js",
     "clean": "rm -rf node_modules && rm -rf dist && rm -rf demo/node_modules && rm -rf demo/dist",
