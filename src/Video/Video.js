@@ -1,130 +1,90 @@
 /**
  * This is a HoC that finds a single
  * <video> in a component and makes
- * all its PROPERTIES and METHODS
- * available as props.
+ * all its PROPERTIES available as props.
  */
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import toClass from 'recompose/toClass';
+import {
+    EVENTS,
+    PROPERTIES,
+} from './constants';
 
-const EVENTS = [
-    'onAbort',
-    'onCanPlay',
-    'onCanPlayThrough',
-    'onDurationChange',
-    'onEmptied',
-    'onEncrypted',
-    'onEnded',
-    'onError',
-    'onLoadedData',
-    'onLoadedMetadata',
-    'onLoadStart',
-    'onPause',
-    'onPlay',
-    'onPlaying',
-    'onProgress',
-    'onRateChange',
-    'onSeeked',
-    'onSeeking',
-    'onStalled',
-    'onSuspend',
-    'onTimeUpdate',
-    'onVolumeChange',
-    'onWaiting'
-];
+const defaultMapStateToProps = (state = {}) => Object.assign({
+    video: {
+        ...state
+    }
+});
 
-const METHODS = [
-    'addTextTrack',
-    'canPlayType',
-    'load',
-    'play',
-    'pause'
-];
+const defaultMapVideoElToProps = (videoEl) => ({
+    videoEl
+});
 
-const PROPERTIES = [
-    'audioTracks',
-    'autoPlay',
-    'buffered',
-    'controller',
-    'controls',
-    'currentSrc',
-    'currentTime',
-    'defaultMuted',
-    'defaultPlaybackRate',
-    'duration',
-    'ended',
-    'error',
-    'loop',
-    'mediaGroup',
-    'muted',
-    'networkState',
-    'paused',
-    'playbackRate',
-    'played',
-    'preload',
-    'readyState',
-    'seekable',
-    'seeking',
-    'src',
-    'startDate',
-    'textTracks',
-    'videoTracks',
-    'volume'
-];
+const defaultMergeProps = (
+    stateProps = {},
+    videoElProps = {},
+    ownProps = {}
+) => Object.assign({}, stateProps, videoElProps, ownProps);
 
-export default (BaseComponent) => {
+export default (
+    BaseComponent,
+    mapStateToProps = defaultMapStateToProps,
+    mapVideoElToProps = defaultMapVideoElToProps,
+    mergeProps = defaultMergeProps
+) => {
     const BaseComponentClass = toClass(BaseComponent);
 
     class Video extends Component {
         constructor(props) {
             super(props);
-            this.getVideoEl = this.getVideoEl.bind(this);
             this.updateState = this.updateState.bind(this);
-        }
-
-        getVideoEl() {
-            return this.videoEl;
+            this.state = {};
         }
 
         updateState() {
             this.setState(
                 PROPERTIES.reduce((p, c) => {
-                    p[c] = this.videoEl[c];
+                    p[c] = this.videoEl && this.videoEl[c];
                     return p;
                 }, {})
             );
         }
 
+        bindEventsToUpdateState() {
+            EVENTS.forEach(event => {
+                this.videoEl[event.toLowerCase()] = this.updateState;
+            });
+        }
+
+        // Stop `this.el` from being null briefly on every render,
+        // see: https://github.com/mderrick/react-html5video/pull/65
+        setRef(el) {
+            this.el = findDOMNode(el);
+        }
+
         componentDidMount() {
             this.videoEl = this.el.getElementsByTagName('video')[0];
-            EVENTS.forEach(event => {
-                this.videoEl[event.toLowerCase()] = this.updateState.bind(this);
-            });
-            this.methods = METHODS.reduce((p, c) => {
-                p[c] = (...args) => {
-                    if (this.videoEl[c]) this.videoEl[c].apply(this.videoEl, args);
-                };
-                return p;
-            }, {});
+            this.bindEventsToUpdateState();
         }
 
         render() {
+            const stateProps = mapStateToProps(
+                this.state,
+                this.props
+            );
+            const videoElProps = mapVideoElToProps(
+                this.videoEl,
+                this.state,
+                this.props
+            );
             return (
                 <BaseComponentClass
-                    ref={(el) => this.el = findDOMNode(el)}
-                    video={Object.assign({
-                        // getVideoEl is used to update the video
-                        // using the HTMLMediaElement API.
-                        // e.g getVideoEl().muted = true;
-                        getVideoEl: this.getVideoEl,
-                        // forceUpdateState should never be used
-                        // unless changing a video property that
-                        // does not trigger an EVENT.
-                        // See CaptionMenu component.
-                        forceUpdateState: this.updateState,
-                    }, this.methods, this.state, this.props)}
-                    {...this.props} />
+                    ref={this.setRef.bind(this)}
+                    {...mergeProps(
+                        stateProps,
+                        videoElProps,
+                        this.props)} />
             );
         }
     }

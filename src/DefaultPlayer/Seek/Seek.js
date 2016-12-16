@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Seek.css';
 
-export default ({ getVideoEl, duration, currentTime, className }) => {
+export default ({ setCurrentTime, duration, currentTime, className }) => {
     const change = (e) => {
-        getVideoEl().currentTime = e.target.value * duration / 100;
+        setCurrentTime(e.target.value * duration / 100);
     };
     return (
         <div className={[
@@ -17,7 +17,7 @@ export default ({ getVideoEl, duration, currentTime, className }) => {
                 type="range"
                 orient="horizontal"
                 onChange={change}
-                value={currentTime / duration * 100}  />
+                value={currentTime / duration * 100} />
         </div>
     );
 };

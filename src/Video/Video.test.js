@@ -1,48 +1,190 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import video from './Video';
+import { mount, shallow } from 'enzyme';
+import video from './video';
 
-const TestComponent = () => (
-    <div>
-        <video></video>
-    </div>
-);
+const TestControl = ({ duration }) => {
+    return (
+        <div>
+            { duration }
+        </div>
+    );
+};
 
-describe('Video', () => {
+const TestVideo = ({ video, ...restProps }) => {
+    // Remove `videoEl` so we do not spread an unsupported
+    // prop onto a DOM element.
+    delete restProps.videoEl;
+    return (
+        <div>
+            <video {...restProps}></video>
+            <TestControl {...video} />
+        </div>
+    );
+};
+
+describe('video', () => {
     let Component;
     let component;
 
     beforeAll(() => {
-        Component = video(TestComponent);
-        component = shallow(
-            <Component />
-        );
+        Component = video(TestVideo);
     });
 
-    it('returns a component with `video.forceUpdateState` method', () => {
-        expect(component.prop('video').forceUpdateState)
-            .toBe(component.instance().updateState);
+    describe('the wrapped component', () => {
+        beforeAll(() => {
+            component = mount(
+                <Component autoPlay />
+            );
+        });
+
+        it('should receive all of the HTMLMediaElement API as props when an event is triggered', () => {
+            const testControl = component.find(TestControl);
+            expect(testControl.props()).toEqual({});
+            component.find('video').node.dispatchEvent(new Event('play'));
+
+            // Only matching a subset is sufficient.
+            expect(testControl.props()).toMatchObject({
+                controller: undefined,
+                autoPlay: undefined,
+                controls: false,
+                currentSrc: '',
+                currentTime: 0,
+                defaultMuted: false,
+                defaultPlaybackRate: 1,
+                duration: 0,
+                ended: false,
+                error: undefined,
+                loop: false,
+                mediaGroup: undefined,
+                muted: false,
+                networkState: 0,
+                paused: true,
+                playbackRate: 1,
+                preload: '',
+                readyState: 0,
+                seeking: false,
+                src: '',
+                startDate: undefined,
+                volume: 1
+            });
+        });
     });
 
-    it('returns a component with `video.getVideoEl` method', () => {
-        expect(component.prop('video').getVideoEl)
-            .toBe(component.instance().getVideoEl);
-    });
+    describe('mapping to props', () => {
+        let videoEl = {};
 
-    it('returns a component with all its state on the `video` prop', () => {
-        const state = {
-            html5: '1',
-            dom: 2,
-            properties: function() {
-                return 3;
-            }
-        };
-        component.setState(state);
-        expect(component.prop('video').html5)
-            .toEqual(state.html5);
-        expect(component.prop('video').dom)
-            .toEqual(state.dom);
-        expect(component.prop('video').properties)
-            .toEqual(state.properties);
+        beforeAll(() => {
+            component = shallow(
+                <Component autoPlay />
+            );
+            // Emulate videoEl being present
+            // e.g. componentDidMount fired.
+            component.instance().videoEl = videoEl;
+            component.instance().forceUpdate();
+        });
+
+        beforeEach(() => {
+            // Reset spy
+            videoEl.play = jest.fn();
+        });
+
+        it('returns a component with it\'s ownProps', () => {
+            expect(component.prop('autoPlay'))
+                .toBe(true);
+        });
+
+        it('returns a component with a videoEl prop', () => {
+            expect(component.prop('videoEl'))
+                .toBe(videoEl);
+        });
+
+        it('returns a component with all of its state on the `video` prop', () => {
+            const state = {
+                html5: '1',
+                dom: 2,
+                properties: function() {
+                    return 3;
+                }
+            };
+            component.setState(state);
+            expect(component.prop('video'))
+                .toEqual(state);
+        });
+
+        it('can customise the mapping of props using mapToProps', () => {
+            const Component = video(TestVideo, (state, ownProps) => {
+                return {
+                    state,
+                    ownProps
+                };
+            });
+            const component = shallow(
+                <Component autoPlay />
+            );
+            component.setState({
+                paused: true
+            });
+            expect(component.prop('state').paused)
+                .toBe(true);
+            expect(component.prop('ownProps').autoPlay)
+                .toBe(true);
+        });
+
+        it('can map videoEl to props for creating custom API methods', () => {
+            const Component = video(TestVideo, undefined, (el, state, ownProps) => {
+                return {
+                    togglePlay: () => {
+                        el.play(ownProps.testProp);
+                    }
+                }
+            });
+            const component = shallow(
+                <Component autoPlay testProp="testValue" />
+            );
+            component.instance().videoEl = videoEl;
+            component.instance().forceUpdate();
+            component.prop('togglePlay')();
+            expect(videoEl.play).toHaveBeenCalledWith('testValue');
+        });
+
+        it('allows mapVideoElToProps to take precedence over mapStateToProps', () => {
+            const Component = video(TestVideo, () => ({
+                duplicateKey: 'mapStateToProps'
+            }), () => ({
+                duplicateKey: 'mapVideoElToProps'
+            }));
+            const component = shallow(
+                <Component />
+            );
+            expect(component.prop('duplicateKey')).toBe('mapVideoElToProps');
+        });
+
+        it('allows ownProps to take precedence over mapVideoElToProps and mapStateToProps', () => {
+            const Component = video(TestVideo, () => ({
+                duplicateKey: 'mapStateToProps'
+            }), () => ({
+                duplicateKey: 'mapVideoElToProps'
+            }));
+            const component = shallow(
+                <Component duplicateKey="ownProps" />
+            );
+            expect(component.prop('duplicateKey')).toBe('ownProps');
+        });
+
+        it('allows cusomtisation of merging ownProps, mapVideoElToProps and mapStateToProps to change the merging precedence', () => {
+            const Component = video(TestVideo, () => ({
+                duplicateKey: 'mapStateToProps'
+            }), () => ({
+                duplicateKey: 'mapVideoElToProps'
+            }), (stateProps, videoElProps, ownProps) =>
+                Object.assign({}, ownProps, stateProps, videoElProps));
+            const component = shallow(
+                <Component duplicateKey="ownProps" />
+            );
+            expect(component.prop('duplicateKey')).toBe('mapVideoElToProps');
+        });
     });
 });
+
+
+

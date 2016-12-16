@@ -1,21 +1,14 @@
 import React from 'react';
 import styles from './PlayPause.css';
 
-export default ({ pause, play, paused, className }) => {
-    const toggle = () => {
-        if (paused) {
-            play();
-        } else {
-            pause();
-        }
-    };
+export default ({ togglePause, paused, className }) => {
     return (
         <div className={[
             styles.component,
             className
         ].join(' ')}>
             <button
-                onClick={toggle}
+                onClick={togglePause}
                 type="button">
                 { paused
                     ? 'Play'
