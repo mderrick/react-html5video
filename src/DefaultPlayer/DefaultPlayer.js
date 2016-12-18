@@ -10,25 +10,30 @@ import styles from './DefaultPlayer.css';
 import PlayPause from './PlayPause/PlayPause';
 import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
-const DefaultPlayer = (props) => {
-    const {
-        video,
-        style,
-        children,
-        className,
-        setVolume,
-        toggleMute,
-        togglePause,
-        setCurrentTime,
-        ...restProps
-    } = props;
+const DefaultPlayer = ({
+    video,
+    style,
+    children,
+    className,
+    setVolume,
+    toggleMute,
+    togglePause,
+    setCurrentTime,
+    ...restProps
+}) => {
     return (
         <div className={[
             styles.component,
             className
         ].join(' ')}
         style={style}>
+            { video.error
+                ? <ErrorMessage
+                    className={styles.error}
+                    {...video} />
+                : null }
             <video
                 className={styles.video}
                 {...restProps}>
@@ -50,9 +55,18 @@ const DefaultPlayer = (props) => {
     );
 };
 
-export default video(DefaultPlayer, undefined, (videoEl, state) => ({
-    toggleMute: () => toggleMute(videoEl, state),
-    togglePause: () => togglePause(videoEl, state),
-    setVolume: (value) => setVolume(videoEl, state, value),
-    setCurrentTime: (value) => setCurrentTime(videoEl, state, value)
-}));
+export default video(
+    DefaultPlayer,
+    ({  networkState, error, ...restState }) => ({
+        video: {
+            error: error || networkState === 3,
+            ...restState
+        }
+    }),
+    (videoEl, state) => ({
+        toggleMute: () => toggleMute(videoEl, state),
+        togglePause: () => togglePause(videoEl, state),
+        setVolume: (value) => setVolume(videoEl, state, value),
+        setCurrentTime: (value) => setCurrentTime(videoEl, state, value)
+    })
+);

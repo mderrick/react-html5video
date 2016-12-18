@@ -16,7 +16,9 @@ const TestVideo = ({ video, ...restProps }) => {
     delete restProps.videoEl;
     return (
         <div>
-            <video {...restProps}></video>
+            <video {...restProps}>
+                <source src="1" />
+            </video>
             <TestControl {...video} />
         </div>
     );
@@ -31,41 +33,56 @@ describe('video', () => {
     });
 
     describe('the wrapped component', () => {
-        beforeAll(() => {
+        beforeEach(() => {
             component = mount(
                 <Component autoPlay />
             );
         });
 
-        it('should receive all of the HTMLMediaElement API as props when an event is triggered', () => {
-            const testControl = component.find(TestControl);
-            expect(testControl.props()).toEqual({});
-            component.find('video').node.dispatchEvent(new Event('play'));
+        describe('HTMLMediaElement API as props', () => {
+            let testControl;
+            beforeEach(() => {
+                component = mount(
+                    <Component autoPlay />
+                );
+                testControl = component.find(TestControl);
+                expect(testControl.props()).toEqual({});
+            });
 
-            // Only matching a subset is sufficient.
-            expect(testControl.props()).toMatchObject({
-                controller: undefined,
-                autoPlay: undefined,
-                controls: false,
-                currentSrc: '',
-                currentTime: 0,
-                defaultMuted: false,
-                defaultPlaybackRate: 1,
-                duration: 0,
-                ended: false,
-                error: undefined,
-                loop: false,
-                mediaGroup: undefined,
-                muted: false,
-                networkState: 0,
-                paused: true,
-                playbackRate: 1,
-                preload: '',
-                readyState: 0,
-                seeking: false,
-                src: '',
-                startDate: undefined,
-                volume: 1
+            it('should be provided when a video event is triggered', () => {
+                component.find('video').node.dispatchEvent(new Event('play'));
+            });
+
+            it('should be provided when an error occurs on last source element', () => {
+                component.find('source').node.dispatchEvent(new Event('error'));
+            });
+
+            afterEach(() => {
+                // Only matching a subset is sufficient.
+                expect(testControl.props()).toMatchObject({
+                    controller: undefined,
+                    autoPlay: undefined,
+                    controls: false,
+                    currentSrc: '',
+                    currentTime: 0,
+                    defaultMuted: false,
+                    defaultPlaybackRate: 1,
+                    duration: 0,
+                    ended: false,
+                    error: undefined,
+                    loop: false,
+                    mediaGroup: undefined,
+                    muted: false,
+                    networkState: 0,
+                    paused: true,
+                    playbackRate: 1,
+                    preload: '',
+                    readyState: 0,
+                    seeking: false,
+                    src: '',
+                    startDate: undefined,
+                    volume: 1
+                });
             });
         });
     });

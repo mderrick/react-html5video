@@ -6,7 +6,9 @@ import pkg from './../../../package.json';
 import vttEn from './../../assets/sintel-en.vtt';
 import vttEs from './../../assets/sintel-es.vtt';
 
-const sintelTrailer = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
+const sintelTrailer = 'https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4';
+const bigBuckBunny = 'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov';
+const failingSource = 'https://github.com/mderrick/react-html5video';
 
 const App = () => (
     <div className={styles.component}>
@@ -24,6 +26,21 @@ const App = () => (
                 kind="subtitles"
                 srcLang="es"
                 src={vttEs} />
+        </Video>
+        <Video
+            src={bigBuckBunny}
+            className={styles.video}>
+        </Video>
+        <Video
+            src={failingSource}
+            className={styles.video}>
+        </Video>
+        <Video className={styles.video}>
+            <source src={failingSource} type="video/mp4" />
+            <source src={sintelTrailer} type="video/mp4" />
+        </Video>
+        <Video className={styles.video}>
+            <source src={failingSource} type="video/mp4" />
         </Video>
     </div>
 );

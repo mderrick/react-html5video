@@ -55,6 +55,17 @@ export default (
             EVENTS.forEach(event => {
                 this.videoEl[event.toLowerCase()] = this.updateState;
             });
+
+            // If <source> elements are used instead of a src attribute then
+            // errors for unsuppored format do not bubble up to the <video>.
+            // Do this manually by listening to the last <source> error event
+            // to force an update.
+            // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video
+            const sources = this.videoEl.getElementsByTagName('source');
+            if (sources.length) {
+                const lastSource = sources[sources.length - 1];
+                lastSource.addEventListener('error', this.updateState);
+            }
         }
 
         // Stop `this.el` from being null briefly on every render,
