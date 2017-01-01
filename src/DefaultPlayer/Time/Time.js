@@ -3,7 +3,7 @@ import styles from './Time.css';
 
 const formatTime = (seconds) => {
     const date = new Date(Date.UTC(1970,1,1,0,0,0,0));
-    seconds = isNaN(seconds)
+    seconds = isNaN(seconds) || seconds > 86400
         ? 0
         : Math.floor(seconds);
     date.setSeconds(seconds);

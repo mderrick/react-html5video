@@ -13,6 +13,7 @@ import PlayPause from './PlayPause/PlayPause';
 import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
+import Time from './Time/Time';
 
 const DefaultPlayer = ({
     video,
@@ -49,6 +50,7 @@ const DefaultPlayer = ({
                     className={styles.seek}
                     setCurrentTime={setCurrentTime}
                     {...video} />
+                <Time {...video} />
                 <Volume
                     setVolume={setVolume}
                     toggleMute={toggleMute}
