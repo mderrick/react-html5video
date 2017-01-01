@@ -1,1 +1,26 @@
 .component {}
+
+.component:hover {
+    background-color: #000;
+}
+
+.button {
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+}
+
+.button:focus {
+    outline:0;
+}
+
+.icon {
+    padding: 5px;
+}

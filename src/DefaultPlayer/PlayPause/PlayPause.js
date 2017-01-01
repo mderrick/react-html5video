@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './PlayPause.css';
+import PlayArrow from './../Icon/play_arrow.svg';
+import Pause from './../Icon/pause.svg';
 
 export default ({ togglePause, paused, className }) => {
     return (
@@ -8,11 +10,19 @@ export default ({ togglePause, paused, className }) => {
             className
         ].join(' ')}>
             <button
+                className={styles.button}
                 onClick={togglePause}
-                type="button">
-                { paused
+                aria-label={ paused
                     ? 'Play'
                     : 'Pause' }
+                type="button">
+                { paused
+                    ? <PlayArrow
+                        className={styles.icon}
+                        fill="#fff" />
+                    : <Pause
+                        className={styles.icon}
+                        fill="#fff" /> }
             </button>
         </div>
     );
