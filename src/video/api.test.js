@@ -4,7 +4,9 @@ import {
     setVolume,
     toggleMute,
     togglePause,
-    setCurrentTime
+    setCurrentTime,
+    getPercentagePlayed,
+    getPercentageBuffered
 } from './api';
 
 describe('api', () => {
@@ -100,6 +102,25 @@ describe('api', () => {
             toggleMute(videoElMock, { volume: 0, muted: true });
             expect(videoElMock.volume).toBe(1);
             expect(videoElMock.muted).toBe(false);
+        });
+    });
+
+    describe('getPercentagePlayed', () => {
+        it('returns correct percentage played', () => {
+            expect(getPercentagePlayed({
+                currentTime: 10,
+                duration: 100
+            })).toBe(10);
+
+            expect(getPercentagePlayed({
+                currentTime: 1,
+                duration: 10
+            })).toBe(10);
+
+            expect(getPercentagePlayed({
+                currentTime: 5,
+                duration: 20
+            })).toBe(25);
         });
     });
 });

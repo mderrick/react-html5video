@@ -4,7 +4,9 @@ import {
     setVolume,
     toggleMute,
     togglePause,
-    setCurrentTime
+    setCurrentTime,
+    getPercentagePlayed,
+    getPercentageBuffered
 } from './../video/api';
 import styles from './DefaultPlayer.css';
 import PlayPause from './PlayPause/PlayPause';
@@ -44,6 +46,7 @@ const DefaultPlayer = ({
                     togglePause={togglePause}
                     {...video} />
                 <Seek
+                    className={styles.seek}
                     setCurrentTime={setCurrentTime}
                     {...video} />
                 <Volume
@@ -57,9 +60,11 @@ const DefaultPlayer = ({
 
 export default video(
     DefaultPlayer,
-    ({  networkState, error, ...restState }) => ({
+    ({ networkState, error, ...restState }) => ({
         video: {
             error: error || networkState === 3,
+            percentagePlayed: getPercentagePlayed(restState),
+            percentageBuffered: getPercentageBuffered(restState),
             ...restState
         }
     }),

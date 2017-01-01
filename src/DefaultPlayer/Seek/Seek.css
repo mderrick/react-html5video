@@ -1,1 +1,36 @@
-.component {}
+.component {
+    position: relative;
+}
+
+.track {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    right: 5px;
+    height: 4px;
+    transform: translateY(-50%);
+    background-color: #3e3e3e;
+}
+
+.buffer,
+.fill,
+.input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.buffer {
+    background-color: #5a5a5a;
+}
+
+.fill {
+    background: #fff;
+}
+
+.input {
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}

@@ -39,3 +39,14 @@ export const toggleMute = (videoEl, { volume, muted }) => {
         videoEl.muted = true;
     }
 };
+
+/**
+ * Custom getter methods that are commonly used
+ * across video layouts. To be primarily used in
+ * `mapStateToProps`
+ */
+export const getPercentageBuffered = ({ buffered, duration }) =>
+    buffered && buffered.length && buffered.end(buffered.length - 1) / duration * 100 || 0;
+
+export const getPercentagePlayed = ({ currentTime, duration }) =>
+    currentTime / duration * 100;
