@@ -44,11 +44,14 @@ module.exports = (options = {}) => {
                     cacheDirectory: true
                 }
             }, {
+                test: /\.svg$/,
+                loader: 'babel!react-svg'
+            }, {
                 test: /\.css$/,
                 include: srcPath,
                 loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[hash:base64:5]&hashPrefix=react-html5video&-autoprefixer!postcss')
             }, {
-                test: /\.(eot|ttf|woff|woff2|svg)(\?.*)?$/,
+                test: /\.(eot|ttf|woff|woff2)(\?.*)?$/,
                 loader: 'url'
             }]
         },
