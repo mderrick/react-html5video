@@ -40,6 +40,18 @@ export const toggleMute = (videoEl, { volume, muted }) => {
     }
 };
 
+export const fullscreen = (videoEl) => {
+    if (videoEl.requestFullscreen) {
+        videoEl.requestFullscreen();
+    } else if (videoEl.msRequestFullscreen) {
+        videoEl.msRequestFullscreen();
+    } else if (videoEl.mozRequestFullScreen) {
+        videoEl.mozRequestFullScreen();
+    } else if (videoEl.webkitRequestFullscreen) {
+        videoEl.webkitRequestFullscreen();
+    }
+}
+
 /**
  * Custom getter methods that are commonly used
  * across video layouts. To be primarily used in

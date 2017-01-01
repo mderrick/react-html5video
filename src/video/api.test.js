@@ -3,6 +3,7 @@ import {
     unmute,
     setVolume,
     toggleMute,
+    fullscreen,
     togglePause,
     setCurrentTime,
     getPercentagePlayed,
@@ -102,6 +103,32 @@ describe('api', () => {
             toggleMute(videoElMock, { volume: 0, muted: true });
             expect(videoElMock.volume).toBe(1);
             expect(videoElMock.muted).toBe(false);
+        });
+    });
+
+    describe('fullscreen', () => {
+        it('requestsFullscreen', () => {
+            videoElMock.requestFullscreen = jest.fn();
+            fullscreen(videoElMock);
+            expect(videoElMock.requestFullscreen).toHaveBeenCalled();
+        });
+
+        it('requestsFullscreen for ms', () => {
+            videoElMock.msRequestFullscreen = jest.fn();
+            fullscreen(videoElMock);
+            expect(videoElMock.msRequestFullscreen).toHaveBeenCalled();
+        });
+
+        it('requestsFullscreen for moz', () => {
+            videoElMock.mozRequestFullScreen = jest.fn();
+            fullscreen(videoElMock);
+            expect(videoElMock.mozRequestFullScreen).toHaveBeenCalled();
+        });
+
+        it('requestsFullscreen for webkit', () => {
+            videoElMock.webkitRequestFullscreen = jest.fn();
+            fullscreen(videoElMock);
+            expect(videoElMock.webkitRequestFullscreen).toHaveBeenCalled();
         });
     });
 

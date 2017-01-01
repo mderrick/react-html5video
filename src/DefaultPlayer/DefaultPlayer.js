@@ -2,6 +2,7 @@ import React from 'react';
 import video from './../video/video';
 import {
     setVolume,
+    fullscreen,
     toggleMute,
     togglePause,
     setCurrentTime,
@@ -14,6 +15,7 @@ import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import Time from './Time/Time';
+import Fullscreen from './Fullscreen/Fullscreen';
 
 const DefaultPlayer = ({
     video,
@@ -24,6 +26,7 @@ const DefaultPlayer = ({
     toggleMute,
     togglePause,
     setCurrentTime,
+    onFullscreenClick,
     ...restProps
 }) => {
     return (
@@ -55,6 +58,9 @@ const DefaultPlayer = ({
                     setVolume={setVolume}
                     toggleMute={toggleMute}
                     {...video} />
+                <Fullscreen
+                    onClick={onFullscreenClick}
+                    {...video} />
             </div>
         </div>
     );
@@ -71,6 +77,7 @@ export default video(
         }
     }),
     (videoEl, state) => ({
+        onFullscreenClick: () => fullscreen(videoEl),
         toggleMute: () => toggleMute(videoEl, state),
         togglePause: () => togglePause(videoEl, state),
         setVolume: (value) => setVolume(videoEl, state, value),
