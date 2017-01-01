@@ -25,4 +25,15 @@
     left: 0;
     height: 34px;
     display: flex;
+    background-color: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.seek {
+    flex-grow: 1;
+}
+
+.component:hover .controls {
+    opacity: 1;
 }
