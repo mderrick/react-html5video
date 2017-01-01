@@ -22,10 +22,10 @@ const DefaultPlayer = ({
     style,
     children,
     className,
-    setVolume,
-    toggleMute,
-    togglePause,
-    setCurrentTime,
+    onSeekChange,
+    onVolumeChange,
+    onVolumeClick,
+    onPlayPauseClick,
     onFullscreenClick,
     ...restProps
 }) => {
@@ -47,16 +47,16 @@ const DefaultPlayer = ({
             </video>
             <div className={styles.controls}>
                 <PlayPause
-                    togglePause={togglePause}
+                    onClick={onPlayPauseClick}
                     {...video} />
                 <Seek
                     className={styles.seek}
-                    setCurrentTime={setCurrentTime}
+                    onChange={onSeekChange}
                     {...video} />
                 <Time {...video} />
                 <Volume
-                    setVolume={setVolume}
-                    toggleMute={toggleMute}
+                    onChange={onVolumeChange}
+                    onClick={onVolumeClick}
                     {...video} />
                 <Fullscreen
                     onClick={onFullscreenClick}
@@ -78,9 +78,9 @@ export default video(
     }),
     (videoEl, state) => ({
         onFullscreenClick: () => fullscreen(videoEl),
-        toggleMute: () => toggleMute(videoEl, state),
-        togglePause: () => togglePause(videoEl, state),
-        setVolume: (value) => setVolume(videoEl, state, value),
-        setCurrentTime: (value) => setCurrentTime(videoEl, state, value)
+        onVolumeClick: () => toggleMute(videoEl, state),
+        onPlayPauseClick: () => togglePause(videoEl, state),
+        onVolumeChange: (e) => setVolume(videoEl, state, e.target.value),
+        onSeekChange: (e) => setCurrentTime(videoEl, state, e.target.value * state.duration / 100)
     })
 );

@@ -3,10 +3,7 @@ import styles from './Volume.css';
 import VolumeOff from './../Icon/volume_off.svg';
 import VolumeUp from './../Icon/volume_up.svg';
 
-export default ({ setVolume, toggleMute, volume, muted, className }) => {
-    const change = (e) => {
-        setVolume(e.target.value);
-    };
+export default ({ onChange, onClick, volume, muted, className }) => {
     const volumeValue = muted
         ? 0
         : +volume;
@@ -21,7 +18,7 @@ export default ({ setVolume, toggleMute, volume, muted, className }) => {
                     ? 'Unmute'
                     : 'Mute'}
                 className={styles.button}
-                onClick={toggleMute}
+                onClick={onClick}
                 type="button">
                 { isSilent
                     ? <VolumeOff
@@ -48,7 +45,7 @@ export default ({ setVolume, toggleMute, volume, muted, className }) => {
                         max="1"
                         type="range"
                         orient="vertical"
-                        onChange={change}
+                        onChange={onChange}
                         className={styles.input}
                         value={volumeValue} />
                 </div>

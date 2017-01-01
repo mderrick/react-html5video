@@ -3,7 +3,7 @@ import styles from './PlayPause.css';
 import PlayArrow from './../Icon/play_arrow.svg';
 import Pause from './../Icon/pause.svg';
 
-export default ({ togglePause, paused, className }) => {
+export default ({ onClick, paused, className }) => {
     return (
         <div className={[
             styles.component,
@@ -11,7 +11,7 @@ export default ({ togglePause, paused, className }) => {
         ].join(' ')}>
             <button
                 className={styles.button}
-                onClick={togglePause}
+                onClick={onClick}
                 aria-label={ paused
                     ? 'Play'
                     : 'Pause' }

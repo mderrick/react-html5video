@@ -39,14 +39,26 @@ describe('Volume', () => {
             .toEqual('1');
     });
 
-    it('triggers \'toggleMute\' prop when the button is clicked', () => {
+    it('triggers \'onClick\' prop when the button is clicked', () => {
         const spy = jest.fn();
         component.setProps({
-            toggleMute: spy
+            onClick: spy
         });
         expect(spy)
             .not.toHaveBeenCalled();
         component.find('button').simulate('click');
+        expect(spy)
+            .toHaveBeenCalled();
+    });
+
+    it('triggers \'onChange\' prop when the input is changed', () => {
+        const spy = jest.fn();
+        component.setProps({
+            onChange: spy
+        });
+        expect(spy)
+            .not.toHaveBeenCalled();
+        component.find('input').simulate('change');
         expect(spy)
             .toHaveBeenCalled();
     });

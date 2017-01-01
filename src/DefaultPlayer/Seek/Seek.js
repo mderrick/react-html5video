@@ -1,10 +1,7 @@
 import React from 'react';
 import styles from './Seek.css';
 
-export default ({ setCurrentTime, duration, percentagePlayed, percentageBuffered, className }) => {
-    const change = (e) => {
-        setCurrentTime(e.target.value * duration / 100);
-    };
+export default ({ onChange, duration, percentagePlayed, percentageBuffered, className }) => {
     return (
         <div className={[
             styles.component,
@@ -27,7 +24,7 @@ export default ({ setCurrentTime, duration, percentagePlayed, percentageBuffered
                     max="100"
                     type="range"
                     orient="horizontal"
-                    onChange={change}
+                    onChange={onChange}
                     className={styles.input}
                     value={percentagePlayed} />
             </div>

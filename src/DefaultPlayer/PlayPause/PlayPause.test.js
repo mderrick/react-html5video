@@ -25,10 +25,10 @@ describe('PlayPause', () => {
             .toContain(newClassNameString);
     });
 
-    it('triggers \'togglePause\' prop when the button is clicked', () => {
+    it('triggers \'onClick\' prop when the button is clicked', () => {
         const spy = jest.fn();
         component.setProps({
-            togglePause: spy
+            onClick: spy
         });
         expect(spy)
             .not.toHaveBeenCalled();

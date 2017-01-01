@@ -42,6 +42,18 @@ describe('Seek', () => {
             .toEqual(10);
     });
 
+    it('triggers \'onChange\' prop when the input is changed', () => {
+        const spy = jest.fn();
+        component.setProps({
+            onChange: spy
+        });
+        expect(spy)
+            .not.toHaveBeenCalled();
+        component.find('input').simulate('change');
+        expect(spy)
+            .toHaveBeenCalled();
+    });
+
     it('changes the played fill bar width', () => {
         component.setProps({
             percentagePlayed: 0
