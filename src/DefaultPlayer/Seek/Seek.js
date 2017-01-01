@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Seek.css';
 
-export default ({ onChange, duration, percentagePlayed, percentageBuffered, className }) => {
+export default ({ onChange, percentagePlayed, percentageBuffered, className }) => {
     return (
         <div className={[
             styles.component,

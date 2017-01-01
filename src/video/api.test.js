@@ -6,8 +6,7 @@ import {
     fullscreen,
     togglePause,
     setCurrentTime,
-    getPercentagePlayed,
-    getPercentageBuffered
+    getPercentagePlayed
 } from './api';
 
 describe('api', () => {
