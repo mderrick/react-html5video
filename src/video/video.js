@@ -57,7 +57,7 @@ export default (
             });
 
             // If <source> elements are used instead of a src attribute then
-            // errors for unsuppored format do not bubble up to the <video>.
+            // errors for unsupported format do not bubble up to the <video>.
             // Do this manually by listening to the last <source> error event
             // to force an update.
             // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video
