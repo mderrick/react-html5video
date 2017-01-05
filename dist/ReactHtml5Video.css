@@ -388,4 +388,78 @@
     margin-left: 5px;
     color: #919191;
 }
+.video-subtitles {
+    cursor: pointer;
+}
+
+.video-subtitles:hover .video-menu {
+    display: block;
+}
+
+
+.video-menu-button-popup .video-menu {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    width: 10em;
+    /*left: -5.8em;*/
+    right: -0.5em;
+    height: 0em;
+    margin-bottom: 1.5em;
+    border-top-color: rgba(43, 51, 63, 0.7);
+}
+
+.video-menu-button-popup .video-menu .video-menu-content {
+    background-color: #2B333F;
+    background-color: rgba(43, 51, 63, 0.7);
+    position: absolute;
+    width: 100%;
+    bottom: .2em;
+    max-height: 15em;
+}
+
+
+
+.video-control {
+    outline: none;
+    position: relative;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    -webkit-box-flex: none;
+    -moz-box-flex: none;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+}
+
+.video-menu .video-menu-content {
+    display: block;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+.video-menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0.2em 0;
+    line-height: 1.4em;
+    text-align: center;
+}
+
+.video-menu li.video-menu-item:focus,
+.video-menu li.video-menu-item:hover {
+    outline: 0;
+    background-color: #73859f;
+    background-color: rgba(115, 133, 159, 0.5);
+}
+
+.video-menu li.video-selected,
+.video-menu li.video-selected:focus,
+.video-menu li.video-selected:hover {
+    background-color: #fff;
+    color: #2B333F;
+}
 

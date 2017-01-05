@@ -67,12 +67,14 @@ render() {
  You can configure, customize and modify the controls by adding, removing and shuffling them as you desire. You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`:
 
 ```js
-import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
+import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay, Subtitles } from 'react-html5video';
 render() {
     return (
         <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
             <source src="http://sourcefile.mp4" type="video/mp4" />
             <source src="http://sourcefile.webm" type="video/webm" />
+            <track kind="subtitles" label="English" srcLang="en" src="http://trackfile-en.vtt"/>
+            <track kind="subtitles" label="日本語" srcLang="ja" src="http://trackfile-ja.vtt"/>
             <h1>Optional HTML and components can be added also</h1>
             <CustomComponent />
 
@@ -86,6 +88,7 @@ render() {
                 <Seek />
                 <Time />
                 <Mute />
+                <Subtitles />
                 <Fullscreen />
                 <CustomControlComponent />
             </Controls>
