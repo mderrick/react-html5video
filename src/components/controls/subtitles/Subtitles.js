@@ -12,7 +12,6 @@ var Subtitles = React.createClass({
     },
 
     showSubtitles: function (key) {
-        console.log('show ', key);
         this.props.setTextTrack(key);
     },
 
