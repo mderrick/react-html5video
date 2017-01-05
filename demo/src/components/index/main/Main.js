@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './../../button/Button';
 import browserStackLogo from './../../../../browserstack.png';
-import {default as Video, Controls, Overlay} from './../../../../../src/components/video/Video';
+import {default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay, Subtitles} from './../../../../../src/components/video/Video';
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.
@@ -98,10 +98,19 @@ var Main = React.createClass({
                         loop
                         muted
                         ref="video"
-                        onProgress={this.onProgress}>
+                        onProgress={this.onProgress}
+                        >
                         <source src={videos[this.state.videoId]} type="video/mp4" />
+                        <track kind="subtitles" label="English" srcLang="en" src="demo.vtt"/>
+                        <track kind="subtitles" label="Japanese" srcLang="ja" src="demo2.vtt"/>
                         <Overlay />
-                        <Controls />
+                        <Controls>
+                            <Play />
+                            <Seek />
+                            <Time />
+                            <Subtitles />
+                            <Fullscreen />
+                        </Controls>
                     </Video>
                 </div>
                 <div className="main__cols">

@@ -6,6 +6,7 @@ import Play from './../controls/play/Play';
 import Mute from './../controls/mute/Mute';
 import Fullscreen from './../controls/fullscreen/Fullscreen';
 import Time from './../controls/time/Time';
+import Subtitles from './../controls/subtitles/Subtitles';
 import throttle from 'lodash.throttle';
 import copy from './../../assets/copy';
 
@@ -67,7 +68,9 @@ var Video = React.createClass({
             volume: 1,
             playbackRate: 1,
             error: false,
-            loading: false
+            loading: false,
+            textTracks: {},
+            textTrackSelected: null,
         };
     },
 
@@ -200,7 +203,7 @@ var Video = React.createClass({
      * Seeks the video timeline.
      * @param  {number} time The value in seconds to seek to
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.          
+     *                              throttled event.
      * @return {undefined}
      */
     seek(time, forceUpdate) {
@@ -218,7 +221,7 @@ var Video = React.createClass({
      * Sets the video volume.
      * @param  {number} volume The volume level between 0 and 1.
      * @param  {bool}   forceUpdate Forces a state update without waiting for
-     *                              throttled event.  
+     *                              throttled event.
      * @return {undefined}
      */
     setVolume(volume, forceUpdate) {
@@ -258,6 +261,7 @@ var Video = React.createClass({
             volume: this.videoEl.volume,
             playbackRate: this.videoEl.playbackRate,
             readyState: this.videoEl.readyState,
+            textTracks: this.videoEl.textTracks,
 
             // Non-standard state computed from properties
             percentageBuffered: this.videoEl.buffered.length && this.videoEl.buffered.end(this.videoEl.buffered.length - 1) / this.videoEl.duration * 100,
@@ -287,10 +291,11 @@ var Video = React.createClass({
             fullscreen: this.fullscreen,
             setVolume: this.setVolume,
             setPlaybackRate: this.setPlaybackRate,
+            setTextTrack: this.setTextTrack,
         }, this.state, {copyKeys: this.props.copyKeys});
 
         var controls = React.Children.map(this.props.children, (child) => {
-            if (child.type === 'source') {
+            if (child.type === 'source' || child.type === 'track') {
                 return void 0;
             }
             return React.cloneElement(child, extendedProps);
@@ -318,6 +323,37 @@ var Video = React.createClass({
             }
             return child;
         });
+    },
+
+    /**
+     * Returns video 'track' nodes from children.
+     * @return {Array.<ReactElement>} An array of components.
+     */
+    renderTexttracks() {
+        return React.Children.map(this.props.children, (child) => {
+            if (child.type !== 'track') {
+                return void 0;
+            }
+            return child;
+        });
+    },
+
+    setTextTrack(key) {
+        // first turn all off
+        var textTracks = this.videoEl.textTracks;
+        Object.keys(this.videoEl.textTracks).forEach(function (offKey) {
+            textTracks[offKey].mode = 'disabled';
+        });
+
+        if (key) {
+            this.videoEl.textTracks[key].mode = 'showing';
+        }
+
+        this.setState({
+            textTrackSelected: key
+        });
+
+        this.onBlur();
     },
 
     /**
@@ -390,7 +426,8 @@ var Video = React.createClass({
                     //  every available Media event that React allows and
                     //  infer the Video state in that method from the Video properties.
                     {...this.mediaEventProps}>
-                        {this.renderSources()}
+                    {this.renderSources()}
+                    {this.renderTexttracks()}
                 </video>
                 {controls ? this.renderControls() : ''}
             </div>
@@ -398,4 +435,4 @@ var Video = React.createClass({
     }
 });
 
-export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Time, Overlay};
+export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Time, Overlay, Subtitles};
