@@ -1,6 +1,6 @@
 # react-html5video
 
-A customizeable HTML5 Video that uses the familiar HTML5 video markup but with custom and configurable controls with i18n and a11y.
+A customizeable HoC (Higher Order Component) for HTML5 Video that allows custom and configurable controls.
 
 [![Build Status](https://travis-ci.org/mderrick/react-html5video.svg?branch=master)](https://travis-ci.org/mderrick/react-html5video)
 [![npm version](https://img.shields.io/npm/v/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
@@ -23,10 +23,10 @@ View the [demo](http://mderrick.github.io/react-html5video/).
 
 ### Simple Usage
 
-Use normal HTML5 `<video>` markup with all the standard [html attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and supported [React media events](https://facebook.github.io/react/docs/events.html#media-events):
+The simplest way to use this component is to use the default player that is provided.
 
 ```js
-import Video from 'react-html5video';
+import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 render() {
     return (
@@ -43,80 +43,46 @@ render() {
 
 ### Advanced Usage
 
-You can configure, customize and modify the controls by adding, removing and shuffling them as you desire. You can create your very own custom children components and controls that can interact with the video. All children components will receive [these props](#props-and-methods). Obviously you can still call methods and set properties on the HTML5 DOM element directly if you have access to it with `refs`:
+If you want to get creative and create your own video player then you will need to use the high order component. The HoC connects a React component to all the [HTML5 video attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and the [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement) of the first video it finds in the component it is wrapping.
 
 ```js
-import { default as Video, Controls, Play, Mute, Seek, Fullscreen, Time, Overlay } from 'react-html5video';
-import 'react-html5video/dist/styles.css';
+import videoConnect from 'react-html5video';
 
-render() {
-    return (
-        <Video controls autoPlay loop muted poster="http://sourceposter.jpg">
-            <source src="http://sourcefile.mp4" type="video/mp4" />
+const MyVideoPlayer = ({ video, videoEl, ...restProps }) => (
+    <div>
+        <video {...restProps}>
             <source src="http://sourcefile.webm" type="video/webm" />
-            <h1>Optional HTML and components can be added also</h1>
-            <CustomComponent />
+        </video>
+        <p>
+            Here are the video properties for the above HTML5 video:
+            { JSON.stringify(video) }
+        </p>
+        <a href="#" onClick={(e) => {
+            e.preventDefault();
+            // You can do what you like with the HTMLMediaElement DOM element also.
+            videoEl.pause();
+        }}>
+            Pause video
+        </a>
+    </div>
+);
 
-            /* As soon as a child is supplied that is not a `<source>`
-            you have to define all controls and overlays as the default
-            controls will have been removed. They are however exported
-            and can be re-applied as below in any order. */
-            <Overlay />
-            <Controls>
-                <Play />
-                <Seek />
-                <Time />
-                <Mute />
-                <Fullscreen />
-                <CustomControlComponent />
-            </Controls>
-        </Video>
-    );
-}
+export default videoConnect(MyVideoPlayer)
 ```
 
-## i18n
+The above will simply print out the properties of the HTML5 `<video>` within `MyVideoPlayer`. Now you have these properties and the HTMLMediaElement itself available in your component, it is up to you to create your new custom controls using them. See the default player as an example.
 
-There is some text used that could require translations. This can be done like so:
+#### API
 
-```js
-<Video copyKeys={{ key: value }}>
-```
+The API behaves much like the [React Redux](https://github.com/reactjs/react-redux/) connect HoC but instead of using dispatch to change the state, we have access to the [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement).
 
-The default english `copyKeys` can be found in [here](https://github.com/mderrick/react-html5video/tree/master/src/assets/copy.js).
+#### `videoConnect(ReactComponent, [mapStateToProps], [mapVideoElToProps], [mergeProps])`
 
-## a11y*
+- `mapStateToProps(videoState, ownProps)` - Use this to return the [HTML5 video attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) required for your component. The plain object returned here will be merged with what is returned from `mapVideoElToProps` using the `mergeProps` function. By Default this returns all video attributes so they are accessible on `this.props.video` in your wrapped component.
 
-The custom controls provided are built using `<button>` and `<input type="range">` which means basic keyboard controls are available when they are focused. For example, you can and hit the space bar on mute, play and fullscreen buttons as well as seek using the arrow keys when focused on the slider. All inputs have a visible focus outline and can be tabbed to. `aria-label` attributes for screen readers have been used where user interaction is required. Try tabbing through the [demo](http://mderrick.github.io/react-html5video/) with [Vox](http://www.chromevox.com/) enabled.
+- `mapVideoElToProps(videoEl, videoState, ownProps)` - Use this to return a plain object that uses `videoEl` to update the videos state. `videoEl` is the raw [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement). The object returned here will be merged with what is returned from `mapStateToProps` using the `mergeProps` function. By default the `videoEl` will be accessible on `this.props.videoEl` in your wrapped component.
 
-*Disclaimer: Unfortuantely I don't much experience with a11y but I have tried to use some of the features from [PayPal's accessible HTML5 player](https://github.com/paypal/accessible-html5-video-player). If anyone has further input on this please raise an issue or a pull request.
-
-
-## Props and Methods
-
-All children components will receive the following properties via props:
-- `copyKeys`
-- `duration`
-- `currentTime`
-- `buffered`
-- `paused`
-- `muted`
-- `volume`
-- `playbackRate`
-- `percentageBuffered`
-- `percentagePlayed`
-
-All children components receive the following methods via props:
-- `play`
-- `pause`
-- `togglePlay`
-- `mute`
-- `unmute`
-- `toggleMute`
-- `seek`
-- `fullscreen`
-- `setVolume`
-- `setPlaybackRate`
+- `mergeProps(stateProps, videoElProps, ownProps)` - If specified, it is passed the result of `mapStateToProps` `mapVideoElToProps` and the parent `props`. The plain object you return will be passed to your wrapped component. By default this will do `Object.assign({}, stateProps, videoElProps, ownProps)`.
 
 ## Contributing
 
@@ -129,16 +95,6 @@ To run a development server with HMR:
     $ npm run i:demo
     $ npm start
 ```
-
-### Issues
-
-Feel free to raise and solve any existing issues as desired. Where possible please do try and replicate any bugs you may have using the [react-html5video jsfiddle](https://jsfiddle.net/mderrick/7s9a311q/1/) and include them in your ticket.
-
-## Thank You
-
-<img src="http://mderrick.github.io/react-html5video/browserstack.png?v=1" height="22" width="100" />
-
-[BrowserStack](http://www.browserstack.com) for a free subscription to help test cross browser.
 
 ## License
 MIT

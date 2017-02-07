@@ -1,5 +1,5 @@
 import React from 'react';
-import video from './../video/video';
+import videoConnect from './../video/video';
 import {
     setVolume,
     fullscreen,
@@ -66,7 +66,7 @@ const DefaultPlayer = ({
     );
 };
 
-export default video(
+export default videoConnect(
     DefaultPlayer,
     ({ networkState, error, ...restState }) => ({
         video: {
