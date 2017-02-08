@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import videoConnect from './../video/video';
 import {
     setVolume,
@@ -10,16 +10,17 @@ import {
     getPercentageBuffered
 } from './../video/api';
 import styles from './DefaultPlayer.css';
-import PlayPause from './PlayPause/PlayPause';
+import Time from './Time/Time';
 import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
-import Time from './Time/Time';
+import PlayPause from './PlayPause/PlayPause';
 import Fullscreen from './Fullscreen/Fullscreen';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
-const DefaultPlayer = ({
+export const DefaultPlayer = ({
     video,
     style,
+    controls,
     children,
     className,
     onSeekChange,
@@ -35,7 +36,7 @@ const DefaultPlayer = ({
             className
         ].join(' ')}
         style={style}>
-            { video.error
+            { video && video.error
                 ? <ErrorMessage
                     className={styles.error}
                     {...video} />
@@ -45,25 +46,54 @@ const DefaultPlayer = ({
                 {...restProps}>
                 { children }
             </video>
-            <div className={styles.controls}>
-                <PlayPause
-                    onClick={onPlayPauseClick}
-                    {...video} />
-                <Seek
-                    className={styles.seek}
-                    onChange={onSeekChange}
-                    {...video} />
-                <Time {...video} />
-                <Volume
-                    onChange={onVolumeChange}
-                    onClick={onVolumeClick}
-                    {...video} />
-                <Fullscreen
-                    onClick={onFullscreenClick}
-                    {...video} />
-            </div>
+            { controls && controls.length
+                ? <div className={styles.controls}>
+                        { controls.map((control, i) => {
+                            switch (control) {
+                                case 'Seek':
+                                    return <Seek
+                                        key={i}
+                                        className={styles.seek}
+                                        onChange={onSeekChange}
+                                        {...video} />;
+                                case 'PlayPause':
+                                    return <PlayPause
+                                        key={i}
+                                        onClick={onPlayPauseClick}
+                                        {...video} />;
+                                case 'Fullscreen':
+                                    return <Fullscreen
+                                        key={i}
+                                        onClick={onFullscreenClick}
+                                        {...video} />;
+                                case 'Time':
+                                    return <Time
+                                        key={i}
+                                        {...video} />;
+                                case 'Volume':
+                                    return <Volume
+                                        key={i}
+                                        onChange={onVolumeChange}
+                                        onClick={onVolumeClick}
+                                        {...video} />;
+                                default:
+                                    return null;
+                            }
+                        }) }
+                    </div>
+                : null }
         </div>
     );
+};
+
+const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen'];
+
+DefaultPlayer.defaultProps = {
+    controls
+};
+
+DefaultPlayer.propTypes = {
+    controls: PropTypes.arrayOf(PropTypes.oneOf(controls))
 };
 
 export default videoConnect(

@@ -23,19 +23,21 @@ View the [demo](http://mderrick.github.io/react-html5video/).
 
 ### Simple Usage
 
-The simplest way to use this component is to use the default player that is provided.
+The simplest way to use this component is to use the default player that is provided. It works the same way as a normal HTML5 video by taking all the supported [HTML5 video attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) except for `controls`. This is now "controlled" and can be an array of supported component names in any order as below:
 
 ```js
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 render() {
     return (
-        <Video controls autoPlay loop muted
+        <Video autoPlay loop muted
+            controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
             poster="http://sourceposter.jpg"
             onCanPlayThrough={() => {
                 // Do stuff
             }}>
             <source src="http://sourcefile.webm" type="video/webm" />
+            <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default />
         </Video>
     );
 }
@@ -48,10 +50,10 @@ If you want to get creative and create your own video player then you will need 
 ```js
 import videoConnect from 'react-html5video';
 
-const MyVideoPlayer = ({ video, videoEl, ...restProps }) => (
+const MyVideoPlayer = ({ video, videoEl, children, ...restProps }) => (
     <div>
         <video {...restProps}>
-            <source src="http://sourcefile.webm" type="video/webm" />
+            { children }
         </video>
         <p>
             Here are the video properties for the above HTML5 video:
