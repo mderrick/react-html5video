@@ -45,7 +45,7 @@ render() {
 
 ### Advanced Usage
 
-If you want to get creative and create your own video player then you will need to use the high order component. The HoC connects a React component to all the [HTML5 video attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and the [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement) of the first video it finds in the component it is wrapping.
+If you want to get creative and create your own video player then you will need to use the higher order component. The HoC connects a React component to all the [HTML5 video attributes](https://developer.mozilla.org/en/docs/Web/HTML/Element/video) and the [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement) of the first video it finds in the component it is wrapping.
 
 ```js
 import videoConnect from 'react-html5video';
