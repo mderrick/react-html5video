@@ -50,7 +50,30 @@ export const fullscreen = (videoEl) => {
     } else if (videoEl.webkitRequestFullscreen) {
         videoEl.webkitRequestFullscreen();
     }
-}
+};
+
+export const showTrack = ({ textTracks }, track) => {
+    hideTracks({ textTracks });
+    track.mode = 'showing';
+};
+
+export const hideTracks = ({ textTracks }) => {
+    for (var i = 0; i < textTracks.length; i++) {
+        textTracks[i].mode = 'disabled';
+    }
+};
+
+export const toggleTracks = (() => {
+    let previousTrack;
+    return ({ textTracks }) => {
+        let currentTrack = [...textTracks].filter((track) => track.mode === 'showing')[0];
+        if (currentTrack) {
+            hideTracks({ textTracks });
+            previousTrack = currentTrack;
+        } else {
+            showTrack({ textTracks }, previousTrack || textTracks[0]);
+        }
+}})();
 
 /**
  * Custom getter methods that are commonly used

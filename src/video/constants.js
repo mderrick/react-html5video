@@ -24,6 +24,12 @@ export const EVENTS = [
     'onWaiting'
 ];
 
+export const TRACKEVENTS = [
+    'onChange',
+    'onAddTrack',
+    'onRemoveTrack'
+];
+
 export const METHODS = [
     'addTextTrack',
     'canPlayType',

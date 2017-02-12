@@ -1,19 +1,42 @@
 .component {
     position: relative;
-    color: #fff;
 }
 
-.button {}
+.component:hover {
+    background-color: #000;
+}
+
+.button {
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+}
+
+.button:focus {
+    outline: 0;
+}
+
+.icon {
+    padding: 5px;
+}
 
 .trackList {
     position: absolute;
-    left: 0;
+    right: 0;
     bottom: 100%;
     display: none;
-    background: #000;
+    background-color: rgba(0,0,0,0.7);
     list-style: none;
     padding: 0;
     margin: 0;
+    color: #fff;
 }
 
 .component:hover .trackList {
@@ -21,10 +44,16 @@
 }
 
 .trackItem {
-    padding: 5px;
+    padding: 7px;
+    cursor: pointer;
 }
 
-.activeTrack {
+.activeTrackItem,
+.trackItem:hover {
+    background: #000;
+}
+
+.activeTrackItem {
     composes: trackItem;
     text-decoration: underline;
 }

@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import videoConnect from './../video/video';
 import {
     setVolume,
+    showTrack,
+    toggleTracks,
     fullscreen,
     toggleMute,
     togglePause,
@@ -13,6 +15,7 @@ import styles from './DefaultPlayer.css';
 import Time from './Time/Time';
 import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
+import Captions from './Captions/Captions';
 import PlayPause from './PlayPause/PlayPause';
 import Fullscreen from './Fullscreen/Fullscreen';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
@@ -26,8 +29,10 @@ export const DefaultPlayer = ({
     onSeekChange,
     onVolumeChange,
     onVolumeClick,
+    onCaptionsClick,
     onPlayPauseClick,
     onFullscreenClick,
+    onCaptionsItemClick,
     ...restProps
 }) => {
     return (
@@ -76,6 +81,14 @@ export const DefaultPlayer = ({
                                         onChange={onVolumeChange}
                                         onClick={onVolumeClick}
                                         {...video} />;
+                                case 'Captions':
+                                    return video && video.textTracks && video.textTracks.length
+                                        ? <Captions
+                                            key={i}
+                                            onClick={onCaptionsClick}
+                                            onItemClick={onCaptionsItemClick}
+                                            {...video}/>
+                                        : null;
                                 default:
                                     return null;
                             }
@@ -86,7 +99,7 @@ export const DefaultPlayer = ({
     );
 };
 
-const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen'];
+const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen', 'Captions'];
 
 DefaultPlayer.defaultProps = {
     controls
@@ -109,7 +122,9 @@ export default videoConnect(
     (videoEl, state) => ({
         onFullscreenClick: () => fullscreen(videoEl),
         onVolumeClick: () => toggleMute(videoEl, state),
+        onCaptionsClick: () => toggleTracks(state),
         onPlayPauseClick: () => togglePause(videoEl, state),
+        onCaptionsItemClick: (track) => showTrack(state, track),
         onVolumeChange: (e) => setVolume(videoEl, state, e.target.value),
         onSeekChange: (e) => setCurrentTime(videoEl, state, e.target.value * state.duration / 100)
     })

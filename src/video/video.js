@@ -9,6 +9,7 @@ import toClass from 'recompose/toClass';
 import {
     EVENTS,
     PROPERTIES,
+    TRACKEVENTS
 } from './constants';
 
 const defaultMapStateToProps = (state = {}) => Object.assign({
@@ -54,6 +55,10 @@ export default (
         bindEventsToUpdateState() {
             EVENTS.forEach(event => {
                 this.videoEl[event.toLowerCase()] = this.updateState;
+            });
+
+            TRACKEVENTS.forEach(event => {
+                this.videoEl.textTracks[event.toLowerCase()] = this.updateState;
             });
 
             // If <source> elements are used instead of a src attribute then

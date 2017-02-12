@@ -1,34 +1,30 @@
 import React from 'react';
 import styles from './Captions.css';
+import ClosedCaptionIcon from './../Icon/closed_caption.svg';
 
-export default ({ textTracks, getVideoEl, forceUpdateState, className }) => {
+export default ({ textTracks, onClick, onItemClick, className }) => {
     return (
         <div className={[
             styles.component,
             className
         ].join(' ')}>
-            <button className={styles.button}>
-                CC
+            <button
+                type="button"
+                onClick={onClick}
+                aria-label="Captions"
+                className={styles.button}>
+                <ClosedCaptionIcon
+                    className={styles.icon}
+                    fill="#fff" />
             </button>
             <ul className={styles.trackList}>
-                { textTracks && Array.prototype.slice.call(textTracks).map((track, i) => (
+                { textTracks && [...textTracks].map((track) => (
                     <li
+                        key={track.language}
                         className={track.mode === 'showing'
-                            ? styles.activeTrack
+                            ? styles.activeTrackItem
                             : styles.trackItem}
-                        onClick={() => {
-                            const videoEl = getVideoEl()
-                            if (track.mode !== 'showing') {
-                                videoEl.textTracks[i].mode = 'showing';
-                            } else {
-                                videoEl.textTracks[i].mode = 'disabled';
-                            }
-                            // There is no `onTrackChange` event so we
-                            // have to forcibly update the video state
-                            // in order for the UI to update.
-                            forceUpdateState();
-                        }}
-                        key={track.language}>
+                        onClick={onItemClick.bind(this, track)}>
                         { track.label }
                     </li>
                 ))}

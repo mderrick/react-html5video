@@ -2,21 +2,35 @@ import {
     mute,
     unmute,
     setVolume,
+    showTrack,
     toggleMute,
     fullscreen,
+    hideTracks,
     togglePause,
+    toggleTracks,
     setCurrentTime,
     getPercentagePlayed
 } from './api';
 
 describe('api', () => {
     let videoElMock;
+    let textTracksMock;
 
     beforeEach(() => {
         videoElMock = {
             play: jest.fn(),
             pause: jest.fn()
         };
+        textTracksMock = [{
+            id: 1,
+            mode: 'showing'
+        }, {
+            id: 2,
+            mode: 'disabled'
+        }, {
+            id: 3,
+            mode: 'disabled'
+        }];
     });
 
     describe('togglePause', () => {
@@ -128,6 +142,59 @@ describe('api', () => {
             videoElMock.webkitRequestFullscreen = jest.fn();
             fullscreen(videoElMock);
             expect(videoElMock.webkitRequestFullscreen).toHaveBeenCalled();
+        });
+    });
+
+    describe('hideTracks', () => {
+        it('hides all of the tracks', () => {
+            expect(textTracksMock[0].mode).toBe('showing');
+            hideTracks({ textTracks: textTracksMock }, textTracksMock[2]);
+            expect(textTracksMock[0].mode).toBe('disabled');
+        });
+    });
+
+    describe('showTrack', () => {
+        it('hides all of the tracks', () => {
+            expect(textTracksMock[0].mode).toBe('showing');
+            showTrack({ textTracks: textTracksMock }, textTracksMock[2]);
+            expect(textTracksMock[0].mode).toBe('disabled');
+        });
+
+        it('sets the given track to show', () => {
+            expect(textTracksMock[2].mode).toBe('disabled');
+            showTrack({ textTracks: textTracksMock }, textTracksMock[2]);
+            expect(textTracksMock[2].mode).toBe('showing');
+        });
+    });
+
+    describe('toggleTracks', () => {
+        it('shows the first track if no tracks are showing and there is no previously active track', () => {
+            textTracksMock[0].mode = 'disabled';
+            expect(textTracksMock[0].mode).toBe('disabled');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[0].mode).toBe('showing');
+        });
+
+        it('hides all tracks if a current track is showing', () => {
+            expect(textTracksMock[0].mode).toBe('showing');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[0].mode).toBe('disabled');
+            expect(textTracksMock[1].mode).toBe('disabled');
+            expect(textTracksMock[2].mode).toBe('disabled');
+        });
+
+        it('shows the previously active track if no tracks are showing', () => {
+            expect(textTracksMock[0].mode).toBe('showing');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[0].mode).toBe('disabled');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[0].mode).toBe('showing');
+            showTrack({ textTracks: textTracksMock }, textTracksMock[2]);
+            expect(textTracksMock[2].mode).toBe('showing');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[2].mode).toBe('disabled');
+            toggleTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[2].mode).toBe('showing');
         });
     });
 
