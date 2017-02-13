@@ -7,7 +7,7 @@ import Seek from './Seek/Seek';
 import Volume from './Volume/Volume';
 import PlayPause from './PlayPause/PlayPause';
 import Fullscreen from './Fullscreen/Fullscreen';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
+import Overlay from './Overlay/Overlay';
 
 describe('DefaultPlayer', () => {
     let component;
@@ -45,15 +45,8 @@ describe('DefaultPlayer', () => {
             .toEqual(true);
     });
 
-    it('shows the error component when required', () => {
-        expect(component.find(ErrorMessage).exists())
-            .toBeFalsy();
-        component.setProps({
-            video: {
-                error: true
-            }
-        });
-        expect(component.find(ErrorMessage).exists())
+    it('has an overlay component', () => {
+        expect(component.find(Overlay).exists())
             .toBeTruthy();
     });
 
@@ -89,6 +82,25 @@ describe('DefaultPlayer', () => {
             .toBeTruthy();
         component.setProps({
             controls: []
+        });
+        expect(component.find(`.${styles.controls}`).exists())
+            .toBeFalsy();
+    });
+
+    it('renders no controls when there is an error', () => {
+        component.setProps({
+            controls: ['PlayPause'],
+            video: {
+                error: false
+            }
+        });
+        expect(component.find(`.${styles.controls}`).exists())
+            .toBeTruthy();
+        component.setProps({
+            controls: ['PlayPause'],
+            video: {
+                error: true
+            }
         });
         expect(component.find(`.${styles.controls}`).exists())
             .toBeFalsy();

@@ -18,7 +18,7 @@ import Volume from './Volume/Volume';
 import Captions from './Captions/Captions';
 import PlayPause from './PlayPause/PlayPause';
 import Fullscreen from './Fullscreen/Fullscreen';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
+import Overlay from './Overlay/Overlay';
 
 export const DefaultPlayer = ({
     video,
@@ -41,17 +41,15 @@ export const DefaultPlayer = ({
             className
         ].join(' ')}
         style={style}>
-            { video && video.error
-                ? <ErrorMessage
-                    className={styles.error}
-                    {...video} />
-                : null }
             <video
                 className={styles.video}
                 {...restProps}>
                 { children }
             </video>
-            { controls && controls.length
+            <Overlay
+                onClick={onPlayPauseClick}
+                {...video} />
+            { controls && controls.length && !video.error
                 ? <div className={styles.controls}>
                         { controls.map((control, i) => {
                             switch (control) {
@@ -82,7 +80,7 @@ export const DefaultPlayer = ({
                                         onClick={onVolumeClick}
                                         {...video} />;
                                 case 'Captions':
-                                    return video && video.textTracks && video.textTracks.length
+                                    return video.textTracks && video.textTracks.length
                                         ? <Captions
                                             key={i}
                                             onClick={onCaptionsClick}
@@ -102,18 +100,23 @@ export const DefaultPlayer = ({
 const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen', 'Captions'];
 
 DefaultPlayer.defaultProps = {
+    video: {},
     controls
 };
 
 DefaultPlayer.propTypes = {
+    video: PropTypes.object.isRequired,
     controls: PropTypes.arrayOf(PropTypes.oneOf(controls))
 };
 
 export default videoConnect(
     DefaultPlayer,
-    ({ networkState, error, ...restState }) => ({
+    ({ networkState, readyState, error, ...restState }) => ({
         video: {
+            readyState,
+            networkState,
             error: error || networkState === 3,
+            loading: readyState < 4,
             percentagePlayed: getPercentagePlayed(restState),
             percentageBuffered: getPercentageBuffered(restState),
             ...restState
