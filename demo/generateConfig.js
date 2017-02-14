@@ -41,7 +41,7 @@ module.exports = ({ optimize, extractCss, hot, publicPath = '/' }) => {
                     : 'style!' + cssString
             }, {
                 test: /\.css$/,
-                include: new RegExp(pkg.name + '/dist/'),
+                include: [new RegExp(pkg.name + '/dist/'), new RegExp('reset-css')],
                 loader: extractCss
                     ? ExtractTextPlugin.extract('style', 'css')
                     : 'style!css'

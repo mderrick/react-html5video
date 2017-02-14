@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 
 import App from './App';
 import styles from './App.css';
-import pkg from './../../../package.json';
 
 describe('App', () => {
     let component;
@@ -16,7 +15,7 @@ describe('App', () => {
 
     it('contains heading text', () => {
         expect(component.find('h1').text())
-            .toEqual(`This is a demo for "${pkg.name}".`);
+            .toEqual('React HTML5 Video');
     });
 
     it('has a className', () => {
