@@ -148,8 +148,15 @@ describe('api', () => {
     describe('hideTracks', () => {
         it('hides all of the tracks', () => {
             expect(textTracksMock[0].mode).toBe('showing');
-            hideTracks({ textTracks: textTracksMock }, textTracksMock[2]);
+            hideTracks({ textTracks: textTracksMock });
             expect(textTracksMock[0].mode).toBe('disabled');
+        });
+
+        it('uses constants on text tracks if they exist for IE', () => {
+            textTracksMock[0].DISABLED = 3;
+            expect(textTracksMock[0].mode).toBe('showing');
+            hideTracks({ textTracks: textTracksMock });
+            expect(textTracksMock[0].mode).toBe(3);
         });
     });
 
@@ -164,6 +171,13 @@ describe('api', () => {
             expect(textTracksMock[2].mode).toBe('disabled');
             showTrack({ textTracks: textTracksMock }, textTracksMock[2]);
             expect(textTracksMock[2].mode).toBe('showing');
+        });
+
+        it('uses constants on text tracks if they exist for IE', () => {
+            textTracksMock[2].SHOWING = 2;
+            expect(textTracksMock[2].mode).toBe('disabled');
+            showTrack({ textTracks: textTracksMock }, textTracksMock[2]);
+            expect(textTracksMock[2].mode).toBe(2);
         });
     });
 

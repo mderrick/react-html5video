@@ -54,19 +54,20 @@ export const fullscreen = (videoEl) => {
 
 export const showTrack = ({ textTracks }, track) => {
     hideTracks({ textTracks });
-    track.mode = 'showing';
+    track.mode = track.SHOWING || 'showing';
 };
 
 export const hideTracks = ({ textTracks }) => {
     for (var i = 0; i < textTracks.length; i++) {
-        textTracks[i].mode = 'disabled';
+        textTracks[i].mode = textTracks[i].DISABLED || 'disabled';
     }
 };
 
 export const toggleTracks = (() => {
     let previousTrack;
     return ({ textTracks }) => {
-        let currentTrack = [...textTracks].filter((track) => track.mode === 'showing')[0];
+        let currentTrack = [...textTracks]
+            .filter((track) => track.mode === track.SHOWING || track.mode === 'showing')[0];
         if (currentTrack) {
             hideTracks({ textTracks });
             previousTrack = currentTrack;

@@ -21,7 +21,7 @@ export default ({ textTracks, onClick, onItemClick, className }) => {
                 { textTracks && [...textTracks].map((track) => (
                     <li
                         key={track.language}
-                        className={track.mode === 'showing'
+                        className={track.mode === track.SHOWING || track.mode == 'showing'
                             ? styles.activeTrackItem
                             : styles.trackItem}
                         onClick={onItemClick.bind(this, track)}>
