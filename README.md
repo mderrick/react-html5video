@@ -2,11 +2,13 @@
 
 A customizeable HoC (Higher Order Component) for HTML5 Video that allows custom and configurable controls.
 
+V2 API has changed and is not backwards compatible. You can find the old documentation [here](https://github.com/mderrick/react-html5video/blob/master/README.md).
+
 [![Build Status](https://travis-ci.org/mderrick/react-html5video.svg?branch=master)](https://travis-ci.org/mderrick/react-html5video)
 [![npm version](https://img.shields.io/npm/v/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
 [![npm downloads](https://img.shields.io/npm/dm/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
 
-<img src="http://mderrick.github.io/react-html5video/example.png?v=1" align="center" height="337" width="600" />
+<img src="http://mderrick.github.io/react-html5video/example.v2.png?v=1" align="center" height="337" width="600" />
 
 View the [demo](http://mderrick.github.io/react-html5video/).
 

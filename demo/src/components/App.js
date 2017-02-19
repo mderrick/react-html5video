@@ -5,6 +5,8 @@ import styles from './App.css';
 import 'reset-css/reset.css';
 import vttEn from './../../assets/sintel-en.vtt';
 import vttEs from './../../assets/sintel-es.vtt';
+import bigBuckBunnyPoster from './../../assets/poster-big-buck-bunny.png';
+import sintelTrailerPoster from './../../assets/poster-sintel-trailer.png';
 
 const sintelTrailer = 'https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4';
 const bigBuckBunny = 'http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov';
@@ -28,7 +30,8 @@ class App extends Component {
                             onPlay={() => {
                                 this.refs.video2.videoEl.pause();
                             }}
-                            className={styles.video}>
+                            className={styles.video}
+                            poster={sintelTrailerPoster}>
                             <source src={sintelTrailer} type="video/mp4" />
                             <track
                                 label="English"
@@ -50,7 +53,8 @@ class App extends Component {
                                 this.refs.video1.videoEl.pause();
                             }}
                             src={bigBuckBunny}
-                            className={styles.video}>
+                            className={styles.video}
+                            poster={bigBuckBunnyPoster}>
                         </Video>
                     </li>
                 </ul>
