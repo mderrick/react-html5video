@@ -16,15 +16,11 @@
     color: #2492a8;
 }
 
-.video {
-    width: 634px;
-    height: 356px;
-    margin: 0 auto;
-}
-
-
 .videoListItem {
     background-color: #efefef;
     padding: 20px;
     margin-bottom: 20px;
+    max-width: 634px;
+    max-height: 356px;
+    margin: 0 auto;
 }
