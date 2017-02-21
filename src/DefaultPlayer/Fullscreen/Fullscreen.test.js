@@ -7,7 +7,9 @@ describe('Fullscreen', () => {
     let component;
 
     beforeAll(() => {
-        component = shallow(<Fullscreen />);
+        component = shallow(
+            <Fullscreen ariaLabel="Fullscreen" />
+        );
     });
 
     it('should accept a className prop and append it to the components class', () => {

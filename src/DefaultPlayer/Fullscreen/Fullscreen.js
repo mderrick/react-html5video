@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Fullscreen.css';
 import FullscreenIcon from './../Icon/fullscreen.svg';
 
-export default ({ onClick, className }) => {
+export default ({ onClick, className, ariaLabel }) => {
     return (
         <div className={[
             styles.component,
@@ -11,7 +11,7 @@ export default ({ onClick, className }) => {
             <button
                 type="button"
                 onClick={onClick}
-                aria-label="Fullscreen"
+                aria-label={ariaLabel}
                 className={styles.button}>
                     <FullscreenIcon
                         fill="#fff"

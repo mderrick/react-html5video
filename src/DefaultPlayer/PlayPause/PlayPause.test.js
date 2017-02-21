@@ -9,7 +9,11 @@ describe('PlayPause', () => {
     let component;
 
     beforeAll(() => {
-        component = shallow(<PlayPause />);
+        component = shallow(
+            <PlayPause
+                ariaLabelPlay="Play"
+                ariaLabelPause="Pause" />
+        );
     });
 
     it('should accept a className prop and append it to the components class', () => {

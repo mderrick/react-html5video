@@ -7,7 +7,9 @@ describe('Captions', () => {
     let component;
 
     beforeAll(() => {
-        component = shallow(<Captions />);
+        component = shallow(
+            <Captions ariaLabel="Captions" />
+        );
     });
 
     it('should accept a className prop and append it to the components class', () => {
@@ -21,5 +23,10 @@ describe('Captions', () => {
             .toContain(styles.component);
         expect(component.prop('className'))
             .toContain(newClassNameString);
+    });
+
+    it('has correct aria-label', () => {
+        expect(component.find('button').prop('aria-label'))
+            .toEqual('Captions');
     });
 });

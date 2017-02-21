@@ -9,7 +9,11 @@ describe('Volume', () => {
     let component;
 
     beforeAll(() => {
-        component = shallow(<Volume />);
+        component = shallow(
+            <Volume
+                ariaLabelMute="Mute"
+                ariaLabelUnmute="Unmute" />
+        );
     });
 
     it('should accept a className prop and append it to the components class', () => {

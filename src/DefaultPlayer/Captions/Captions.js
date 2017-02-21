@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Captions.css';
 import ClosedCaptionIcon from './../Icon/closed_caption.svg';
 
-export default ({ textTracks, onClick, onItemClick, className }) => {
+export default ({ textTracks, onClick, onItemClick, className, ariaLabel }) => {
     return (
         <div className={[
             styles.component,
@@ -11,7 +11,7 @@ export default ({ textTracks, onClick, onItemClick, className }) => {
             <button
                 type="button"
                 onClick={onClick}
-                aria-label="Captions"
+                aria-label={ariaLabel}
                 className={styles.button}>
                 <ClosedCaptionIcon
                     className={styles.icon}

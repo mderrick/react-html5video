@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import videoConnect from './../video/video';
+import copy from './copy';
 import {
     setVolume,
     showTrack,
@@ -21,6 +22,7 @@ import Fullscreen from './Fullscreen/Fullscreen';
 import Overlay from './Overlay/Overlay';
 
 export const DefaultPlayer = ({
+    copy,
     video,
     style,
     controls,
@@ -56,17 +58,21 @@ export const DefaultPlayer = ({
                                 case 'Seek':
                                     return <Seek
                                         key={i}
+                                        ariaLabel={copy.seek}
                                         className={styles.seek}
                                         onChange={onSeekChange}
                                         {...video} />;
                                 case 'PlayPause':
                                     return <PlayPause
                                         key={i}
+                                        ariaLabelPlay={copy.play}
+                                        ariaLabelPause={copy.pause}
                                         onClick={onPlayPauseClick}
                                         {...video} />;
                                 case 'Fullscreen':
                                     return <Fullscreen
                                         key={i}
+                                        ariaLabel={copy.fullscreen}
                                         onClick={onFullscreenClick}
                                         {...video} />;
                                 case 'Time':
@@ -76,14 +82,17 @@ export const DefaultPlayer = ({
                                 case 'Volume':
                                     return <Volume
                                         key={i}
-                                        onChange={onVolumeChange}
                                         onClick={onVolumeClick}
+                                        onChange={onVolumeChange}
+                                        ariaLabelMute={copy.mute}
+                                        ariaLabelUnmute={copy.unmute}
                                         {...video} />;
                                 case 'Captions':
                                     return video.textTracks && video.textTracks.length
                                         ? <Captions
                                             key={i}
                                             onClick={onCaptionsClick}
+                                            ariaLabel={copy.captions}
                                             onItemClick={onCaptionsItemClick}
                                             {...video}/>
                                         : null;
@@ -100,13 +109,15 @@ export const DefaultPlayer = ({
 const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen', 'Captions'];
 
 DefaultPlayer.defaultProps = {
-    video: {},
-    controls
+    copy,
+    controls,
+    video: {}
 };
 
 DefaultPlayer.propTypes = {
-    video: PropTypes.object.isRequired,
-    controls: PropTypes.arrayOf(PropTypes.oneOf(controls))
+    copy: PropTypes.object.isRequired,
+    controls: PropTypes.arrayOf(PropTypes.oneOf(controls)),
+    video: PropTypes.object.isRequired
 };
 
 export default videoConnect(

@@ -3,7 +3,7 @@ import styles from './Volume.css';
 import VolumeOff from './../Icon/volume_off.svg';
 import VolumeUp from './../Icon/volume_up.svg';
 
-export default ({ onChange, onClick, volume, muted, className }) => {
+export default ({ onChange, onClick, volume, muted, className, ariaLabelMute, ariaLabelUnmute }) => {
     const volumeValue = muted
         ? 0
         : +volume;
@@ -15,8 +15,8 @@ export default ({ onChange, onClick, volume, muted, className }) => {
         ].join(' ')}>
             <button
                 aria-label={isSilent
-                    ? 'Unmute'
-                    : 'Mute'}
+                    ? ariaLabelUnmute
+                    : ariaLabelMute}
                 className={styles.button}
                 onClick={onClick}
                 type="button">

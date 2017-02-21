@@ -3,7 +3,7 @@ import styles from './PlayPause.css';
 import PlayArrow from './../Icon/play_arrow.svg';
 import Pause from './../Icon/pause.svg';
 
-export default ({ onClick, paused, className }) => {
+export default ({ onClick, paused, className, ariaLabelPlay, ariaLabelPause }) => {
     return (
         <div className={[
             styles.component,
@@ -13,8 +13,8 @@ export default ({ onClick, paused, className }) => {
                 className={styles.button}
                 onClick={onClick}
                 aria-label={ paused
-                    ? 'Play'
-                    : 'Pause' }
+                    ? ariaLabelPlay
+                    : ariaLabelPause }
                 type="button">
                 { paused
                     ? <PlayArrow
