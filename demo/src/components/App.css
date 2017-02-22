@@ -1,0 +1,26 @@
+.component {
+    padding: 20px;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.link {
+    color: #2492a8;
+}
+
+.videoListItem {
+    background-color: #efefef;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 634px;
+    max-height: 356px;
+    margin: 0 auto;
+}

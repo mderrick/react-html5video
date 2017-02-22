@@ -1,11 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Index from './components/index/Index';
+/* eslint-disable global-require */
 
-// For hot reloading to work it is essential
-// that our entry point only contains this render
-// and that the first component is a module.
-ReactDOM.render(
-    <Index />,
+import React from 'react';
+import { render } from 'react-dom';
+import App from './components/App';
+
+render(
+    <App />,
     document.getElementById('content')
 );
+
+if (module.hot) {
+    module.hot.accept('./components/App', () => {
+        const NextRoot = require('./components/App').default;
+        render(
+            <NextRoot />,
+            document.getElementById('content')
+        );
+    });
+}

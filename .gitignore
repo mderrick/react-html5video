@@ -1,5 +1,4 @@
-.DS_Store
 node_modules
-.grunt
-demo/dist
 npm-debug.log
+.DS_Store
+dist

@@ -1,0 +1,14 @@
+.component {
+    padding: 0 10px 0 10px;
+    line-height: 35px;
+    color: #fff;
+}
+
+.current {
+    margin-right: 5px;
+}
+
+.duration {
+    margin-left: 5px;
+    color: #919191;
+}
