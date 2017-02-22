@@ -2,7 +2,7 @@
 
 A customizeable HoC (Higher Order Component) for HTML5 Video that allows custom and configurable controls with i18n and a11y.
 
-V2 API has changed and is not backwards compatible. You can find the old documentation [here](https://github.com/mderrick/react-html5video/blob/master/README.md).
+V2 API has changed and is not backwards compatible. You can find the old documentation [here](https://github.com/mderrick/react-html5video/blob/1.4.0/README.md).
 
 [![Build Status](https://travis-ci.org/mderrick/react-html5video.svg?branch=master)](https://travis-ci.org/mderrick/react-html5video)
 [![npm version](https://img.shields.io/npm/v/react-html5video.svg?style=flat-square)](https://www.npmjs.com/package/react-html5video)
@@ -55,7 +55,7 @@ You can change translate the `aria-label` values for all controls like so:
 <Video copy={{ key: value }}>
 ```
 
-The default english `copy` can be found in [here](https://github.com/mderrick/react-html5video/blob/v2/src/DefaultPlayer/copy.js).
+The default english `copy` can be found in [here](https://github.com/mderrick/react-html5video/blob/master/src/DefaultPlayer/copy.js).
 
 *Disclaimer: Unfortuantely I don't much experience with a11y but I have tried to use some of the features from [PayPal's accessible HTML5 player](https://github.com/paypal/accessible-html5-video-player). If anyone has further input on this please raise an issue or a pull request.
 
@@ -88,7 +88,7 @@ const MyVideoPlayer = ({ video, videoEl, children, ...restProps }) => (
 export default videoConnect(MyVideoPlayer)
 ```
 
-The above will simply print out the properties of the HTML5 `<video>` within `MyVideoPlayer`. Now you have these properties and the HTMLMediaElement itself available in your component, it is up to you to create your new custom controls using them. See the [default player](https://github.com/mderrick/react-html5video/blob/v2/src/DefaultPlayer/DefaultPlayer.js) as an example.
+The above will simply print out the properties of the HTML5 `<video>` within `MyVideoPlayer`. Now you have these properties and the HTMLMediaElement itself available in your component, it is up to you to create your new custom controls using them. See the [default player](https://github.com/mderrick/react-html5video/blob/master/src/DefaultPlayer/DefaultPlayer.js) as an example.
 
 #### API
 
