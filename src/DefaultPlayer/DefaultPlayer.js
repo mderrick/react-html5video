@@ -120,6 +120,8 @@ DefaultPlayer.propTypes = {
     video: PropTypes.object.isRequired
 };
 
+const READY_STATE_HAVE_METADATA = 1;
+
 export default videoConnect(
     DefaultPlayer,
     ({ networkState, readyState, error, ...restState }) => ({
@@ -127,7 +129,7 @@ export default videoConnect(
             readyState,
             networkState,
             error: error || networkState === 3,
-            loading: readyState < 4,
+            loading: readyState < READY_STATE_HAVE_METADATA,
             percentagePlayed: getPercentagePlayed(restState),
             percentageBuffered: getPercentageBuffered(restState),
             ...restState
