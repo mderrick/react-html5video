@@ -41,7 +41,17 @@ export const toggleMute = (videoEl, { volume, muted }) => {
 };
 
 export const fullscreen = (videoEl) => {
-    if (videoEl.requestFullscreen) {
+    if (document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
+        if (document.exitFullscreen){
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen){
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen){
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    } else if (videoEl.requestFullscreen) {
         videoEl.requestFullscreen();
     } else if (videoEl.msRequestFullscreen) {
         videoEl.msRequestFullscreen();
