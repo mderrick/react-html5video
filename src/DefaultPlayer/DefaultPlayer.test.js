@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { DefaultPlayer } from './DefaultPlayer';
+import {shallow} from 'enzyme';
+import {DefaultPlayer} from './DefaultPlayer';
 import styles from './DefaultPlayer.css';
 import Time from './Time/Time';
 import Seek from './Seek/Seek';
@@ -31,10 +31,10 @@ describe('DefaultPlayer', () => {
 
     it('applies `style` prop if provided', () => {
         component.setProps({
-            style: { color: 'red' }
+            style: {color: 'red'}
         });
         expect(component.prop('style'))
-            .toEqual({ color: 'red' });
+            .toEqual({color: 'red'});
     });
 
     it('spreads all parent props on the video element', () => {
@@ -104,5 +104,27 @@ describe('DefaultPlayer', () => {
         });
         expect(component.find(`.${styles.controls}`).exists())
             .toBeFalsy();
+    });
+
+    it('should not trigger click event when overlayDisabled is set to false', () => {
+        const onPlayPauseClick = jest.fn();
+        component.setProps({
+            onPlayPauseClick,
+            overlayDisabled: false
+        });
+        component.find(Overlay).simulate('click');
+        expect(onPlayPauseClick)
+            .toHaveBeenCalled();
+    });
+
+    it('should not trigger click event when overlayDisabled is set to true', () => {
+        const onPlayPauseClick = jest.fn();
+        component.setProps({
+            onPlayPauseClick,
+            overlayDisabled: true
+        });
+        component.find(Overlay).simulate('click');
+        expect(onPlayPauseClick)
+            .not.toHaveBeenCalled();
     });
 });
