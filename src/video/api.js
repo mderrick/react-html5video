@@ -40,15 +40,26 @@ export const toggleMute = (videoEl, { volume, muted }) => {
     }
 };
 
-export const fullscreen = (videoEl) => {
-    if (videoEl.requestFullscreen) {
-        videoEl.requestFullscreen();
-    } else if (videoEl.msRequestFullscreen) {
-        videoEl.msRequestFullscreen();
-    } else if (videoEl.mozRequestFullScreen) {
-        videoEl.mozRequestFullScreen();
-    } else if (videoEl.webkitRequestFullscreen) {
-        videoEl.webkitRequestFullscreen();
+export const toggleFullscreen = (videoEl) => {
+    videoEl.requestFullScreen =
+        videoEl.requestFullscreen
+        || videoEl.msRequestFullscreen
+        || videoEl.mozRequestFullScreen
+        || videoEl.webkitRequestFullscreen;
+    document.exitFullscreen =
+        document.exitFullscreen
+        || document.msExitFullscreen
+        || document.mozCancelFullScreen
+        || document.webkitExitFullscreen;
+    const fullscreenElement =
+        document.fullscreenElement
+        || document.msFullscreenElement
+        || document.mozFullScreenElement
+        || document.webkitFullscreenElement;
+    if (fullscreenElement === videoEl) {
+        document.exitFullscreen();
+    } else {
+        videoEl.requestFullScreen();
     }
 };
 

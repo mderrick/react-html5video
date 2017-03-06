@@ -4,11 +4,11 @@ import {
     setVolume,
     showTrack,
     toggleMute,
-    fullscreen,
     hideTracks,
     togglePause,
     toggleTracks,
     setCurrentTime,
+    toggleFullscreen,
     getPercentagePlayed
 } from './api';
 
@@ -119,29 +119,72 @@ describe('api', () => {
         });
     });
 
-    describe('fullscreen', () => {
-        it('requestsFullscreen', () => {
-            videoElMock.requestFullscreen = jest.fn();
-            fullscreen(videoElMock);
-            expect(videoElMock.requestFullscreen).toHaveBeenCalled();
+    describe('toggleFullscreen', () => {
+        describe('going fullscreen', () => {
+            it('requestsFullscreen', () => {
+                videoElMock.requestFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(videoElMock.requestFullscreen).toHaveBeenCalled();
+            });
+
+            it('requestsFullscreen for ms', () => {
+                videoElMock.msRequestFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(videoElMock.msRequestFullscreen).toHaveBeenCalled();
+            });
+
+            it('requestsFullscreen for moz', () => {
+                videoElMock.mozRequestFullScreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(videoElMock.mozRequestFullScreen).toHaveBeenCalled();
+            });
+
+            it('requestsFullscreen for webkit', () => {
+                videoElMock.webkitRequestFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(videoElMock.webkitRequestFullscreen).toHaveBeenCalled();
+            });
         });
 
-        it('requestsFullscreen for ms', () => {
-            videoElMock.msRequestFullscreen = jest.fn();
-            fullscreen(videoElMock);
-            expect(videoElMock.msRequestFullscreen).toHaveBeenCalled();
-        });
+        describe('exiting fullscreen', () => {
+            beforeEach(() => {
+                document.exitFullscreen = undefined;
+                document.msExitFullscreen = undefined;
+                document.mozCancelFullScreen = undefined;
+                document.webkitExitFullscreen = undefined;
+                document.fullscreenElement = undefined;
+                document.msFullscreenElement = undefined;
+                document.mozFullScreenElement = undefined;
+                document.webkitFullscreenElement = undefined;
+            });
 
-        it('requestsFullscreen for moz', () => {
-            videoElMock.mozRequestFullScreen = jest.fn();
-            fullscreen(videoElMock);
-            expect(videoElMock.mozRequestFullScreen).toHaveBeenCalled();
-        });
+            it('exitFullscreen', () => {
+                document.fullscreenElement = videoElMock;
+                document.exitFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(document.exitFullscreen).toHaveBeenCalled();
+            });
 
-        it('requestsFullscreen for webkit', () => {
-            videoElMock.webkitRequestFullscreen = jest.fn();
-            fullscreen(videoElMock);
-            expect(videoElMock.webkitRequestFullscreen).toHaveBeenCalled();
+            it('exitFullscreen for ms', () => {
+                document.msFullscreenElement = videoElMock;
+                document.msExitFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(document.msExitFullscreen).toHaveBeenCalled();
+            });
+
+            it('exitFullscreen for moz', () => {
+                document.mozFullScreenElement = videoElMock;
+                document.mozCancelFullScreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(document.mozCancelFullScreen).toHaveBeenCalled();
+            });
+
+            it('exitFullscreen for webkit', () => {
+                document.webkitFullscreenElement = videoElMock;
+                document.webkitExitFullscreen = jest.fn();
+                toggleFullscreen(videoElMock);
+                expect(document.webkitExitFullscreen).toHaveBeenCalled();
+            });
         });
     });
 
