@@ -73,6 +73,22 @@ export default (
             }
         }
 
+        unbindEventsToUpdateState() {
+            EVENTS.forEach(event => {
+                this.videoEl[event.toLowerCase()] = null;
+            });
+
+            TRACKEVENTS.forEach(event => {
+                this.videoEl.textTracks[event.toLowerCase()] = null;
+            });
+
+            const sources = this.videoEl.getElementsByTagName('source');
+            if (sources.length) {
+                const lastSource = sources[sources.length - 1];
+                lastSource.removeEventListener('error', this.updateState);
+            }
+        }
+
         // Stop `this.el` from being null briefly on every render,
         // see: https://github.com/mderrick/react-html5video/pull/65
         setRef(el) {
@@ -82,6 +98,11 @@ export default (
         componentDidMount() {
             this.videoEl = this.el.getElementsByTagName('video')[0];
             this.bindEventsToUpdateState();
+        }
+
+        componentWillUnmount() {
+            this.unbindEventsToUpdateState();
+            this.videoEl = null;
         }
 
         render() {
