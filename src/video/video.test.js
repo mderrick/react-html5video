@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import video from './video';
+import { EVENTS } from './constants';
 
 const TestControl = ({ duration }) => {
     return (
@@ -84,6 +85,32 @@ describe('video', () => {
                     volume: 1
                 });
             });
+        });
+
+        it('should remove all event listeners from the video element when unmounted', () => {
+            const removeEventListenerSpy = jest.fn();
+            component = mount(
+                <Component autoPlay />
+            );
+            const updateState = component.instance().updateState;
+            component.find('video').node.removeEventListener = removeEventListenerSpy;
+            expect(removeEventListenerSpy).not.toHaveBeenCalled();
+            component.unmount();
+            EVENTS.forEach((event) => {
+                expect(removeEventListenerSpy).toHaveBeenCalledWith(event.toLowerCase(), updateState);
+            });
+        });
+
+        it('should remove "error" event listener from the source element when unmounted', () => {
+            const removeEventListenerSpy = jest.fn();
+            component = mount(
+                <Component autoPlay />
+            );
+            const updateState = component.instance().updateState;
+            component.find('source').node.removeEventListener = removeEventListenerSpy;
+            expect(removeEventListenerSpy).not.toHaveBeenCalled();
+            component.unmount();
+            expect(removeEventListenerSpy).toHaveBeenCalledWith('error', updateState);
         });
     });
 

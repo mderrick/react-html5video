@@ -54,11 +54,14 @@ export default (
 
         bindEventsToUpdateState() {
             EVENTS.forEach(event => {
-                this.videoEl[event.toLowerCase()] = this.updateState;
+                this.videoEl.addEventListener(event.toLowerCase(), this.updateState);
             });
 
             TRACKEVENTS.forEach(event => {
-                this.videoEl.textTracks[event.toLowerCase()] = this.updateState;
+                // TODO: JSDom does not have this method on
+                // `textTracks`. Investigate so we can test this without this check.
+                this.videoEl.textTracks.addEventListener
+                && this.videoEl.textTracks.addEventListener(event.toLowerCase(), this.updateState);
             });
 
             // If <source> elements are used instead of a src attribute then
@@ -71,6 +74,29 @@ export default (
                 const lastSource = sources[sources.length - 1];
                 lastSource.addEventListener('error', this.updateState);
             }
+        }
+
+        unbindEvents() {
+            EVENTS.forEach(event => {
+                this.videoEl.removeEventListener(event.toLowerCase(), this.updateState);
+            });
+
+            TRACKEVENTS.forEach(event => {
+                // TODO: JSDom does not have this method on
+                // `textTracks`. Investigate so we can test this without this check.
+                this.videoEl.textTracks.removeEventListener
+                && this.videoEl.textTracks.removeEventListener(event.toLowerCase(), this.updateState);
+            });
+
+            const sources = this.videoEl.getElementsByTagName('source');
+            if (sources.length) {
+                const lastSource = sources[sources.length - 1];
+                lastSource.removeEventListener('error', this.updateState);
+            }
+        }
+
+        componentWillUnmount() {
+            this.unbindEvents();
         }
 
         // Stop `this.el` from being null briefly on every render,
