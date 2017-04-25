@@ -49,7 +49,7 @@ module.exports = (options = {}) => {
             }, {
                 test: /\.css$/,
                 include: srcPath,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[hash:base64:5]&hashPrefix=react-html5video&-autoprefixer!postcss')
+                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=rh5v-[name]_[local]&-autoprefixer!postcss')
             }, {
                 test: /\.(eot|ttf|woff|woff2)(\?.*)?$/,
                 loader: 'url'

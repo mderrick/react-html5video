@@ -5,10 +5,10 @@ import {
     setVolume,
     showTrack,
     toggleTracks,
-    fullscreen,
     toggleMute,
     togglePause,
     setCurrentTime,
+    toggleFullscreen,
     getPercentagePlayed,
     getPercentageBuffered
 } from './../video/api';
@@ -137,7 +137,7 @@ export default videoConnect(
         }
     }),
     (videoEl, state) => ({
-        onFullscreenClick: () => fullscreen(videoEl.parentElement),
+        onFullscreenClick: () => toggleFullscreen(videoEl.parentElement),
         onVolumeClick: () => toggleMute(videoEl, state),
         onCaptionsClick: () => toggleTracks(state),
         onPlayPauseClick: () => togglePause(videoEl, state),

@@ -1,33 +1,33 @@
 export const EVENTS = [
-    'onAbort',
-    'onCanPlay',
-    'onCanPlayThrough',
-    'onDurationChange',
-    'onEmptied',
-    'onEncrypted',
-    'onEnded',
-    'onError',
-    'onLoadedData',
-    'onLoadedMetadata',
-    'onLoadStart',
-    'onPause',
-    'onPlay',
-    'onPlaying',
-    'onProgress',
-    'onRateChange',
-    'onSeeked',
-    'onSeeking',
-    'onStalled',
-    'onSuspend',
-    'onTimeUpdate',
-    'onVolumeChange',
-    'onWaiting'
+    'abort',
+    'canPlay',
+    'canPlayThrough',
+    'durationChange',
+    'emptied',
+    'encrypted',
+    'ended',
+    'error',
+    'loadedData',
+    'loadedMetadata',
+    'loadStart',
+    'pause',
+    'play',
+    'playing',
+    'progress',
+    'rateChange',
+    'seeked',
+    'seeking',
+    'stalled',
+    'suspend',
+    'timeUpdate',
+    'volumeChange',
+    'waiting'
 ];
 
 export const TRACKEVENTS = [
-    'onChange',
-    'onAddTrack',
-    'onRemoveTrack'
+    'change',
+    'addTrack',
+    'removeTrack'
 ];
 
 export const METHODS = [
