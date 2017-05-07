@@ -110,11 +110,6 @@ export default (
             this.bindEventsToUpdateState();
         }
 
-        componentWillUnmount() {
-            this.unbindEventsToUpdateState();
-            this.videoEl = null;
-        }
-
         render() {
             const stateProps = mapStateToProps(
                 this.state,
