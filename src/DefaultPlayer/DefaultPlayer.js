@@ -25,6 +25,7 @@ import Overlay from './Overlay/Overlay';
 export const DefaultPlayer = ({
     copy,
     video,
+    overlayDisabled,
     style,
     controls,
     children,
@@ -50,7 +51,7 @@ export const DefaultPlayer = ({
                 { children }
             </video>
             <Overlay
-                onClick={onPlayPauseClick}
+                onClick={!overlayDisabled ? onPlayPauseClick : null}
                 {...video} />
             { controls && controls.length && !video.error
                 ? <div className={styles.controls}>
@@ -112,13 +113,15 @@ const controls = ['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen', 'Captions
 DefaultPlayer.defaultProps = {
     copy,
     controls,
-    video: {}
+    video: {},
+    overlayDisabled: false
 };
 
 DefaultPlayer.propTypes = {
     copy: PropTypes.object.isRequired,
     controls: PropTypes.arrayOf(PropTypes.oneOf(controls)),
-    video: PropTypes.object.isRequired
+    video: PropTypes.object.isRequired,
+    overlayDisabled: PropTypes.bool
 };
 
 export default videoConnect(
