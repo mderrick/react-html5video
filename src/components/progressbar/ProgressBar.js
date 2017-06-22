@@ -1,45 +1,43 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-var ProgressBar = React.createClass({
+class ProgressBar extends React.Component {
+    static propTypes = {
+        orientation: PropTypes.string,
+        step: PropTypes.number,
+        progress: PropTypes.number,
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
+    };
 
-    propTypes: {
-        orientation: React.PropTypes.string,
-        step: React.PropTypes.number,
-        progress: React.PropTypes.number,
-        onChange: React.PropTypes.func,
-        onFocus: React.PropTypes.func,
-        onBlur: React.PropTypes.func
-    },
-
-    getDefaultProps() {
-        return {
-            orientation: 'horizontal',
-            step: 0.1,
-            progress: 0,
-            onChange: this.onChange,
-            onFocus: this.onFocus,
-            onBlur: this.onBlur
-        };
-    },
+    static defaultProps = {
+        orientation: 'horizontal',
+        step: 0.1,
+        progress: 0,
+        onChange: this.onChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur
+    };
 
     componentDidMount() {
         // 'orient' is not supported by React but
         // is required for Firefox. Setting manually.
         // https://github.com/facebook/react/issues/2453
         this.refs.input.setAttribute('orient', this.props.orientation);
-    },
+    }
 
-    onChange() {
+    onChange = () => {
         // Placeholder
-    },
+    };
 
-    onFocus() {
+    onFocus = () => {
         // Placeholder
-    },
+    };
 
-    onBlur() {
+    onBlur = () => {
         // Placeholder
-    },
+    };
 
     render() {
         return (
@@ -61,6 +59,6 @@ var ProgressBar = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default ProgressBar;

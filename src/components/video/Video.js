@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Overlay from './overlay/Overlay';
 import Controls from './../controls/Controls';
@@ -35,41 +36,32 @@ var EVENTS = [
     'onWaiting'
 ];
 
-var Video = React.createClass({
-
-    propTypes: {
+class Video extends React.Component {
+    static propTypes = {
         // Non-standard props
-        copyKeys: React.PropTypes.object,
-        children: React.PropTypes.node,
-        className: React.PropTypes.string,
+        copyKeys: PropTypes.object,
+        children: PropTypes.node,
+        className: PropTypes.string,
 
         // HTML5 Video standard attributes
-        autoPlay: React.PropTypes.bool,
-        muted: React.PropTypes.bool,
-        controls: React.PropTypes.bool
-    },
+        autoPlay: PropTypes.bool,
+        muted: PropTypes.bool,
+        controls: PropTypes.bool
+    };
 
-    getDefaultProps() {
-        return {
-            copyKeys: copy
-        };
-    },
+    static defaultProps = {
+        copyKeys: copy
+    };
 
-    getInitialState() {
-        // Set state from props and always use these
-        // to check state of video as they will update
-        // on the video events. Changing this state however will not
-        // change the video. The API methods must be used.
-        return {
-            networkState: 0,
-            paused: !this.props.autoPlay,
-            muted: !!this.props.muted,
-            volume: 1,
-            playbackRate: 1,
-            error: false,
-            loading: false
-        };
-    },
+    state = {
+        networkState: 0,
+        paused: !this.props.autoPlay,
+        muted: !!this.props.muted,
+        volume: 1,
+        playbackRate: 1,
+        error: false,
+        loading: false
+    };
 
     /**
      * Creates a throttle update method.
@@ -89,7 +81,7 @@ var Video = React.createClass({
             };
             return p;
         }, {});
-    },
+    }
 
     /**
      * Bind eventlisteners not supported by React's synthetic events
@@ -100,7 +92,7 @@ var Video = React.createClass({
         // Listen to error of last source.
         this.videoEl.children[this.videoEl.children.length - 1]
             .addEventListener('error', this._updateStateFromVideo);
-    },
+    }
 
     /**
      * Removes event listeners bound outside of React's synthetic events
@@ -114,45 +106,45 @@ var Video = React.createClass({
         // the video has been unmounted.
         // https://github.com/mderrick/react-html5video/issues/35
         this._updateStateFromVideo.cancel();
-    },
+    }
 
     /**
      * Toggles the video to play and pause.
      * @return {undefined}
      */
-    togglePlay() {
+    togglePlay = () => {
         if (this.state.paused) {
             this.play();
         } else {
             this.pause();
         }
-    },
+    };
 
     /**
      * Toggles the video to mute and unmute.
      * @return {undefined}
      */
-    toggleMute() {
+    toggleMute = () => {
         if (this.state.muted) {
             this.unmute();
         } else {
             this.mute();
         }
-    },
+    };
 
     /**
      * Loads video.
      * @return {undefined}
      */
-    load() {
+    load = () => {
         this.videoEl.load();
-    },
+    };
 
     /**
      * Sets the video to fullscreen.
      * @return {undefined}
      */
-    fullscreen() {
+    fullscreen = () => {
         if (this.videoEl.requestFullscreen) {
             this.videoEl.requestFullscreen();
         } else if (this.videoEl.msRequestFullscreen) {
@@ -162,39 +154,39 @@ var Video = React.createClass({
         } else if (this.videoEl.webkitRequestFullscreen) {
             this.videoEl.webkitRequestFullscreen();
         }
-    },
+    };
 
     /**
      * Plays the video.
      * @return {undefined}
      */
-    play() {
+    play = () => {
         this.videoEl.play();
-    },
+    };
 
     /**
      * Pauses the video.
      * @return {undefined}
      */
-    pause() {
+    pause = () => {
         this.videoEl.pause();
-    },
+    };
 
     /**
      * Unmutes video.
      * @return {undefined}
      */
-    unmute() {
+    unmute = () => {
         this.videoEl.muted = false;
-    },
+    };
 
     /**
      * Mutes the video.
      * @return {undefined}
      */
-    mute() {
+    mute = () => {
         this.videoEl.muted = true;
-    },
+    };
 
     /**
      * Seeks the video timeline.
@@ -203,7 +195,7 @@ var Video = React.createClass({
      *                              throttled event.          
      * @return {undefined}
      */
-    seek(time, forceUpdate) {
+    seek = (time, forceUpdate) => {
         this.videoEl.currentTime = time;
         // In some use cases, we wish not to wait for `onSeeked` or `onSeeking`
         // throttled event to update state so we force it. This is because
@@ -212,7 +204,7 @@ var Video = React.createClass({
         if (forceUpdate) {
             this.updateStateFromVideo();
         }
-    },
+    };
 
     /**
      * Sets the video volume.
@@ -221,7 +213,7 @@ var Video = React.createClass({
      *                              throttled event.  
      * @return {undefined}
      */
-    setVolume(volume, forceUpdate) {
+    setVolume = (volume, forceUpdate) => {
         this.videoEl.volume = volume;
         // In some use cases, we wish not to wait for `onVolumeChange`
         // throttled event to update state so we force it. This is because
@@ -230,24 +222,24 @@ var Video = React.createClass({
         if (forceUpdate) {
             this.updateStateFromVideo();
         }
-    },
+    };
 
     /**
      * Sets the video playback rate.
      * @param  {number} rate The playback rate (default 1.0).
      * @return {undefined}
      */
-    setPlaybackRate(rate) {
+    setPlaybackRate = (rate) => {
         this.videoEl.playbackRate = rate;
         this.updateStateFromVideo();
-    },
+    };
 
     /**
      * Updates the React component state from the DOM video properties.
      * This is where the magic happens.
      * @return {undefined}
      */
-    updateStateFromVideo() {
+    updateStateFromVideo = () => {
         this.setState({
             // Standard video properties
             duration: this.videoEl.duration,
@@ -265,7 +257,7 @@ var Video = React.createClass({
             error: this.videoEl.networkState === this.videoEl.NETWORK_NO_SOURCE,
             loading: this.videoEl.readyState < this.videoEl.HAVE_ENOUGH_DATA
         });
-    },
+    };
 
     /**
      * Returns everything but 'source' nodes from children
@@ -273,7 +265,7 @@ var Video = React.createClass({
      * If there are no controls provided, returns default Controls.
      * @return {Array.<ReactElement>} An array of components.
      */
-    renderControls() {
+    renderControls = () => {
         var extendedProps = Object.assign({
             // The public methods that all controls should be able to
             // use.
@@ -305,26 +297,26 @@ var Video = React.createClass({
             );
         }
         return controls;
-    },
+    };
 
     /**
      * Returns video 'source' nodes from children.
      * @return {Array.<ReactElement>} An array of components.
      */
-    renderSources() {
+    renderSources = () => {
         return React.Children.map(this.props.children, (child) => {
             if (child.type !== 'source') {
                 return void 0;
             }
             return child;
         });
-    },
+    };
 
     /**
      * Gets the video class name based on its state
      * @return {string} Class string
      */
-    getVideoClassName() {
+    getVideoClassName = () => {
         var {className} = this.props;
         var classString = 'video';
 
@@ -345,28 +337,28 @@ var Video = React.createClass({
             classString += ' ' + className;
         }
         return classString;
-    },
+    };
 
     /**
      * Sets state to show focused class on video player.
      * @return {undefined}
      */
-    onFocus() {
+    onFocus = () => {
         this.setState({
             focused: true
         });
-    },
+    };
 
     /**
      * Sets state to not be focused to remove class form video
      * player.
      * @return {undefined}
      */
-    onBlur() {
+    onBlur = () => {
         this.setState({
             focused: false
         });
-    },
+    };
 
     render() {
         // If controls prop is provided remove it
@@ -396,6 +388,6 @@ var Video = React.createClass({
             </div>
         );
     }
-});
+}
 
 export {Video as default, Controls, Seek, Play, Mute, Fullscreen, Time, Overlay};

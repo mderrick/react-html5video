@@ -21,7 +21,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash.throttle": "^3.0.4"
+    "lodash.throttle": "^3.0.4",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-core": "^5.8.25",

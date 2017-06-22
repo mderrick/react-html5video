@@ -1,18 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from './../../icon/Icon';
 import Spinner from './../../spinner/Spinner';
 
-var Overlay = React.createClass({
+class Overlay extends React.Component {
+    static propTypes = {
+        error: PropTypes.bool,
+        togglePlay: PropTypes.func,
+        paused: PropTypes.bool,
+        copyKeys: PropTypes.object,
+        loading: PropTypes.bool
+    };
 
-    propTypes: {
-        error: React.PropTypes.bool,
-        togglePlay: React.PropTypes.func,
-        paused: React.PropTypes.bool,
-        copyKeys: React.PropTypes.object,
-        loading: React.PropTypes.bool
-    },
-
-    renderContent() {
+    renderContent = () => {
         var content;
         if (this.props.error) {
             content = (
@@ -34,7 +34,7 @@ var Overlay = React.createClass({
             );
         }
         return content;
-    },
+    };
 
     render() {
         return (
@@ -43,7 +43,6 @@ var Overlay = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 export default Overlay;

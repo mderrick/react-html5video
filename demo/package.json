@@ -12,6 +12,7 @@
   "dependencies": {
     "css-reset": "git+https://github.com/60frames/css-reset.git",
     "lodash.throttle": "^3.0.4",
+    "prop-types": "^15.5.10",
     "react": "^15.2.0",
     "react-dom": "^15.2.0"
   },
