@@ -128,7 +128,10 @@ export default videoConnect(
             readyState,
             networkState,
             error: error || networkState === 3,
-            loading: readyState < 4,
+            // TODO: This is not pretty. Doing device detection to remove
+            // spinner on iOS devices for a quick and dirty win. We should see if
+            // we can use the same readyState check safely across all browsers.
+            loading: readyState < (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4),
             percentagePlayed: getPercentagePlayed(restState),
             percentageBuffered: getPercentageBuffered(restState),
             ...restState
