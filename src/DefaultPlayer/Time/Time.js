@@ -7,13 +7,8 @@ const formatTime = (seconds) => {
         ? 0
         : Math.floor(seconds);
     date.setSeconds(seconds);
-    let timeStamp = date.toISOString();
-    if (seconds >= 3600) {
-        timeStamp = timeStamp.substr(11, 8);
-    } else {
-        timeStamp = timeStamp.substr(14, 5);
-    }
-    return timeStamp;
+    const duration = date.toISOString().substr(11, 8).replace(/^0{1,2}:?0{0,1}/,'');
+    return duration;
 };
 
 export default ({ currentTime, duration, className }) => {

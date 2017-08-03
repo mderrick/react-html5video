@@ -28,7 +28,7 @@ describe('Time', () => {
             duration: 10
         });
         expect(component.find(`.${styles.duration}`).text())
-            .toEqual('00:00:10');
+            .toEqual('0:10');
     });
 
     it('shows current video elapsed time', () => {
@@ -36,7 +36,7 @@ describe('Time', () => {
             currentTime: 10
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:00:10');
+            .toEqual('0:10');
     });
 
     it('can handle minutes, hours and seconds', () => {
@@ -44,19 +44,19 @@ describe('Time', () => {
             currentTime: 60 * 2
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:02:00');
+            .toEqual('2:00');
 
         component.setProps({
             currentTime: 60 * 60 * 3
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('03:00:00');
+            .toEqual('3:00:00');
 
         component.setProps({
             currentTime: 60 * 60 * 3 + 72
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('03:01:12');
+            .toEqual('3:01:12');
     });
 
     it('fails gracefully and shows 00:00:00 when video is greater than 24 hours', () => {
@@ -66,26 +66,26 @@ describe('Time', () => {
             currentTime: 86401
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:00:00');
+            .toEqual('0:00');
 
         component.setProps({
             currentTime: 86400
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:00:00');
+            .toEqual('0:00');
     });
 
-    it('fails gracefully and shows 00:00:00 when not given a number', () => {
+    it('fails gracefully and shows 00:00 when not given a number', () => {
         component.setProps({
             currentTime: null
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:00:00');
+            .toEqual('0:00');
 
         component.setProps({
             currentTime: undefined
         });
         expect(component.find(`.${styles.current}`).text())
-            .toEqual('00:00:00');
+            .toEqual('0:00');
     });
 });
