@@ -12,7 +12,8 @@ describe('Volume', () => {
         component = shallow(
             <Volume
                 ariaLabelMute="Mute"
-                ariaLabelUnmute="Unmute" />
+                ariaLabelUnmute="Unmute"
+                ariaLabelVolume="Change volume" />
         );
     });
 
@@ -41,6 +42,8 @@ describe('Volume', () => {
             .toEqual('0');
         expect(rangeInput.prop('max'))
             .toEqual('1');
+        expect(rangeInput.prop('aria-label'))
+            .toEqual('Change volume');
     });
 
     it('triggers \'onClick\' prop when the button is clicked', () => {
