@@ -133,12 +133,12 @@ describe('video', () => {
         });
 
         it('returns a component with it\'s ownProps', () => {
-            expect(component.prop('autoPlay'))
+            expect(component.find(TestVideo).prop('autoPlay'))
                 .toBe(true);
         });
 
         it('returns a component with a videoEl prop', () => {
-            expect(component.prop('videoEl'))
+            expect(component.find(TestVideo).prop('videoEl'))
                 .toBe(videoEl);
         });
 
@@ -151,7 +151,7 @@ describe('video', () => {
                 }
             };
             component.setState(state);
-            expect(component.prop('video'))
+            expect(component.find(TestVideo).prop('video'))
                 .toEqual(state);
         });
 
@@ -168,9 +168,9 @@ describe('video', () => {
             component.setState({
                 paused: true
             });
-            expect(component.prop('state').paused)
+            expect(component.find(TestVideo).prop('state').paused)
                 .toBe(true);
-            expect(component.prop('ownProps').autoPlay)
+            expect(component.find(TestVideo).prop('ownProps').autoPlay)
                 .toBe(true);
         });
 
@@ -187,7 +187,7 @@ describe('video', () => {
             );
             component.instance().videoEl = videoEl;
             component.instance().forceUpdate();
-            component.prop('togglePlay')();
+            component.find(TestVideo).prop('togglePlay')();
             expect(videoEl.play).toHaveBeenCalledWith('testValue');
         });
 
@@ -200,7 +200,7 @@ describe('video', () => {
             const component = shallow(
                 <Component />
             );
-            expect(component.prop('duplicateKey')).toBe('mapVideoElToProps');
+            expect(component.find(TestVideo).prop('duplicateKey')).toBe('mapVideoElToProps');
         });
 
         it('allows ownProps to take precedence over mapVideoElToProps and mapStateToProps', () => {
@@ -212,7 +212,7 @@ describe('video', () => {
             const component = shallow(
                 <Component duplicateKey="ownProps" />
             );
-            expect(component.prop('duplicateKey')).toBe('ownProps');
+            expect(component.find(TestVideo).prop('duplicateKey')).toBe('ownProps');
         });
 
         it('allows cusomtisation of merging ownProps, mapVideoElToProps and mapStateToProps to change the merging precedence', () => {
@@ -225,7 +225,7 @@ describe('video', () => {
             const component = shallow(
                 <Component duplicateKey="ownProps" />
             );
-            expect(component.prop('duplicateKey')).toBe('mapVideoElToProps');
+            expect(component.find(TestVideo).prop('duplicateKey')).toBe('mapVideoElToProps');
         });
     });
 });

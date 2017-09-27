@@ -5,7 +5,6 @@
  */
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import toClass from 'recompose/toClass';
 import {
     EVENTS,
     PROPERTIES,
@@ -33,10 +32,7 @@ export default (
     mapStateToProps = defaultMapStateToProps,
     mapVideoElToProps = defaultMapVideoElToProps,
     mergeProps = defaultMergeProps
-) => {
-    const BaseComponentClass = toClass(BaseComponent);
-
-    class Video extends Component {
+) => class Video extends Component {
         constructor(props) {
             super(props);
             this.updateState = this.updateState.bind(this);
@@ -121,14 +117,13 @@ export default (
                 this.props
             );
             return (
-                <BaseComponentClass
-                    ref={this.setRef.bind(this)}
-                    {...mergeProps(
-                        stateProps,
-                        videoElProps,
-                        this.props)} />
+                <div ref={this.setRef.bind(this)}>
+                    <BaseComponent
+                        {...mergeProps(
+                            stateProps,
+                            videoElProps,
+                            this.props)} />
+                </div>
             );
         }
     }
-    return Video;
-}
