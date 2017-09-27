@@ -3,7 +3,7 @@ import styles from './Volume.css';
 import VolumeOff from './../Icon/volume_off.svg';
 import VolumeUp from './../Icon/volume_up.svg';
 
-export default ({ onChange, onClick, volume, muted, className, ariaLabelMute, ariaLabelUnmute }) => {
+export default ({ onChange, onClick, volume, muted, className, ariaLabelMute, ariaLabelUnmute, ariaLabelVolume }) => {
     const volumeValue = muted
         ? 0
         : +volume;
@@ -46,6 +46,7 @@ export default ({ onChange, onClick, volume, muted, className, ariaLabelMute, ar
                         type="range"
                         orient="vertical"
                         onChange={onChange}
+                        aria-label={ariaLabelVolume}
                         className={styles.input}
                         value={volumeValue} />
                 </div>

@@ -87,6 +87,7 @@ export const DefaultPlayer = ({
                                         onChange={onVolumeChange}
                                         ariaLabelMute={copy.mute}
                                         ariaLabelUnmute={copy.unmute}
+                                        ariaLabelVolume={copy.volume}
                                         {...video} />;
                                 case 'Captions':
                                     return video.textTracks && video.textTracks.length
