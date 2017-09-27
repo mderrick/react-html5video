@@ -7,7 +7,8 @@ const formatTime = (seconds) => {
         ? 0
         : Math.floor(seconds);
     date.setSeconds(seconds);
-    return date.toISOString().substr(11, 8);
+    const duration = date.toISOString().substr(11, 8).replace(/^0{1,2}:?0{0,1}/,'');
+    return duration;
 };
 
 export default ({ currentTime, duration, className }) => {
