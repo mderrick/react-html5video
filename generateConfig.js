@@ -15,25 +15,16 @@ module.exports = (options = {}) => {
         output: {
             path: options.outputPath || distPath,
             filename: 'index.js',
-            libraryTarget: 'umd',
+            libraryTarget: 'commonjs2',
             library: pkg.name
         },
         resolve: {
             extensions: ['.js', '.json', '.jsx', '']
         },
         externals: [{
-            react: {
-                root: 'React',
-                commonjs2: 'react',
-                commonjs: 'react',
-                amd: 'react'
-            },
-            'react-dom': {
-                root: 'ReactDOM',
-                commonjs2: 'react-dom',
-                commonjs: 'react-dom',
-                amd: 'react-dom'
-            }
+            react: 'react',
+            'react-dom': 'react-dom',
+            'prop-types': 'prop-types'
         }],
         module: {
             loaders: [{

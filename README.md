@@ -20,6 +20,7 @@ View the [demo](http://mderrick.github.io/react-html5video/).
 
 - `react@>=15.0.x`
 - `react-dom@>=15.0.x`
+- `prop-types@>=15.0.x`
 
 ## Usage
 
