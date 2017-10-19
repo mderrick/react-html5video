@@ -26,6 +26,7 @@ export const DefaultPlayer = ({
     copy,
     video,
     style,
+    videoStyle,
     controls,
     children,
     className,
@@ -46,6 +47,7 @@ export const DefaultPlayer = ({
         style={style}>
             <video
                 className={styles.video}
+                style={videoStyle}
                 {...restProps}>
                 { children }
             </video>
