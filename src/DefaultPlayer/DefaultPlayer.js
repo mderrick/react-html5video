@@ -22,7 +22,7 @@ import PlayPause from './PlayPause/PlayPause';
 import Fullscreen from './Fullscreen/Fullscreen';
 import Overlay from './Overlay/Overlay';
 
-export const DefaultPlayer = ({
+const DefaultPlayer = ({
     copy,
     video,
     style,
@@ -148,3 +148,5 @@ export default videoConnect(
         onSeekChange: (e) => setCurrentTime(videoEl, state, e.target.value * state.duration / 100)
     })
 );
+
+export { DefaultPlayer, Time, Seek, Volume, Captions, PlayPause, Fullscreen, Overlay };
