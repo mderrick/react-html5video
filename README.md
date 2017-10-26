@@ -103,6 +103,12 @@ The API behaves much like the [React Redux](https://github.com/reactjs/react-red
 
 - `mergeProps(stateProps, videoElProps, ownProps)` - If specified, it is passed the result of `mapStateToProps` `mapVideoElToProps` and the parent `props`. The plain object you return will be passed to your wrapped component. By default this will do `Object.assign({}, stateProps, videoElProps, ownProps)`.
 
+#### Components/Helpers
+
+It is also possible to use the individual defaultPlayer components if you desire. The [apiHelpers](https://github.com/mderrick/react-html5video/blob/master/src/video/api.js) are also available. These are just methods that normalise the HTML5 video player API somewhat:
+
+`import { Time, Seek, Volume, Captions, PlayPause, Fullscreen, Overlay, apiHelpers } from 'react-html5video';
+
 ## Contributing
 
 ### Dev Setup
