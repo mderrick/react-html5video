@@ -2,8 +2,7 @@ import React from 'react';
 import Header from './header/Header';
 import Main from './main/Main';
 
-var Index = React.createClass({
-
+class Index extends React.Component {
     render() {
         return (
             <div className="index">
@@ -12,6 +11,6 @@ var Index = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Index;

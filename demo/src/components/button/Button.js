@@ -1,24 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-var Button = React.createClass({
+class Button extends React.Component {
+    static propTypes = {
+        active: PropTypes.bool,
+        children: PropTypes.string,
+        onClick: PropTypes.func
+    };
 
-    propTypes: {
-        active: React.PropTypes.bool,
-        children: React.PropTypes.string,
-        onClick: React.PropTypes.func
-    },
-
-    getDefaultProps() {
-        return {
-            active: false,
-            onClick: this.onClick,
-            text: 'A button'
-        };
-    },
-
-    onClick(e) {
-        e.preventDefault();
-    },
+    static defaultProps = {
+        active: false,
+        onClick: (e) => { e.preventDefault(); },
+        text: 'A button'
+    };
 
     render() {
         return (
@@ -27,7 +21,6 @@ var Button = React.createClass({
             </button>
         );
     }
-
-});
+}
 
 export default Button;

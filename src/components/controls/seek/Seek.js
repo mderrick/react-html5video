@@ -1,25 +1,25 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ProgressBar from './../../progressbar/ProgressBar';
 
-var Seek = React.createClass({
-
-    propTypes: {
-        copyKeys: React.PropTypes.object,
-        seek: React.PropTypes.func,
-        percentageBuffered: React.PropTypes.number,
-        percentagePlayed: React.PropTypes.number,
-        duration: React.PropTypes.number
-    },
-
-    getInitialState() {
-        return {
+class Seek extends React.Component {
+    static propTypes = {
+        copyKeys: PropTypes.object,
+        seek: PropTypes.func,
+        percentageBuffered: PropTypes.number,
+        percentagePlayed: PropTypes.number,
+        duration: PropTypes.number
+    };
+    constructor(props) {
+        super(props);
+        this.state = {
             // When the child range input becomes focused,
             // we need to set this custom seek bar to look
             // 'focused' with the correct styles. Need to
             // do this via a class.
             focused: false
         };
-    },
+    }
 
     /**
      * As controls receive all props for extensibility, we do a quick
@@ -29,31 +29,31 @@ var Seek = React.createClass({
      */
     shouldComponentUpdate(nextProps) {
         return this.props.seek !== nextProps.seek ||
-               this.props.percentageBuffered !== nextProps.percentageBuffered ||
-               this.props.percentagePlayed !== nextProps.percentagePlayed ||
-               this.props.duration !== nextProps.duration;
-    },
+            this.props.percentageBuffered !== nextProps.percentageBuffered ||
+            this.props.percentagePlayed !== nextProps.percentagePlayed ||
+            this.props.duration !== nextProps.duration;
+    }
 
     /**
      * Calculates the seek time based on change of input.
      * @param  {object} e Event object
      * @return {undefined}
      */
-    seek(e) {
+    seek = (e) => {
         this.props.seek(e.target.value * this.props.duration / 100, true);
-    },
+    };
 
-    onFocus() {
+    onFocus = () => {
         this.setState({
             focused: true
         });
-    },
+    };
 
-    onBlur() {
+    onBlur = () => {
         this.setState({
             focused: false
         });
-    },
+    };
 
     render() {
         return (
@@ -75,6 +75,6 @@ var Seek = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Seek;

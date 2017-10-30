@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from './../../button/Button';
 import browserStackLogo from './../../../../browserstack.png';
-import {default as Video, Controls, Overlay} from './../../../../../src/components/video/Video';
+import { default as Video, Controls, Overlay } from './../../../../../src/components/video/Video';
 
 var videos = [
     // TODO: Don't hot link these. upload them somewhere.
@@ -13,76 +13,76 @@ var videos = [
     'https://github.com/mderrick/react-html5video'
 ];
 
-var Main = React.createClass({
-
-    getInitialState() {
-        return {
+class Main extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             videoId: 0
         };
-    },
+    }
 
-    showVideo(id) {
+    showVideo = (id) => {
         this.setState({
             videoId: id
         }, this.reloadVideo);
-    },
+    };
 
-    reloadVideo() {
+    reloadVideo = () => {
         // When changing a HTML5 video, you have to reload it.
         this.refs.video.load();
         this.refs.video.play();
-    },
+    };
 
-    togglePlay() {
+    togglePlay = () => {
         this.refs.video.togglePlay();
-    },
+    };
 
-    toggleMute() {
+    toggleMute = () => {
         this.refs.video.toggleMute()
-    },
+    };
 
-    fullscreen() {
+    fullscreen = () => {
         this.refs.video.fullscreen();
-    },
+    };
 
-    load() {
+    load = () => {
         this.refs.video.load();
-    },
+    };
 
-    play() {
+    play = () => {
         this.refs.video.play();
-    },
+    };
 
-    pause() {
+    pause = () => {
         this.refs.video.pause();
-    },
+    };
 
-    unmute() {
+    unmute = () => {
         this.refs.video.unmute();
-    },
+    };
 
-    mute() {
+    mute = () => {
         this.refs.video.mute();
-    },
+    };
 
-    seek() {
+    seek = () => {
         this.refs.video.seek(this._seekInput.valueAsNumber);
-    },
+    };
 
-    setVolume() {
+    setVolume = () => {
         this.refs.video.setVolume(this._volumeInput.valueAsNumber);
-    },
+    };
 
-    setPlaybackRate() {
+    setPlaybackRate = () => {
         this.refs.video.setPlaybackRate(this._playbackRateInput.valueAsNumber);
-    },
+    };
 
-    onProgress() {
+    onProgress = () => {
         var el = ReactDOM.findDOMNode(this.refs.video).getElementsByTagName('video')[0];
         this.setState({
             percentageLoaded: el.buffered.length && el.buffered.end(el.buffered.length - 1) / el.duration * 100
         });
-    },
+    };
 
     render() {
         return (
@@ -143,11 +143,11 @@ var Main = React.createClass({
                             </li>
                             <li>
                                 <Button onClick={this.setVolume}>setVolume</Button>
-                                <input className="main__input" defaultValue="1" ref={(c) => this._volumeInput = c} type="number" min="0" max="1" step="0.1"/>
+                                <input className="main__input" defaultValue="1" ref={(c) => this._volumeInput = c} type="number" min="0" max="1" step="0.1" />
                             </li>
                             <li>
                                 <Button onClick={this.setPlaybackRate}>setPlaybackRate</Button>
-                                <input className="main__input" defaultValue="1" ref={(c) => this._playbackRateInput = c} type="number" min="0.5" max="2" step="0.25"/>
+                                <input className="main__input" defaultValue="1" ref={(c) => this._playbackRateInput = c} type="number" min="0.5" max="2" step="0.25" />
                             </li>
                             <li>
                                 <Button onClick={this.fullscreen}>fullscreen</Button>
@@ -161,6 +161,6 @@ var Main = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Main;

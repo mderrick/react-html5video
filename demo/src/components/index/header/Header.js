@@ -1,8 +1,7 @@
 import React from 'react';
 import Icon from './../../icon/Icon';
 
-var Header = React.createClass({
-
+class Header extends React.Component {
     render() {
         return (
             <div className="header">
@@ -13,7 +12,6 @@ var Header = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 export default Header;

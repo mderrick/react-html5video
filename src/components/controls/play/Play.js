@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from './../../icon/Icon';
 
-var Play = React.createClass({
-
-    propTypes: {
-        copyKeys: React.PropTypes.object,
-        togglePlay: React.PropTypes.func,
-        paused: React.PropTypes.bool
-    },
+class Play extends React.Component {
+    static propTypes = {
+        copyKeys: PropTypes.object,
+        togglePlay: PropTypes.func,
+        paused: PropTypes.bool
+    };
 
     /**
      * As controls receive all props for extensibility, we do a quick
@@ -18,7 +18,7 @@ var Play = React.createClass({
     shouldComponentUpdate(nextProps) {
         return this.props.paused !== nextProps.paused ||
                this.props.togglePlay !== nextProps.togglePlay;
-    },
+    }
 
     render() {
         return (
@@ -31,6 +31,6 @@ var Play = React.createClass({
             </button>
         );
     }
-});
+}
 
 export default Play;
