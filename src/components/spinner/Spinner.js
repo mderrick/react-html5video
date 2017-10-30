@@ -1,7 +1,6 @@
 import React from 'react';
 
-var Spinner = React.createClass({
-
+class Spinner extends React.Component {
     render() {
         return (
             <div className="video-spinner">
@@ -13,7 +12,6 @@ var Spinner = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 export default Spinner;

@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from './../../icon/Icon';
 import ProgressBar from './../../progressbar/ProgressBar';
 
-var Mute = React.createClass({
-
-    propTypes: {
-        copyKeys: React.PropTypes.object,
-        volume: React.PropTypes.number,
-        unmute: React.PropTypes.func,
-        setVolume: React.PropTypes.func,
-        toggleMute: React.PropTypes.func,
-        muted: React.PropTypes.bool
-    },
+class Mute extends React.Component {
+    static propTypes = {
+        copyKeys: PropTypes.object,
+        volume: PropTypes.number,
+        unmute: PropTypes.func,
+        setVolume: PropTypes.func,
+        toggleMute: PropTypes.func,
+        muted: PropTypes.bool
+    };
 
     /**
      * As controls receive all props for extensibility, we do a quick
@@ -25,19 +25,19 @@ var Mute = React.createClass({
                this.props.volume !== nextProps.volume ||
                this.props.setVolume !== nextProps.setVolume ||
                this.props.unmute !== nextProps.unmute;
-    },
+    }
 
     /**
      * Calculates the seek time based on click position and element offset.
      * @param  {object} e Event object
      * @return {undefined}
      */
-    changeVolume(e) {
+    changeVolume = (e) => {
         this.props.setVolume(e.target.value / 100, true);
         this.props.unmute();
-    },
+    };
 
-    toggleMute() {
+    toggleMute = () => {
         // If we volume has been dragged to 0, assume it is in
         // a muted state and then toggle to full volume.
         if (this.props.volume <= 0) {
@@ -45,7 +45,7 @@ var Mute = React.createClass({
         } else {
             this.props.toggleMute();
         }
-    },
+    };
 
     render() {
         return (
@@ -73,6 +73,6 @@ var Mute = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Mute;

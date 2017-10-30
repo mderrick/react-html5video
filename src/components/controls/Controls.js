@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Play from './play/Play';
 import Seek from './seek/Seek';
@@ -5,27 +6,24 @@ import Mute from './mute/Mute';
 import Time from './time/Time';
 import Fullscreen from './fullscreen/Fullscreen';
 
-var Controls = React.createClass({
-
-    propTypes: {
-        error: React.PropTypes.bool,
-        children: React.PropTypes.oneOfType([
-            React.PropTypes.arrayOf(React.PropTypes.node),
-            React.PropTypes.node
+class Controls extends React.Component {
+    static propTypes = {
+        error: PropTypes.bool,
+        children: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.node),
+            PropTypes.node
         ])
-    },
+    };
 
-    getDefaultProps() {
-        return {
-            children: [
-                <Play />,
-                <Seek />,
-                <Time />,
-                <Mute />,
-                <Fullscreen />
-            ]
-        };
-    },
+    static defaultProps = {
+        children: [
+            <Play />,
+            <Seek />,
+            <Time />,
+            <Mute />,
+            <Fullscreen />
+        ]
+    };
 
     /**
      * Returns children components with props
@@ -33,11 +31,11 @@ var Controls = React.createClass({
      * for when custom React components are used.
      * @return {Array.<ReactElement>} An array of components.
      */
-    renderChildren() {
+    renderChildren = () => {
         return React.Children.map(this.props.children, child => {
             return React.cloneElement(child, {...this.props});
         });
-    },
+    };
 
     render() {
         return (
@@ -48,6 +46,6 @@ var Controls = React.createClass({
             ) : null
         );
     }
-});
+}
 
 export default Controls;

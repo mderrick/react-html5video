@@ -1,12 +1,12 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from './../../icon/Icon';
 
-var Fullscreen = React.createClass({
-
-    propTypes: {
-        copyKeys: React.PropTypes.object,
-        fullscreen: React.PropTypes.func
-    },
+class Fullscreen extends React.Component {
+    static propTypes = {
+        copyKeys: PropTypes.object,
+        fullscreen: PropTypes.func
+    };
 
     /**
      * As controls receive all props for extensibility, we do a quick
@@ -16,7 +16,7 @@ var Fullscreen = React.createClass({
      */
     shouldComponentUpdate(nextProps) {
         return this.props.fullscreen !== nextProps.fullscreen;
-    },
+    }
 
     render() {
         return (
@@ -28,6 +28,6 @@ var Fullscreen = React.createClass({
             </button>
         );
     }
-});
+}
 
 export default Fullscreen;

@@ -1,12 +1,12 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from './../../icon/Icon';
 
-var Time = React.createClass({
-
-    propTypes: {
-        currentTime: React.PropTypes.number,
-        duration: React.PropTypes.number
-    },
+class Time extends React.Component {
+    static propTypes = {
+        currentTime: PropTypes.number,
+        duration: PropTypes.number
+    };
 
     /**
      * As controls receive all props for extensibility, we do a quick
@@ -17,19 +17,19 @@ var Time = React.createClass({
     shouldComponentUpdate(nextProps) {
         return this.props.currentTime !== nextProps.currentTime ||
                this.props.duration !== nextProps.duration;
-    },
+    }
 
     /**
      * Formats time into a friendlier format
      * @param  {number} seconds Time in seconds
      * @return {string}         Timestamp in the format of HH:MM:SS
      */
-    formatTime(seconds) {
+    formatTime = (seconds) => {
         var date = new Date(Date.UTC(1970,1,1,0,0,0,0));
         seconds = isNaN(seconds) ? 0 : Math.floor(seconds);
         date.setSeconds(seconds);
         return date.toISOString().substr(11, 8);
-    },
+    };
 
     render() {
         return (
@@ -44,6 +44,6 @@ var Time = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default Time;
