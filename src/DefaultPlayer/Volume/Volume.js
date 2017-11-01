@@ -4,7 +4,7 @@ import VolumeOff from './../Icon/volume_off.svg';
 import VolumeUp from './../Icon/volume_up.svg';
 
 export default ({ onChange, onClick, volume, muted, className, ariaLabelMute, ariaLabelUnmute, ariaLabelVolume }) => {
-    const volumeValue = muted
+    const volumeValue = muted || !volume
         ? 0
         : +volume;
     const isSilent = muted || volume <= 0;
