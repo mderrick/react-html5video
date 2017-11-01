@@ -42,6 +42,15 @@ describe('Seek', () => {
             .toEqual(10);
     });
 
+    it('handles an undefined percentagePlayed value', () => {
+        component.setProps({
+            percentagePlayed: undefined
+        });
+        const rangeInput = component.find(`.${styles.input}`);
+        expect(rangeInput.prop('value'))
+            .toEqual(0);
+    });
+
     it('triggers \'onChange\' prop when the input is changed', () => {
         const spy = jest.fn();
         component.setProps({

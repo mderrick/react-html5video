@@ -46,6 +46,15 @@ describe('Volume', () => {
             .toEqual('Change volume');
     });
 
+    it('handles an undefined volume value', () => {
+        component.setProps({
+            volume: undefined
+        });
+        const rangeInput = component.find(`.${styles.input}`);
+        expect(rangeInput.prop('value'))
+            .toEqual(0);
+    });
+
     it('triggers \'onClick\' prop when the button is clicked', () => {
         const spy = jest.fn();
         component.setProps({

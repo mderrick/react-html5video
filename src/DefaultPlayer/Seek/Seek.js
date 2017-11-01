@@ -27,7 +27,7 @@ export default ({ onChange, percentagePlayed, percentageBuffered, className, ari
                     onChange={onChange}
                     aria-label={ariaLabel}
                     className={styles.input}
-                    value={percentagePlayed} />
+                    value={percentagePlayed || 0} />
             </div>
         </div>
     );
