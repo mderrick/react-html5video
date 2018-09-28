@@ -92,7 +92,9 @@ export default (
         }
 
         componentWillUnmount() {
-            this.unbindEvents();
+            if(this.el){
+                this.unbindEvents();
+            }
         }
 
         // Stop `this.el` from being null briefly on every render,
@@ -102,8 +104,10 @@ export default (
         }
 
         componentDidMount() {
-            this.videoEl = this.el.getElementsByTagName('video')[0];
-            this.bindEventsToUpdateState();
+            if(this.el){
+                this.videoEl = this.el.getElementsByTagName('video')[0];
+                this.bindEventsToUpdateState();
+            }
         }
 
         render() {
