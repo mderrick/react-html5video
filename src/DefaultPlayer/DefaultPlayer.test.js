@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DefaultPlayer } from './DefaultPlayer';
+import { DefaultPlayer, isLoading } from './DefaultPlayer';
 import styles from './DefaultPlayer.css';
 import Time from './Time/Time';
 import Seek from './Seek/Seek';
@@ -104,5 +104,34 @@ describe('DefaultPlayer', () => {
         });
         expect(component.find(`.${styles.controls}`).exists())
             .toBeFalsy();
+    });
+});
+
+describe('isLoading', () => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
+    const HAVE_NOTHING = 0;
+    const HAVE_CURRENT_DATA = 2;
+    const HAVE_ENOUGH_DATA = 4;
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/networkState
+    const NETWORK_EMPTY = 0;
+    const NETWORK_IDLE = 1;
+    const NETWORK_LOADING = 2;
+
+    it('is true when empty', () => {
+      expect(isLoading(HAVE_NOTHING, NETWORK_EMPTY, 'Mozilla')).toBe(true);
+    });
+    it('is false when nothing and idle', () => {
+      expect(isLoading(HAVE_NOTHING, NETWORK_IDLE, 'Mozilla')).toBe(false);
+    });
+    it('depends on UA when current', () => {
+      expect(isLoading(HAVE_CURRENT_DATA, NETWORK_IDLE, 'Mozilla')).toBe(true);
+      expect(isLoading(HAVE_CURRENT_DATA, NETWORK_LOADING, 'Mozilla')).toBe(true);
+      expect(isLoading(HAVE_CURRENT_DATA, NETWORK_IDLE, 'iPad')).toBe(false);
+      expect(isLoading(HAVE_CURRENT_DATA, NETWORK_LOADING, 'iPad')).toBe(false);
+    });
+    it('is false when enough', () => {
+      expect(isLoading(HAVE_ENOUGH_DATA, NETWORK_IDLE, 'Mozilla')).toBe(false);
+      expect(isLoading(HAVE_ENOUGH_DATA, NETWORK_LOADING, 'Mozilla')).toBe(false);
+      expect(isLoading(HAVE_ENOUGH_DATA, NETWORK_IDLE, 'iPad')).toBe(false);
     });
 });
