@@ -122,17 +122,26 @@ DefaultPlayer.propTypes = {
     video: PropTypes.object.isRequired
 };
 
+function isLoading(readyState, networkState, userAgent) {
+  if (readyState == 0 && networkState == 1) {
+    // If nothing fetched but idle likely preload=none so not loading.
+    return false;
+  }
+  // TODO: This is not pretty. Doing device detection to remove spinner on iOS
+  // devices for a quick and dirty win. We should see if we can use the same
+  // readyState check safely across all browsers.
+  const readyEnough = /iPad|iPhone|iPod/.test(userAgent) ? 1 : 4;
+  return readyState < readyEnough;
+}
+
 const connectedPlayer = videoConnect(
     DefaultPlayer,
     ({ networkState, readyState, error, ...restState }) => ({
         video: {
             readyState,
             networkState,
+            loading: isLoading(readyState, networkState, navigator.userAgent),
             error: error || networkState === 3,
-            // TODO: This is not pretty. Doing device detection to remove
-            // spinner on iOS devices for a quick and dirty win. We should see if
-            // we can use the same readyState check safely across all browsers.
-            loading: readyState < (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4),
             percentagePlayed: getPercentagePlayed(restState),
             percentageBuffered: getPercentageBuffered(restState),
             ...restState
@@ -151,6 +160,7 @@ const connectedPlayer = videoConnect(
 
 export {
     connectedPlayer as default,
+    isLoading,
     DefaultPlayer,
     Time,
     Seek,
