@@ -24,6 +24,10 @@
     margin-left: -30px;
     background-color: rgba(0,0,0,0.7);
     border-radius: 10px;
+    border: none;
+    padding:0;
+    outline: none;
+    cursor: pointer;
 }
 
 .icon {
@@ -33,4 +37,15 @@
     left: 50%;
     margin-left: -20px;
     transform: translateY(-50%);
+}
+
+.srOnly {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
 }
