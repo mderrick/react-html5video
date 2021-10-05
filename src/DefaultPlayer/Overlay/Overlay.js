@@ -9,31 +9,36 @@ export default class Overlay extends Component {
         const {
             error,
             paused,
-            loading
+            loading,
+            copy
         } = this.props;
         const iconProps = {
             className: styles.icon,
             height: 40,
             width: 40,
-            fill: '#fff'
+            fill: '#fff',
+            'aria-hidden': true,
         };
         if (error) {
             return (
-                <span className={styles.inner}>
+                <button className={styles.inner}>
+                    <span className={styles.srOnly}>{copy.error}</span>
                     <Report {...iconProps} />
-                </span>
+                </button>
             );
         } else if (loading) {
             return (
-                <span className={styles.inner}>
+                <button className={styles.inner}>
+                    <span className={styles.srOnly}>{copy.loading}</span>
                     <Spin {...iconProps} />
-                </span>
+                </button>
             );
         } else if (paused) {
             return (
-                <span className={styles.inner}>
+                <button className={styles.inner}>
+                    <span className={styles.srOnly}>{copy.paused}</span>
                     <PlayArrow {...iconProps} />
-                </span>
+                </button>
             );
         }
     }
@@ -41,12 +46,11 @@ export default class Overlay extends Component {
     render () {
         const { className, onClick } = this.props;
         return (
-            <div className={[
-                styles.component,
-                className
-            ].join(' ')}
-            onClick={onClick}>
-                { this.renderContent() }
+            <div
+                className={[styles.component, className].join(' ')}
+                onClick={onClick}
+            >
+                {this.renderContent()}
             </div>
         );
     }
