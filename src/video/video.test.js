@@ -20,6 +20,12 @@ const TestVideo = ({ video, ...restProps }) => {
             <video {...restProps}>
                 <source src="1" />
             </video>
+            <video
+              id="video2"
+              {...restProps}
+            >
+                <source src="2" />
+            </video>
             <TestControl {...video} />
         </div>
     );
@@ -228,7 +234,20 @@ describe('video', () => {
             expect(component.find(TestVideo).prop('duplicateKey')).toBe('mapVideoElToProps');
         });
     });
+
+    describe('when passing in a video id as the fourth argument to the HOC', () => {
+      const videoEl = { id: 'video2' };
+      beforeEach(() => {
+        component = shallow(
+          <Component />
+        );
+
+        // Emulate videoEl being present
+        // e.g. componentDidMount
+        component.instance().videoEl = videoEl;
+      });
+      it('should find the video by id', () => {
+        expect(videoEl.id).toEqual('video2');
+      });
+    });
 });
-
-
-

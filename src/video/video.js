@@ -31,7 +31,8 @@ export default (
     BaseComponent,
     mapStateToProps = defaultMapStateToProps,
     mapVideoElToProps = defaultMapVideoElToProps,
-    mergeProps = defaultMergeProps
+    mergeProps = defaultMergeProps,
+    videoId
 ) => class Video extends Component {
         constructor(props) {
             super(props);
@@ -102,7 +103,10 @@ export default (
         }
 
         componentDidMount() {
-            this.videoEl = this.el.getElementsByTagName('video')[0];
+            const videoEls = this.el.getElementsByTagName('video');
+            this.videoEl = videoId
+              ? videoEls.namedItem(videoId)
+              : videoEls[0];
             this.bindEventsToUpdateState();
         }
 
