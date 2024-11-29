@@ -51,6 +51,7 @@ const DefaultPlayer = ({
             </video>
             <Overlay
                 onClick={onPlayPauseClick}
+                copy={copy.overlay}
                 {...video} />
             { controls && controls.length && !video.error
                 ? <div className={styles.controls}>

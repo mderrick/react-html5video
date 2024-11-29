@@ -6,7 +6,12 @@ const copy = {
     volume: 'Change volume',
     fullscreen: 'View video fullscreen',
     seek: 'Seek video',
-    captions: 'Toggle captions'
+    captions: 'Toggle captions',
+    overlay: {
+        loading: 'Loading Video...',
+        paused: 'Play Video',
+        error: 'Unable to play video'
+    }
 };
 
 export default copy;
